@@ -1,0 +1,8 @@
+.project
+.cache/
+.settings/
+.idea/
+.buildpath
+vendor/
+*.dist.php
+
