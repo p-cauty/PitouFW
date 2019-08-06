@@ -1,16 +1,18 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: peter_000
  * Date: 29/08/2016
  * Time: 11:15
  */
+
+namespace PitouFW\Core;
+
+require_once ROOT . 'routes.php';
+
 class Router {
     private static $instance = null;
-    public static $controllers = [
-        'home' => 'home'
-    ];
+    public static $controllers = ROUTES;
 
     private $controller = null;
 
@@ -46,6 +48,8 @@ class Router {
                 return array_key_exists(Request::get()->getArg(0), self::$controllers);
             }
         }
+
+        return false;
     }
 
     public function getPathToRequire() {

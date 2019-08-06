@@ -6,6 +6,8 @@
  * Time: 19:59
  */
 
+namespace PitouFW\Core;
+
 abstract class Persist {
     private static function getSetterName(string $column): string {
         return 'set'.Utils::fromSnakeCaseToCamelCase($column);
@@ -15,7 +17,7 @@ abstract class Persist {
         return 'get'.Utils::fromSnakeCaseToCamelCase($column);
     }
 
-    private static function getFilledObject(string $classname, array $rep): Resourcable {
+    private static function getFilledObject(string $classname, array $rep): \Resourceable {
         $res = new $classname();
         foreach ($rep as $key => $value) {
             if (!is_numeric($key)) {
@@ -29,7 +31,7 @@ abstract class Persist {
     }
 
     public static function fetchAll(string $classname, string $cond = '', array $values = []): array {
-        $classname = '\Bean\\'.$classname;
+        $classname = '\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $cond = ($cond != '') ? ' '.$cond : '';
         $req = DB::get()->prepare("SELECT * FROM $table_name".$cond);
@@ -45,7 +47,7 @@ abstract class Persist {
         return $res;
     }
 
-    public static function create(Resourcable $object): int {
+    public static function create(\Resourceable $object): int {
         $classname = get_class($object);
         $table_name = $classname::getTableName();
         $ref = new ReflectionClass($classname);
@@ -74,7 +76,7 @@ abstract class Persist {
     }
 
     public static function exists(string $classname, string $column, string $value): bool {
-        $classname = '\Bean\\'.$classname;
+        $classname = '\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name WHERE $column = ?");
         $req->execute([$value]);
@@ -83,8 +85,8 @@ abstract class Persist {
         return ($res['nb'] > 0);
     }
 
-    public static function read(string $classname, int $id): Resourcable {
-        $classname = '\Bean\\'.$classname;
+    public static function read(string $classname, int $id): \Resourceable {
+        $classname = '\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE id = ?");
         $req->execute([$id]);
@@ -92,8 +94,8 @@ abstract class Persist {
         return self::getFilledObject($classname, $res);
     }
 
-    public static function readBy(string $classname, string $column, string $value): Resourcable {
-        $classname = '\Bean\\'.$classname;
+    public static function readBy(string $classname, string $column, string $value): \Resourceable {
+        $classname = '\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE $column = ?");
         $req->execute([$value]);
@@ -103,7 +105,7 @@ abstract class Persist {
     }
 
     public static function count(string $classname, string $cond = '', array $values = []): int {
-        $classname = '\Bean\\'.$classname;
+        $classname = '\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name $cond");
         $req->execute($values);
@@ -112,7 +114,7 @@ abstract class Persist {
         return $res['nb'];
     }
 
-    public static function update(Resourcable $object) {
+    public static function update(\Resourceable $object) {
         $classname = get_class($object);
         $table_name = $classname::getTableName();
         $id = $object->getId();
@@ -132,7 +134,7 @@ abstract class Persist {
         $req->execute(array_merge($values, [$id]));
     }
 
-    public static function delete(Resourcable $object) {
+    public static function delete(\Resourceable $object) {
         $classname = get_class($object);
         $table_name = $classname::getTableName();
         $id = $object->getId();
@@ -141,7 +143,7 @@ abstract class Persist {
     }
 
     public static function deleteById(string $classname, int $id) {
-        $classname = '\Bean\\'.$classname;
+        $classname = '\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("DELETE FROM $table_name WHERE id = ?");
         $req->execute([$id]);

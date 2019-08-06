@@ -1,4 +1,7 @@
 <?php
+
+namespace PitouFW\Core;
+
 class Request {
 	private static $instance = null;
 	private $args;
