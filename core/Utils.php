@@ -1,4 +1,7 @@
 <?php
+
+namespace PitouFW\Core;
+
 class Utils {
 	public static function time(): int {
 		$jet_lag = 0;

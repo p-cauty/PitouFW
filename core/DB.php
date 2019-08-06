@@ -1,11 +1,14 @@
 <?php
+
+namespace PitouFW\Core;
+
 abstract class DB {
 	private static
 	$instance = null,
-	$db_host = 'localhost',
-	$db_name = '',
-	$db_user = 'root',
-	$db_pass = '';
+	$db_host = DB_HOST,
+	$db_name = DB_NAME,
+	$db_user = DB_USER,
+	$db_pass = DB_PASS;
 	
 	public static function get(): PDO {
 		if (self::$instance == null) {

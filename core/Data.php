@@ -1,4 +1,7 @@
 <?php
+
+namespace PitouFW\Core;
+
 class Data {
 	private static $instance = null;
 	private $data;
