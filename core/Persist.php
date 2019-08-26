@@ -8,6 +8,8 @@
 
 namespace PitouFW\Core;
 
+use ReflectionClass;
+
 abstract class Persist {
     private static function getSetterName(string $column): string {
         return 'set'.Utils::fromSnakeCaseToCamelCase($column);
