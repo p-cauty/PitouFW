@@ -33,7 +33,7 @@ abstract class Persist {
     }
 
     public static function fetchAll(string $classname, string $cond = '', array $values = []): array {
-        $classname = '\Entity\\'.$classname;
+        $classname = '\PitouFW\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $cond = ($cond != '') ? ' '.$cond : '';
         $req = DB::get()->prepare("SELECT * FROM $table_name".$cond);
@@ -78,7 +78,7 @@ abstract class Persist {
     }
 
     public static function exists(string $classname, string $column, string $value): bool {
-        $classname = '\Entity\\'.$classname;
+        $classname = '\PitouFW\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name WHERE $column = ?");
         $req->execute([$value]);
@@ -88,7 +88,7 @@ abstract class Persist {
     }
 
     public static function read(string $classname, int $id): Resourceable {
-        $classname = '\Entity\\'.$classname;
+        $classname = '\PitouFW\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE id = ?");
         $req->execute([$id]);
@@ -97,7 +97,7 @@ abstract class Persist {
     }
 
     public static function readBy(string $classname, string $column, string $value): Resourceable {
-        $classname = '\Entity\\'.$classname;
+        $classname = '\PitouFW\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE $column = ?");
         $req->execute([$value]);
@@ -107,7 +107,7 @@ abstract class Persist {
     }
 
     public static function count(string $classname, string $cond = '', array $values = []): int {
-        $classname = '\Entity\\'.$classname;
+        $classname = '\PitouFW\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name $cond");
         $req->execute($values);
@@ -145,7 +145,7 @@ abstract class Persist {
     }
 
     public static function deleteById(string $classname, int $id) {
-        $classname = '\Entity\\'.$classname;
+        $classname = '\PitouFW\Entity\\'.$classname;
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("DELETE FROM $table_name WHERE id = ?");
         $req->execute([$id]);
