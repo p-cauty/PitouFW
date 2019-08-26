@@ -7,7 +7,8 @@ class Request {
 	private $args;
 	
 	private function __construct() {
-		$this->args = (isset($_GET['arg']) ) ? explode('/', $_GET['arg']) : ['home'];
+		$this->args = isset($_GET['arg']) ? explode('/', $_GET['arg']) : ['home'];
+        $this->args = isset($GLOBALS['argc']) ? array_slice($GLOBALS['argv'], 1) : $this->args;
 	}
 	
 	public static function get(): Request {

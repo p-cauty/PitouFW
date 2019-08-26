@@ -2,6 +2,9 @@
 
 namespace PitouFW\Core;
 
+use Exception;
+use PDO;
+
 abstract class DB {
 	private static
 	$instance = null,

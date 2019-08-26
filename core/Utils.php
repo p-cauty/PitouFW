@@ -2,6 +2,9 @@
 
 namespace PitouFW\Core;
 
+use ReflectionClass;
+use ReflectionProperty;
+
 class Utils {
 	public static function time(): int {
 		$jet_lag = 0;

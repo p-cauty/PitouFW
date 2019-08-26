@@ -23,7 +23,7 @@ class Logger {
                 $backtrace = $backtrace === null ? debug_backtrace() : $backtrace;
                 $caller = array_shift($backtrace);
                 $data = '------------------------------------------' . "\n" .
-                    '[' . date('d/m/Y H:i:s') . '][' . $_SERVER['REMOTE_ADDR'] . ']' . "\n" .
+                    '[' . date('d/m/Y H:i:s') . '][' . ($_SERVER['REMOTE_ADDR'] ?? 'CLI') . ']' . "\n" .
                     '[in ' . $caller['file'] . ' line ' . $caller['line'] . ']' . "\n" .
                     $message . "\n\n";
                 file_put_contents($filename, $data, FILE_APPEND);
