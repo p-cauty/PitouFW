@@ -8,11 +8,5 @@
 
 const ROUTES = [
     'home' => 'home',
-    'auth' => 'auth',
-    'api' => [
-        'auth' => 'auth',
-        'register' => 'register',
-        'login' => 'login',
-        'data' => 'data'
-    ]
+    'api' => []
 ];

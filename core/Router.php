@@ -17,18 +17,25 @@ class Router {
     private $controller = null;
 
     private function __construct() {
-        if (self::controllerExists()) {
-            if (is_array(self::$controllers[Request::get()->getArg(0)])) {
-                $this->controller = Request::get()->getArg(0).'/'.self::$controllers[Request::get()->getArg(0)][Request::get()->getArg(1)];
-            }
-            else {
-                $this->controller = self::$controllers[Request::get()->getArg(0)];
-            }
+       $this->controller = $this->getControllerName(0, '', self::$controllers);
+    }
+
+    private function getControllerName($depth = 0, $path = '', $sub_controllers = null) {
+        if ($sub_controllers === null || $depth >= 20) {
+            return false;
         }
-        else {
-            Controller::http404NotFound();
-            exit();
+
+        $current_path = Request::get()->getArg($depth);
+        if ($current_path !== '' && array_key_exists($current_path, $sub_controllers)) {
+            if (is_array($sub_controllers[$current_path])) {
+                return $this->getControllerName($depth + 1, $path . $current_path . '/', $sub_controllers[$current_path]);
+            }
+
+            return $path . $sub_controllers[$current_path];
         }
+
+        Controller::http404NotFound();
+        die;
     }
 
     public static function get() {
@@ -37,19 +44,6 @@ class Router {
         }
 
         return self::$instance;
-    }
-
-    public static function controllerExists() {
-        if (array_key_exists(Request::get()->getArg(0), self::$controllers)) {
-            if (is_array(self::$controllers[Request::get()->getArg(0)])) {
-                return array_key_exists(Request::get()->getArg(1), self::$controllers[Request::get()->getArg(0)]);
-            }
-            else {
-                return array_key_exists(Request::get()->getArg(0), self::$controllers);
-            }
-        }
-
-        return false;
     }
 
     public function getPathToRequire() {
