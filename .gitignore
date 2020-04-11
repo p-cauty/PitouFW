@@ -17,5 +17,4 @@ vendor/
 qr.php
 entity_gen.php
 demo/
-.htaccess
 log/*.log

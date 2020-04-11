@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once 'config.dist.php';
+require_once '../config.dist.php';
+require_once '../vendor/autoload.php';
 
 $bool = PROD_ENV ? 0 : 1;
 $econst = PROD_ENV ? 0 : E_ALL;
@@ -11,7 +12,7 @@ date_default_timezone_set('UTC');
 
 define('NAME', 'PitouFW');
 define('POST', $_SERVER['REQUEST_METHOD'] == 'POST');
-define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']), true);
+define('ROOT', str_replace('publi/index.php', '', $_SERVER['SCRIPT_FILENAME']), true);
 define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), true);
 define('ENTITIES', ROOT.'entities/');
 define('CORE', ROOT.'core/');
