@@ -1,0 +1,105 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PitouFW\Core\DB;
+use PitouFW\Core\Logger;
+use PitouFW\Entity\EmailQueue;
+use PitouFW\Model\Email;
+
+class Mailer extends PHPMailer {
+    const SEND_AS_DEFAULT = EMAIL_SEND_AS_DEFAULT;
+    const CACHE_PREFIX = 'email_';
+
+    public function __construct() {
+        parent::__construct(true);
+
+
+        $this->IsSMTP();
+        $this->CharSet = parent::CHARSET_UTF8;
+        $this->SMTPDebug  = 0;
+        $this->SMTPAuth   = true;
+        $this->Host       = SMTP_HOST;
+        $this->Port       = SMTP_PORT;
+        $this->Username   = SMTP_USER;
+        $this->Password   = SMTP_PASS;
+
+    }
+
+    private static function getContactDetailsFromString(string $contact): array {
+        if (filter_var(trim($contact), FILTER_VALIDATE_EMAIL)) {
+            return [
+                'email' => trim($contact),
+                'name' => ''
+            ];
+        }
+
+        $split = explode(' ', $contact);
+        $contact_email = trim($split[count($split) - 1], '<>');
+        unset($split[count($split) - 1]);
+        $contact_name = implode(' ', $split);
+
+        return [
+            'email' => $contact_email,
+            'name' => $contact_name
+        ];
+    }
+
+    public function sendMail(array $email): void {
+        $sender = $email['sender'] !== '' ? $email['sender'] : self::SEND_AS_DEFAULT;
+        $bcc = json_decode($email['bcc']);
+
+        $contact_from = self::getContactDetailsFromString($sender);
+        $contact_to = self::getContactDetailsFromString($email['recipient']);
+        array_walk($bcc, function(&$item, $key) {
+            $item = self::getContactDetailsFromString($item);
+        });
+
+        $sent_at = null;
+        $error = null;
+
+        try {
+            $this->isHtml(true);
+            $this->setFrom($contact_from['email'], $contact_from['name']);
+            $this->addAddress($contact_to['email'], $contact_to['name']);
+            foreach ($bcc as $contact) {
+                $this->addBCC($contact['email'], $contact['name']);
+            }
+
+            $this->Subject = $email['subject'];
+            $body = file_get_contents(APP_URL . 'api/mailer/' . $email['id'] . '?render_key=' . Email::hashId($email['id']));
+            $this->Body = $body;
+
+            $text = html_entity_decode($body);
+            $text = strip_tags($text);
+            $text = trim($text);
+            $text = preg_replace("#(\s*\\n){3,}#", "\n\n", $text);
+            $text = preg_replace("#( ){2,}#", "", $text);
+            $text = wordwrap($text);
+            $this->AltBody = $text;
+
+            if ($this->send() === false) {
+                $error = $this->ErrorInfo;
+                Logger::logError('PHPMailer error: ' . $this->ErrorInfo);
+            } else {
+                $sent_at = date('Y-m-d H:i:s');
+            }
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            Logger::logError('PHPMailer exception: ' . $e->getMessage());
+        }
+
+        $req = DB::get()->prepare("UPDATE email_queue SET sent_at = ?, error = ? WHERE id = ?");
+        $req->execute([$sent_at, $error, $email['id']]);
+    }
+
+    public function queueMail(string $to, string $subject, string $template = 'mail/default', array $params = [], array $bcc = [], string $from = self::SEND_AS_DEFAULT): void {
+        $email_queue = new EmailQueue();
+        $email_queue->setSender($from)
+            ->setRecipient($to)
+            ->setSubject($subject)
+            ->setTemplate($template)
+            ->setParams(json_encode($params))
+            ->setBcc(json_encode($bcc));
+        $email_queue->save();
+    }
+}

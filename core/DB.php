@@ -6,12 +6,12 @@ use Exception;
 use PDO;
 
 abstract class DB {
-	private static
-	$instance = null,
-	$db_host = DB_HOST,
-	$db_name = DB_NAME,
-	$db_user = DB_USER,
-	$db_pass = DB_PASS;
+	private static ?PDO $instance = null;
+	private static string
+        $db_host = DB_HOST,
+        $db_name = DB_NAME,
+        $db_user = DB_USER,
+        $db_pass = DB_PASS;
 	
 	public static function get(): PDO {
 		if (self::$instance == null) {

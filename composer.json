@@ -5,5 +5,15 @@
             "name": "PHPeter",
             "email": "phpeter@phpeter.fr"
         }
-    ]
+    ],
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-openssl": "*",
+        "ext-redis": "*",
+        "phpmailer/phpmailer": "^6.1",
+        "philipp15b/php-i18n": "^4.0",
+        "justauthme/php-sdk": "^1.1"
+    }
 }

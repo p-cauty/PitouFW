@@ -3,7 +3,7 @@
 namespace PitouFW\Core;
 
 abstract class Controller {
-    public static function __callStatic($name, $arguments) {
+    public static function __callStatic(string $name, string $arguments): void {
         if (substr($name, 0, 4) == 'http') {
             $errCode = substr($name, 4, 3);
             $errMsg = preg_replace("#([A-Z])#", " $1", substr($name, 7));
@@ -15,14 +15,14 @@ abstract class Controller {
         }
     }
 
-    public static function renderView(string $path, bool $layout = true) {
+    public static function renderView(string $path, bool $layout = true): void {
         $file = VIEWS.$path.'.php';
         if (file_exists($file) ) {
             $appView = $file;
             $data = Request::get()->getArg(0) !== 'api' ? Utils::secure(Data::get()->getData()) : Data::get()->getData();
             extract($data);
             if ($layout) {
-                require_once VIEWS.'mainView.php';
+                require_once VIEWS . 'mainView.php';
             }
             else {
                 require_once $appView;
@@ -33,7 +33,7 @@ abstract class Controller {
         }
     }
 
-    public static function renderApiError($message) {
+    public static function renderApiError(string $message): void {
         Logger::logError($message);
         Data::get()->add('status', 'error');
         Data::get()->add('message', $message);
@@ -41,11 +41,11 @@ abstract class Controller {
         die;
     }
 
-    public static function renderApiSuccess() {
+    public static function renderApiSuccess(): void {
         Data::get()->setData(array_merge(['status' => 'success'], Data::get()->getData()));
     }
 
-    public static function sendNoCacheHeaders() {
+    public static function sendNoCacheHeaders(): void {
         header('Cache-Control: no-store');
         header('Pragma: no-cache');
     }

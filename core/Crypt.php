@@ -14,7 +14,7 @@ class Crypt {
     const RSA_PADDING = OPENSSL_PKCS1_PADDING;
     const RSA_SIGNATURE_ALGO = OPENSSL_ALGO_SHA512;
 
-    public static function encrypt($data, $password, $method = 'aes-192-cbc') {
+    public static function encrypt(string $data, string $password, string $method = 'aes-192-cbc'): ?string {
         $wasItSecure = false;
         $len = openssl_cipher_iv_length($method);
         $iv = openssl_random_pseudo_bytes($len, $wasItSecure);
@@ -22,27 +22,26 @@ class Crypt {
             $cipher = openssl_encrypt($data, $method, $password, OPENSSL_RAW_DATA, $iv);
             return $iv.$cipher;
         } else {
-            return false;
+            return null;
         }
     }
 
-    public static function decrypt($data, $password, $method = 'aes-192-cbc') {
+    public static function decrypt(string $data, string $password, string $method = 'aes-192-cbc'): ?string {
         $len = openssl_cipher_iv_length($method);
         $iv = substr($data, 0, $len);
         $cipher = substr($data, $len);
-        $clear = openssl_decrypt($cipher, $method, $password, OPENSSL_RAW_DATA, $iv);
-        return $clear;
+        return openssl_decrypt($cipher, $method, $password, OPENSSL_RAW_DATA, $iv) ?? null;
     }
 
-    public static function sign($data, $privkey, $passphrase = '') {
+    public static function sign(string $data, string $privkey, string $passphrase = ''): ?string {
         $privkeyid = openssl_pkey_get_private($privkey, $passphrase);
         $isSignatureOk = openssl_sign($data, $signature, $privkeyid, self::RSA_SIGNATURE_ALGO);
         openssl_free_key($privkeyid);
 
-        return $isSignatureOk ? $signature : false;
+        return $isSignatureOk ? $signature : null;
     }
 
-    public static function verify($data, $signature, $pubkey) {
+    public static function verify(string $data, string $signature, string $pubkey): int {
         $pubkeyid = openssl_pkey_get_public($pubkey);
         $res = openssl_verify($data, $signature, $pubkeyid, self::RSA_SIGNATURE_ALGO);
         openssl_free_key($pubkeyid);
@@ -50,7 +49,7 @@ class Crypt {
         return $res;
     }
 
-    public static function async_encrypt($data, $pubkey) {
+    public static function async_encrypt(string $data, string $pubkey): ?string {
         $encrypted = '';
         $plain = str_split($data, self::ENCRYPT_RSA_BLOCK_SIZE);
         $pubkeyid = openssl_pkey_get_public($pubkey);
@@ -60,7 +59,7 @@ class Crypt {
             $isEncryptionOk = openssl_public_encrypt($chunk, $partialEncrypted, $pubkeyid, self::RSA_PADDING);
 
             if ($isEncryptionOk === false) {
-                return false;
+                return null;
             }
 
             $encrypted .= $partialEncrypted;
@@ -69,7 +68,7 @@ class Crypt {
         return base64_encode($encrypted);
     }
 
-    public static function async_decrypt($data, $privkey, $passphrase = '') {
+    public static function async_decrypt(string $data, string $privkey, string $passphrase = ''): ?string {
         $clear = '';
         $encrypted = str_split(base64_decode($data), self::DECRYPT_RSA_BLOCK_SIZE);
         $privkeyid = openssl_pkey_get_private($privkey, $passphrase);
@@ -79,7 +78,7 @@ class Crypt {
             $isDecryptionOk = openssl_private_decrypt($chunk, $partialClear, $privkeyid, self::RSA_PADDING);
 
             if ($isDecryptionOk === false) {
-                return false;
+                return null;
             }
 
             $clear .= $partialClear;

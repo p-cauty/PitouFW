@@ -3,8 +3,8 @@
 namespace PitouFW\Core;
 
 class Data {
-	private static $instance = null;
-	private $data;
+	private static ?Data $instance = null;
+	private array $data;
 	
 	private function __construct(){
 		$this->data = [];

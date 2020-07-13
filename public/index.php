@@ -1,8 +1,13 @@
 <?php
+
+use PitouFW\Core\Controller;
+use PitouFW\Core\Request;
+use PitouFW\Core\Router;
+
 session_start();
 
-define('ROOT', str_replace('publi/index.php', '', $_SERVER['SCRIPT_FILENAME']));
-require_once ROOT . 'config.dist.php';
+define('ROOT', str_replace('public/index.php', '', $_SERVER['SCRIPT_FILENAME']));
+require_once ROOT . 'config/config.php';
 require_once ROOT . 'vendor/autoload.php';
 
 $bool = PROD_ENV ? 0 : 1;
@@ -11,22 +16,6 @@ ini_set('display_errors', $bool);
 ini_set('display_startup_errors', $bool);
 error_reporting($econst ^ E_DEPRECATED);
 date_default_timezone_set('UTC');
-
-define('NAME', 'PitouFW');
-define('POST', $_SERVER['REQUEST_METHOD'] == 'POST');
-define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
-define('ENTITIES', ROOT.'entities/');
-define('CORE', ROOT.'core/');
-define('APP', ROOT.'app/');
-define('MODELS', APP.'models/');
-define('VIEWS', APP.'views/');
-define('CONTROLLERS', APP.'controllers/');
-define('ASSETS', WEBROOT.'assets/');
-define('CSS', ASSETS.'css/');
-define('JS', ASSETS.'js/');
-define('FONTS', ASSETS.'fonts/');
-define('IMG', ASSETS.'img/');
-define('VENDORS', ASSETS.'vendors/');
 
 spl_autoload_register(function ($classname) {
     $ext = '.php';
@@ -53,13 +42,30 @@ spl_autoload_register(function ($classname) {
     }
 });
 
-if (\PitouFW\Core\Request::get()->getArg(0) == 'api' && empty($_POST)) {
+if (Request::get()->getArg(0) == 'api' && empty($_POST)) {
     if ($json_data = json_decode(file_get_contents('php://input'), true)) {
         $_POST = $json_data;
     }
 }
 
-require_once \PitouFW\Core\Router::get()->getPathToRequire();
-if (\PitouFW\Core\Request::get()->getArg(0) == 'api') {
-    \PitouFW\Core\Controller::renderView('json/json', false);
+if (isset($_GET['lang'])) {
+    $_SESSION['lang'] = $_GET['lang'];
+}
+
+$i18n = new i18n();
+$i18n->setCachePath(ROOT . 'cache/');
+$i18n->setFilePath(ROOT . 'lang/{LANGUAGE}.yml');
+$i18n->setFallbackLang('en');
+$i18n->setMergeFallback(true);
+
+try {
+    $i18n->init();
+} catch (Exception $e) {
+    error_log($e->getMessage());
+    Controller::http500InternalServerError();
+}
+
+require_once Router::get()->getPathToRequire();
+if (Request::get()->getArg(0) === 'api') {
+    Controller::renderView('json/json', false);
 }

@@ -1,0 +1,7 @@
+problem: 'It seems like something''s wrong here...'
+back: 'Go back'
+errors:
+  401: 'Authentication required'
+  403: 'Forbidden access'
+  404: 'Page not found'
+  500: 'Internal server error'

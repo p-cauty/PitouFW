@@ -11,16 +11,16 @@ namespace PitouFW\Core;
 require_once ROOT . 'routes.php';
 
 class Router {
-    private static $instance = null;
-    public static $controllers = ROUTES;
+    private static ?Router $instance = null;
+    public static array $controllers = ROUTES;
 
-    private $controller = null;
+    private $controller;
 
     private function __construct() {
        $this->controller = $this->getControllerName(0, '', self::$controllers);
     }
 
-    private function getControllerName($depth = 0, $path = '', $sub_controllers = null) {
+    private function getControllerName(int $depth = 0, string $path = '', ?array $sub_controllers = null): string {
         if ($sub_controllers === null || $depth >= 20) {
             return false;
         }
@@ -38,7 +38,7 @@ class Router {
         die;
     }
 
-    public static function get() {
+    public static function get(): Router {
         if (self::$instance == null) {
             self::$instance = new self();
         }
@@ -46,7 +46,7 @@ class Router {
         return self::$instance;
     }
 
-    public function getPathToRequire() {
+    public function getPathToRequire(): string {
         return CONTROLLERS.$this->controller.'.php';
     }
 }

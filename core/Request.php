@@ -3,8 +3,8 @@
 namespace PitouFW\Core;
 
 class Request {
-	private static $instance = null;
-	private $args;
+	private static ?Request $instance = null;
+	private array $args;
 	
 	private function __construct() {
 		$this->args = isset($_GET['arg']) ? explode('/', $_GET['arg']) : ['home'];

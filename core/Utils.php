@@ -49,7 +49,7 @@ class Utils {
 		}
 	}
 
-    public static function str2hex($string) {
+    public static function str2hex(string $string): string {
         $hex = '';
         for ($i=0; $i<strlen($string); $i++){
             $ord = ord($string[$i]);
@@ -59,11 +59,39 @@ class Utils {
         return $hex;
     }
 
-    public static function hex2str($hex) {
+    public static function hex2str(string $hex): string {
         $string='';
         for ($i=0; $i < strlen($hex)-1; $i+=2){
             $string .= chr(hexdec($hex[$i].$hex[$i+1]));
         }
         return $string;
+    }
+
+    public static function expandIPV6(string $ip): string {
+        $is_ipv6 = strpos($ip, ':') !== false;
+        if (!$is_ipv6) {
+            return $ip;
+        }
+
+        $hex = bin2hex(inet_pton($ip));
+        return implode(':', str_split($hex, 4));
+    }
+
+    public static function truncateIPV6(string $ip, int $blocksCnt): string {
+        $is_ipv6 = strpos($ip, ':') !== false;
+        if (!$is_ipv6) {
+            return $ip;
+        }
+
+        $full_length_ip = self::expandIPV6($ip);
+        $blocks = explode(':', $full_length_ip);
+        return implode(':', array_slice($blocks, 0, count($blocks) - $blocksCnt));
+    }
+
+    public static function slugifyIp(string $ip): string {
+        $is_ipv6 = strpos($ip, ':') !== false;
+        return $is_ipv6 ?
+            str_replace(':', '_', $ip) :
+            str_replace('.', '_', $ip);
     }
 }

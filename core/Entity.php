@@ -10,7 +10,27 @@ namespace PitouFW\Core;
 
 use ReflectionClass;
 
-abstract class Persist {
+abstract class Entity {
+    private int $id = 0;
+
+    /**
+     * @return int
+     */
+    public function getId(): int {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return static
+     */
+    public function setId(int $id): Entity {
+        $this->id = $id;
+        return $this;
+    }
+
+    public static abstract function getTableName(): string;
+
     private static function getSetterName(string $column): string {
         return 'set'.Utils::fromSnakeCaseToCamelCase($column);
     }
@@ -19,7 +39,12 @@ abstract class Persist {
         return 'get'.Utils::fromSnakeCaseToCamelCase($column);
     }
 
-    private static function getFilledObject(string $classname, array $rep): Resourceable {
+    /**
+     * @param array $rep
+     * @return static
+     */
+    private static function getFilledObject(array $rep): Entity {
+        $classname = get_called_class();
         $res = new $classname();
         foreach ($rep as $key => $value) {
             if (!is_numeric($key)) {
@@ -32,16 +57,16 @@ abstract class Persist {
         return $res;
     }
 
-    public static function fetchAll(string $classname, string $cond = '', array $values = []): array {
-        $classname = '\PitouFW\Entity\\'.$classname;
+    public static function fetchAll(string $cond = '', array $values = []): array {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $cond = ($cond != '') ? ' '.$cond : '';
-        $req = DB::get()->prepare("SELECT * FROM $table_name".$cond);
+        $req = DB::get()->prepare("SELECT * FROM $table_name$cond");
         $req->execute($values);
         $res = [];
         $i = 0;
         while ($rep = $req->fetch()) {
-            $res[$i] = self::getFilledObject($classname, $rep);
+            $res[$i] = self::getFilledObject($rep);
             $i++;
         }
         $req->closeCursor();
@@ -49,8 +74,8 @@ abstract class Persist {
         return $res;
     }
 
-    public static function create(Resourceable $object): int {
-        $classname = get_class($object);
+    private function create(): int {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $ref = new ReflectionClass($classname);
         $props = $ref->getProperties();
@@ -61,7 +86,7 @@ abstract class Persist {
         foreach ($props as $prop) {
             $getter = self::getGetterName($prop->getName());
             $columns[] = $prop->getName();
-            $val = $object->$getter();
+            $val = $this->$getter();
             if (is_array($val) || is_object($val)) {
                 $val = serialize($val);
             }
@@ -77,8 +102,8 @@ abstract class Persist {
         return DB::get()->lastInsertId();
     }
 
-    public static function exists(string $classname, string $column, string $value): bool {
-        $classname = '\PitouFW\Entity\\'.$classname;
+    public static function exists(string $column, string $value): bool {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name WHERE $column = ?");
         $req->execute([$value]);
@@ -87,27 +112,36 @@ abstract class Persist {
         return ($res['nb'] > 0);
     }
 
-    public static function read(string $classname, int $id): Resourceable {
-        $classname = '\PitouFW\Entity\\'.$classname;
+    /**
+     * @param int $id
+     * @return static
+     */
+    public static function read(int $id): Entity {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE id = ?");
         $req->execute([$id]);
         $res = $req->fetch();
-        return self::getFilledObject($classname, $res);
+        return self::getFilledObject($res);
     }
 
-    public static function readBy(string $classname, string $column, string $value): Resourceable {
-        $classname = '\PitouFW\Entity\\'.$classname;
+    /**
+     * @param string $column
+     * @param string $value
+     * @return static
+     */
+    public static function readBy(string $column, string $value): Entity {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE $column = ?");
         $req->execute([$value]);
         $res = $req->fetch();
         $req->closeCursor();
-        return self::getFilledObject($classname, $res);
+        return self::getFilledObject($res);
     }
 
-    public static function count(string $classname, string $cond = '', array $values = []): int {
-        $classname = '\PitouFW\Entity\\'.$classname;
+    public static function count(string $cond = '', array $values = []): int {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name $cond");
         $req->execute($values);
@@ -116,10 +150,10 @@ abstract class Persist {
         return $res['nb'];
     }
 
-    public static function update(Resourceable $object) {
-        $classname = get_class($object);
+    private function update() {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
-        $id = $object->getId();
+        $id = $this->getId();
         $ref = new ReflectionClass($classname);
         $props = $ref->getProperties();
 
@@ -127,7 +161,7 @@ abstract class Persist {
         $qms = [];
         foreach ($props as $prop) {
             $getter = self::getGetterName($prop->getName());
-            $values[] = $object->$getter();
+            $values[] = $this->$getter();
             $qms[] = $prop->getName()." = ?";
         }
         $qms = implode(', ', $qms);
@@ -136,16 +170,24 @@ abstract class Persist {
         $req->execute(array_merge($values, [$id]));
     }
 
-    public static function delete(Resourceable $object) {
-        $classname = get_class($object);
+    public function save() {
+        if ($this->getId() === 0) {
+            $this->create();
+        } else {
+            $this->update();
+        }
+    }
+
+    public function delete() {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
-        $id = $object->getId();
+        $id = $this->getId();
         $req = DB::get()->prepare("DELETE FROM $table_name WHERE id = ?");
         $req->execute([$id]);
     }
 
-    public static function deleteById(string $classname, int $id) {
-        $classname = '\PitouFW\Entity\\'.$classname;
+    public static function deleteById(int $id) {
+        $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("DELETE FROM $table_name WHERE id = ?");
         $req->execute([$id]);

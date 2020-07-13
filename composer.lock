@@ -1,0 +1,219 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "984f986fb64b6341b66d5e61ce3601e7",
+    "packages": [
+        {
+            "name": "justauthme/php-sdk",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JustAuthMe/PHP-SDK.git",
+                "reference": "3aacd42fde46c549c4116652c97561c160004fd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/3aacd42fde46c549c4116652c97561c160004fd7",
+                "reference": "3aacd42fde46c549c4116652c97561c160004fd7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JustAuthMe\\SDK\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Cauty",
+                    "email": "peter@justauth.me",
+                    "homepage": "https://justauth.me"
+                }
+            ],
+            "description": "Official PHP SDK for the JustAuthMe platform",
+            "time": "2020-06-02T10:37:17+00:00"
+        },
+        {
+            "name": "mustangostang/spyc",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mustangostang/spyc.git",
+                "reference": "23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mustangostang/spyc/zipball/23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d",
+                "reference": "23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Spyc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mustangostang",
+                    "email": "vlad.andersen@gmail.com"
+                }
+            ],
+            "description": "A simple YAML loader/dumper class for PHP",
+            "homepage": "https://github.com/mustangostang/spyc/",
+            "keywords": [
+                "spyc",
+                "yaml",
+                "yml"
+            ],
+            "time": "2017-02-24T16:06:33+00:00"
+        },
+        {
+            "name": "philipp15b/php-i18n",
+            "version": "v4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Philipp15b/php-i18n.git",
+                "reference": "693bd6800134ef20e45c070ff382b7ebd143c745"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Philipp15b/php-i18n/zipball/693bd6800134ef20e45c070ff382b7ebd143c745",
+                "reference": "693bd6800134ef20e45c070ff382b7ebd143c745",
+                "shasum": ""
+            },
+            "require": {
+                "mustangostang/spyc": "0.6.2",
+                "php": ">= 5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "i18n.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philipp Schröer",
+                    "email": "github@philworld.de"
+                }
+            ],
+            "description": "Simple i18n class for PHP",
+            "homepage": "https://github.com/Philipp15b/php-i18n",
+            "time": "2018-03-26T12:50:46+00:00"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v6.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
+                "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.2",
+                "friendsofphp/php-cs-fixer": "^2.2",
+                "phpunit/phpunit": "^4.8 || ^5.7"
+            },
+            "suggest": {
+                "ext-mbstring": "Needed to send email in multibyte encoding charset",
+                "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+                "psr/log": "For optional PSR-3 debug logging",
+                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPMailer\\PHPMailer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-only"
+            ],
+            "authors": [
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "funding": [
+                {
+                    "url": "https://github.com/synchro",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-05-27T12:24:03+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-openssl": "*",
+        "ext-redis": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
