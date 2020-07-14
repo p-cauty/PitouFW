@@ -19,3 +19,4 @@ entity_gen.php
 demo/
 log/*.log
 .DS_Store
+cache/*.php

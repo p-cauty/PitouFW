@@ -85,11 +85,17 @@ abstract class Entity {
         $qms = [];
         foreach ($props as $prop) {
             $getter = self::getGetterName($prop->getName());
-            $columns[] = $prop->getName();
+
             $val = $this->$getter();
+            if ($val === null) {
+                continue;
+            }
+
+            $columns[] = $prop->getName();
             if (is_array($val) || is_object($val)) {
                 $val = serialize($val);
             }
+
             $values[] = $val;
             $qms[] = '?';
         }

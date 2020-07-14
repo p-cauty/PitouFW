@@ -13,11 +13,16 @@
 
 <div  style="color: #636c72;font-size: 11px;" align="center">
     Vous recevez cet e-mail car vous possédez un compte <a
-            href="https://justauth.me">JustAuthMe</a><br>
+            href="<?= APP_URL ?>"><?= NAME ?></a><br>
     ou car votre adresse e-mail est inscrite sur nos listes de diffusion.
 </div>
 <div  style="color: #636c72;font-size: 11px;" align="center">
-    <a href="<?= CLI_BASE_URL ?>unsubscribe?email=<?= $unsubscribe_email ?>&key=<?= $unsubscribe_key ?>">Se
+    <a href="<?= APP_URL ?>api/mailer/<?= $browser_id ?>?render_key=<?= $browser_key ?>">
+        Voir cet e-mail dans votre navigateur
+    </a>
+</div>
+<div  style="color: #636c72;font-size: 11px;" align="center">
+    <a href="<?= APP_URL ?>unsubscribe?email=<?= $unsubscribe_email ?>&key=<?= $unsubscribe_key ?>">Se
         désinscrire</a>
 </div>
 <table  border="0" cellpadding="0" cellspacing="0"
@@ -40,12 +45,12 @@
     <tbody>
     <tr>
         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 12px; border-top-width: 0; border-bottom-width: 0; margin: 0;"
-            align="left">JustAuthMe
+            align="left"><?= NAME ?>
         </td>
     </tr>
     <tr>
         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 12px; border-top-width: 0; border-bottom-width: 0; margin: 0;"
-            align="left">12 Rue Anselme
+            align="left">83000 Toulon
         </td>
         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-top-width: 0; border-bottom-width: 0; margin: 0;"
             align="left">
@@ -63,7 +68,7 @@
                             <tr>
                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-top-width: 0; border-bottom-width: 0; padding-left: 8px; margin: 0;"
                                     align="left">
-                                    <a href="https://www.facebook.com/justauthme"><img  width="20" height="20" alt="Facebook"
+                                    <a href="<?= SOCIAL_FACEBOOK ?>"><img  width="20" height="20" alt="Facebook"
                                                                                        src="https://static.justauth.me/medias/5eb31d11d73be.png"
                                                                                        style="height: auto; line-height: 100%; outline: none; text-decoration: none; border: 0 none;"></a>
                                 </td>
@@ -90,7 +95,7 @@
                             <tr>
                                 <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-top-width: 0; border-bottom-width: 0; padding-left: 8px; margin: 0;"
                                     align="left">
-                                    <a href="https://twitter.com/justauthme"><img  width="20" height="20" alt="Twitter"
+                                    <a href="<?= SOCIAL_TWITTER ?>"><img  width="20" height="20" alt="Twitter"
                                                                                   src="https://static.justauth.me/medias/5eb31d417a204.png"
                                                                                   style="height: auto; line-height: 100%; outline: none; text-decoration: none; border: 0 none;"></a>
                                 </td>
@@ -110,7 +115,7 @@
                 <tr>
                     <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-top-width: 0; border-bottom-width: 0; margin: 0;"
                         align="left">
-                        <a href="https://instagram.com/justauthme"><img class="" width="20" height="20" alt="Instagram"
+                        <a href="<?= SOCIAL_INSTAGRAM ?>"><img class="" width="20" height="20" alt="Instagram"
                                                                         src="https://static.justauth.me/medias/5eb31d5d6eccb.png"
                                                                         style="height: auto; line-height: 100%; outline: none; text-decoration: none; border: 0 none;"></a>
                     </td>
@@ -118,11 +123,6 @@
                 </tbody>
             </table>
 
-        </td>
-    </tr>
-    <tr>
-        <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 12px; border-top-width: 0; border-bottom-width: 0; margin: 0;"
-            align="left">93400 Saint-Ouen
         </td>
     </tr>
     </tbody>

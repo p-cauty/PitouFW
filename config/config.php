@@ -12,6 +12,7 @@ define('POST', $_SERVER['REQUEST_METHOD'] == 'POST');
 define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 
 const EMAIL_SEND_AS_DEFAULT = 'hello@' . PROD_HOST;
+const JAM_CALLBACK_DEFAULT = APP_URL . 'jam';
 
 const ENTITIES = ROOT . 'entities/';
 const CORE = ROOT . 'core/';

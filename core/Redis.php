@@ -15,15 +15,15 @@ class Redis extends \Redis {
         $this->auth(REDIS_PASS);
     }
 
-    public function set($key, $value, $ttl = 0) {
+    public function set($key, $value, $ttl = 0): bool {
         if (!is_string($value)) {
             $value = json_encode($value);
         }
 
-        parent::set($key, $value, $ttl);
+        return parent::set($key, $value, $ttl);
     }
 
-    public function get($key, $assoc = false) {
+    public function get($key, bool $assoc = false) {
         $value = parent::get($key);
         $try_json = json_decode($value, $assoc);
 

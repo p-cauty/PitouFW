@@ -5,3 +5,8 @@ errors:
   403: 'Forbidden access'
   404: 'Page not found'
   500: 'Internal server error'
+home:
+  title: 'Home'
+unsubscribe:
+  title: 'Unsubscribe from the newsletter'
+  text: 'Your E-Mail address %s have successfully been removed from our mailing lists.'

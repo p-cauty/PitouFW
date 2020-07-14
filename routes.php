@@ -8,5 +8,9 @@
 
 const ROUTES = [
     'home' => 'home',
-    'api' => []
+    'unsubscribe' => 'unsubscribe',
+    'jam' => 'jam',
+    'api' => [
+        'mailer' => 'mailer'
+    ]
 ];

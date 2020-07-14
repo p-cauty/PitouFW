@@ -67,6 +67,10 @@ class Utils {
         return $string;
     }
 
+    public static function isInternalCall() {
+        return isset($_SERVER['HTTP_X_ACCESS_TOKEN']) && $_SERVER['HTTP_X_ACCESS_TOKEN'] === INTERNAL_API_KEY;
+    }
+
     public static function expandIPV6(string $ip): string {
         $is_ipv6 = strpos($ip, ':') !== false;
         if (!$is_ipv6) {
@@ -93,5 +97,14 @@ class Utils {
         return $is_ipv6 ?
             str_replace(':', '_', $ip) :
             str_replace('.', '_', $ip);
+    }
+
+    public static function generateToken($length = 64) {
+        if ($length % 4 !== 0) {
+            throw new \Exception('$length must be a factor of 4');
+        }
+
+        $bytes_number = 0.75 * $length;
+        return str_replace('+', '', str_replace('/', '', base64_encode(openssl_random_pseudo_bytes($bytes_number))));
     }
 }

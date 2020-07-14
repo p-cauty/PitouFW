@@ -7,15 +7,15 @@ namespace PitouFW\Entity;
 use PitouFW\Core\Entity;
 
 class EmailQueue extends Entity {
-    private string $sender;
-    private string $recipient;
-    private string $subject;
-    private string $template;
-    private string $params;
-    private string $bcc;
-    private string $created_at;
-    private ?string $sent_at;
-    private ?string $error;
+    private string $sender = EMAIL_SEND_AS_DEFAULT;
+    private string $recipient = '';
+    private string $subject = '';
+    private string $template = 'mail/default';
+    private string $params = '';
+    private string $bcc = '';
+    private ?string $created_at = null;
+    private ?string $sent_at = null;
+    private ?string $error = null;
 
     /**
      * @return string

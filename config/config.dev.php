@@ -9,6 +9,8 @@ const PRIMARY_COLOR = '#FF9900';
 
 const PROD_HOST = 'localhost';
 const LOGGING = true;
+const INTERNAL_API_KEY = 'xxxxx';
+const UNSUBSCRIBE_SALT = 'xxxxx';
 
 const DB_HOST = 'mamp_mysql';
 const DB_NAME = 'pitoufw';
@@ -26,6 +28,13 @@ const SMTP_PASS = '';
 
 const EMAIL_LOGO_CDN = 'https://uilogos.co/img/logotype/circle.png';
 const EMAIL_RENDERING_KEY = 'xxxxx';
+
+const SOCIAL_FACEBOOK = 'https://facebook.com/pitoufw';
+const SOCIAL_TWITTER = 'https://twitter.com/pitoufw';
+const SOCIAL_INSTAGRAM = 'https://intagram.com/pitoufw';
+
+const JAM_APP_ID = 'xxxxx';
+const JAM_SECRET = 'xxxxx';
 
 const DEPLOYED_COMMIT = "NA";
 const DEPLOYED_REF = "NA";

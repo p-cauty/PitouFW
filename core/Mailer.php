@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PitouFW\Core\DB;
 use PitouFW\Core\Logger;
 use PitouFW\Entity\EmailQueue;
-use PitouFW\Model\Email;
+use PitouFW\Model\EmailModel;
 
 class Mailer extends PHPMailer {
     const SEND_AS_DEFAULT = EMAIL_SEND_AS_DEFAULT;
@@ -66,7 +66,7 @@ class Mailer extends PHPMailer {
             }
 
             $this->Subject = $email['subject'];
-            $body = file_get_contents(APP_URL . 'api/mailer/' . $email['id'] . '?render_key=' . Email::hashId($email['id']));
+            $body = file_get_contents(APP_URL . 'api/mailer/' . $email['id'] . '?render_key=' . EmailModel::hashId($email['id']));
             $this->Body = $body;
 
             $text = html_entity_decode($body);
