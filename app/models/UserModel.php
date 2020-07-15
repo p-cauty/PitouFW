@@ -30,6 +30,7 @@ class UserModel {
 
     public static function login(User $user, int $ttl = self::SESSION_CACHE_TTL): bool {
         if (!User::exists('id', $user->getId())) {
+            var_dump('user do not exists');
             return false;
         }
 
@@ -44,14 +45,18 @@ class UserModel {
 
     private static function getCachedValue() {
         $redis = new Redis();
-        $cache_key = self::SESSION_COOKIE_NAME . Utils::secure($_COOKIE[self::SESSION_COOKIE_NAME] ?? '');
+        $cache_key = self::SESSION_CACHE_PREFIX . Utils::secure($_COOKIE[self::SESSION_COOKIE_NAME] ?? '');
         return $redis->get($cache_key);
     }
 
     public static function isLogged(): bool {
+        if (self::$user !== null) {
+            return true;
+        }
+
         if (isset($_COOKIE[self::SESSION_COOKIE_NAME])) {
-            $cached = self::getCachedValue();
-            return $cached !== false;
+            $uid = self::getCachedValue();
+            return User::exists('id', $uid) && $uid !== false;
         }
 
         return false;
@@ -61,12 +66,46 @@ class UserModel {
         if (self::isLogged()) {
             if (self::$user === null) {
                 $uid = self::getCachedValue();
-                self::$user = User::read($uid);
+                if (User::exists('id', $uid)) {
+                    self::$user = User::read($uid);
+                }
             }
 
             return self::$user;
         }
 
         return null;
+    }
+
+    public static function validatePassword(string $passwd): bool {
+        $lower = preg_match("#[a-z]+#", $passwd) === 1;
+        $upper = preg_match("#[A-Z]+#", $passwd) === 1;
+        $digit = preg_match("#[0-9]+#", $passwd) === 1;
+        $length = strlen($passwd) >= PASSWD_MINIMAL_LENGTH;
+
+        return $lower && $upper && $digit && $length;
+    }
+
+    public static function hashPassword(string $passwd): string {
+        return password_hash($passwd, PASSWORD_DEFAULT);
+    }
+
+    public static function checkPassword(string $passwd, string $hash): bool {
+        return password_verify($passwd, $hash);
+    }
+
+    public static function logout() {
+        $session_token = $_COOKIE[self::SESSION_COOKIE_NAME] ?? null;
+
+        if ($session_token !== null) {
+            setcookie(self::SESSION_COOKIE_NAME, '', -1, WEBROOT, PROD_HOST);
+            $redis = new Redis();
+            $cache_key = self::SESSION_CACHE_PREFIX . $session_token;
+            $res = $redis->del($cache_key);
+
+            return $res > 0;
+        }
+
+        return true;
     }
 }

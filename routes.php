@@ -8,8 +8,11 @@
 
 const ROUTES = [
     'home' => 'home',
-    'unsubscribe' => 'unsubscribe',
+    'register' => 'register',
+    'login' => 'login',
     'jam' => 'jam',
+    'logout' => 'logout',
+    'unsubscribe' => 'unsubscribe',
     'api' => [
         'mailer' => 'mailer'
     ]

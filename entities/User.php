@@ -11,7 +11,7 @@ class User extends Entity {
     private string $passwd = '';
     private string $jam_id = '';
     private int $admin = 0;
-    private ?int $reg_timestamp = null;
+    private ?string $reg_timestamp = null;
 
     /**
      * @return string
@@ -89,17 +89,17 @@ class User extends Entity {
     }
 
     /**
-     * @return int
+     * @return string|null
      */
-    public function getRegTimestamp(): int {
+    public function getRegTimestamp(): ?string {
         return $this->reg_timestamp;
     }
 
     /**
-     * @param int $reg_timestamp
+     * @param string|null $reg_timestamp
      * @return User
      */
-    public function setRegTimestamp(int $reg_timestamp): User {
+    public function setRegTimestamp(?string $reg_timestamp): User {
         $this->reg_timestamp = $reg_timestamp;
         return $this;
     }

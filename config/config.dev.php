@@ -12,9 +12,9 @@ const LOGGING = true;
 const INTERNAL_API_KEY = 'xxxxx';
 const UNSUBSCRIBE_SALT = 'xxxxx';
 
-const DB_HOST = 'mamp_mysql';
+const DB_HOST = 'localhost';
 const DB_NAME = 'pitoufw';
-const DB_USER = 'root';
+const DB_USER = 'peter';
 const DB_PASS = 'secret';
 
 const REDIS_HOST = '127.0.0.1';
@@ -32,6 +32,8 @@ const EMAIL_RENDERING_KEY = 'xxxxx';
 const SOCIAL_FACEBOOK = 'https://facebook.com/pitoufw';
 const SOCIAL_TWITTER = 'https://twitter.com/pitoufw';
 const SOCIAL_INSTAGRAM = 'https://intagram.com/pitoufw';
+
+const PASSWD_MINIMAL_LENGTH = 8;
 
 const JAM_APP_ID = 'xxxxx';
 const JAM_SECRET = 'xxxxx';

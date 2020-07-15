@@ -176,12 +176,14 @@ abstract class Entity {
         $req->execute(array_merge($values, [$id]));
     }
 
-    public function save() {
+    public function save(): ?int {
         if ($this->getId() === 0) {
-            $this->create();
+           return $this->create();
         } else {
             $this->update();
         }
+
+        return null;
     }
 
     public function delete() {

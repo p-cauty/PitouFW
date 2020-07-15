@@ -2,13 +2,10 @@
 
 use JustAuthMe\SDK\JamSdk;
 use PitouFW\Entity\User;
+use PitouFW\Model\JustAuthMeFactory;
 use PitouFW\Model\UserModel;
 
-$jamSdk = new JamSdk(
-    JAM_APP_ID,
-    JAM_CALLBACK_DEFAULT,
-    JAM_SECRET
-);
+$jamSdk = JustAuthMeFactory::getSdk();
 
 if (isset($_GET['access_token'])) {
     try {

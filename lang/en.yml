@@ -5,8 +5,37 @@ errors:
   403: 'Forbidden access'
   404: 'Page not found'
   500: 'Internal server error'
+  form:
+    empty: 'All fields must be filled.'
+labels:
+  email: 'E-mail address:'
+  pass: 'Password:'
 home:
   title: 'Home'
+  welcome: 'Welcome to %s!'
+  logged_as: 'Signed in as: %s'
+  register: 'Sign up'
+  login: 'Sign in'
+  logout: 'Logout'
+register:
+  title: 'Registration'
+  submit: 'Sign me up!'
+  labels:
+    pass2: 'Password confirmation:'
+  success: 'You are now registered on %s! Congratualtions!'
+  errors:
+    invalid_email: 'The provided e-mail address isn''t valid.'
+    email_exists: 'This e-mail address is already associated with another account. Try to sign in.'
+    invalid_passwd: 'Your password must be at least 8 chars long and must contains lowercases, uppercases ans digits.'
+    identical: 'Both passwords must be identical.'
+login:
+  title: 'Login'
+  submit: 'Sign me in!'
+  success: 'You are now logged in! We are happy to see you again!'
+  error: 'Incorrect e-mail address or password.'
+logout:
+  success: 'You are successfully logged out.'
+  error: 'An unknown error appeared during sign out.'
 unsubscribe:
-  title: 'Unsubscribe from the newsletter'
-  text: 'Your E-Mail address %s have successfully been removed from our mailing lists.'
+  title: 'Newsletter unsubscription'
+  text: 'Your e-mail address %s has successfully been removed from our mailing lists.'

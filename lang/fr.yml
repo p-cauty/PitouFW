@@ -5,8 +5,37 @@ errors:
   403: 'Accès interdit'
   404: 'Page non trouvée'
   500: 'Erreur interne du serveur'
+  form:
+    empty: 'Tous les champs doivent être remplis.'
+labels:
+  email: 'Adresse e-mail :'
+  pass: 'Mot de passe :'
 home:
   title: 'Accueil'
+  welcome: 'Bienvenue sur %s !'
+  logged_as: 'Connecté en tant que : %s'
+  register: 'M''inscrire'
+  login: 'Me connecter'
+  logout: 'Me déconnecter'
+register:
+  title: 'Inscription'
+  submit: 'M''inscrire !'
+  labels:
+    pass2: 'Confirmez le mot de passe :'
+  success: 'Vous êtes maintenant inscrit sur %s ! Félicitations !'
+  errors:
+    invalid_email: 'L''adresse e-mail renseignée n''est pas valide.'
+    email_exists: 'Cette adresse e-mail est déjà liée à un compte existant. Essayez de vous connecter.'
+    invalid_passwd: 'Votre mot de passe doit faire au moins 8 caractères de long et être composé de minuscules, de majuscules et de chiffres.'
+    identical: 'Les deux mots de passe doivent être identiques.'
+login:
+  title: 'Connexion'
+  submit: 'Me connecter !'
+  success: 'Vous êtes maintenant connecté ! Nous sommes heureux de vous revoir !'
+  error: 'Adresse e-mail ou mot de passe incorrect.'
+logout:
+  success: 'Vous êtes bien déconnecté.'
+  error: 'Une erreur inconnue est survenue durant la déconnexion.'
 unsubscribe:
   title: 'Désinscription de la newsletter'
   text: 'Votre adresse E-Mail %s a bien été supprimée de nos listes de diffusions.'
