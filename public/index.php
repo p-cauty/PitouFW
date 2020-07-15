@@ -67,5 +67,5 @@ try {
 
 require_once Router::get()->getPathToRequire();
 if (Request::get()->getArg(0) === 'api') {
-    Controller::renderView('json/json', false);
+    Controller::renderView('json/json', null);
 }

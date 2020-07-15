@@ -14,6 +14,7 @@ const ROUTES = [
     'logout' => 'logout',
     'unsubscribe' => 'unsubscribe',
     'api' => [
-        'mailer' => 'mailer'
+        'mailer' => 'mailer',
+        'version' => 'version'
     ]
 ];

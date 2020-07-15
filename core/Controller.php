@@ -41,7 +41,7 @@ abstract class Controller {
         Logger::logError($message);
         Data::get()->add('status', 'error');
         Data::get()->add('message', $message);
-        Controller::renderView('json/json', false);
+        Controller::renderView('json/json', null);
         die;
     }
 
