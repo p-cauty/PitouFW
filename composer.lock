@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "984f986fb64b6341b66d5e61ce3601e7",
+    "content-hash": "ae443696818a2404b315abbe0931102f",
     "packages": [
         {
             "name": "justauthme/php-sdk",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JustAuthMe/PHP-SDK.git",
-                "reference": "3aacd42fde46c549c4116652c97561c160004fd7"
+                "reference": "439415d651c37076cdf89d7d067e600f17a89a2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/3aacd42fde46c549c4116652c97561c160004fd7",
-                "reference": "3aacd42fde46c549c4116652c97561c160004fd7",
+                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/439415d651c37076cdf89d7d067e600f17a89a2f",
+                "reference": "439415d651c37076cdf89d7d067e600f17a89a2f",
                 "shasum": ""
             },
             "require": {
@@ -42,7 +42,7 @@
                 }
             ],
             "description": "Official PHP SDK for the JustAuthMe platform",
-            "time": "2020-06-02T10:37:17+00:00"
+            "time": "2020-07-16T13:26:41+00:00"
         },
         {
             "name": "mustangostang/spyc",
@@ -134,16 +134,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.1.6",
+            "version": "v6.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3"
+                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
-                "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
+                "reference": "2c2370ba3df7034f9eb7b8f387c97b52b2ba5ad0",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +198,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-05-27T12:24:03+00:00"
+            "time": "2020-07-14T18:50:27+00:00"
         }
     ],
     "packages-dev": [],

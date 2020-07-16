@@ -31,8 +31,14 @@ register:
 login:
   title: 'Connexion'
   submit: 'Me connecter !'
+  labels:
+    remember: 'Se souvenir de moi'
   success: 'Vous êtes maintenant connecté ! Nous sommes heureux de vous revoir !'
   error: 'Adresse e-mail ou mot de passe incorrect.'
+jam:
+  errors:
+    no_email: 'Une erreur est survenue lors de votre inscription. Merci de supprimer %s de votre application JustAuthMe et de réessayer'
+    unknown: 'Une erreur inconnue est survenue lors de la connexion.'
 logout:
   success: 'Vous êtes bien déconnecté.'
   error: 'Une erreur inconnue est survenue durant la déconnexion.'

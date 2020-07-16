@@ -31,8 +31,14 @@ register:
 login:
   title: 'Login'
   submit: 'Sign me in!'
+    labels:
+      remember: 'Remember me'
   success: 'You are now logged in! We are happy to see you again!'
   error: 'Incorrect e-mail address or password.'
+jam:
+  errors:
+    no_email: 'An error occured during your registration. Please remove %s from your JustAuthMe app and try again.'
+    unknown: 'An unknown error occured during login.'
 logout:
   success: 'You are successfully logged out.'
   error: 'An unknown error appeared during sign out.'

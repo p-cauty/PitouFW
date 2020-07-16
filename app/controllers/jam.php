@@ -1,6 +1,7 @@
 <?php
 
 use JustAuthMe\SDK\JamSdk;
+use PitouFW\Core\Alert;
 use PitouFW\Entity\User;
 use PitouFW\Model\JustAuthMeFactory;
 use PitouFW\Model\UserModel;
@@ -10,38 +11,39 @@ $jamSdk = JustAuthMeFactory::getSdk();
 if (isset($_GET['access_token'])) {
     try {
         $response = $jamSdk->getUserInfos($_GET['access_token']);
-        if (isset($response->jam_id)) {
-            if (User::exists('jam_id', $response->jam_id)) {
-                // Connexion
-                $user = User::readBy('jam_id', $response->jam_id);
-                UserModel::login($user);
-            } else {
-                if (isset($response->email)) {
-                    if (User::exists('email', $response->email)) {
-                        // Liaison de compte
-                        $user = User::readBy('email', $response->email);
-                        $user->setJamId($response->jam_id);
-                        $user->save();
-                    } else {
-                        // Inscription
-                        $user = new User();
-                        $user->setEmail($response->email)
-                            ->setJamId($response->jam_id);
-                        $user->save();
-                    }
+        if (User::exists('jam_id', $response->jam_id)) {
+            // Login
+            $user = User::readBy('jam_id', $response->jam_id);
 
-                    UserModel::login($user);
-                } else {
-                    // L'utilisateur doit supprimer le service de son app et recommencer
-                }
-            }
+            Alert::success(L::login_success);
+            UserModel::login($user, UserModel::SESSION_CACHE_TTL_LONG);
         } else {
-            // Erreur inconnue au niveau de JustAuthMe
+            if (isset($response->email)) {
+                if (User::exists('email', $response->email)) {
+                    // Account linking
+                    $user = User::readBy('email', $response->email);
+                    $user->setJamId($response->jam_id);
+                    $user->save();
+                } else {
+                    // Registration
+                    $user = new User();
+                    $user->setEmail($response->email)
+                        ->setJamId($response->jam_id);
+                    $user->save();
+                }
+
+                Alert::success(L::login_success);
+                UserModel::login($user, UserModel::SESSION_CACHE_TTL_LONG);
+            } else {
+                // The user need to remove the service from their JustAuthMe app and try again
+                Alert::error(L::jam_errors_no_email(NAME));
+            }
         }
-    } catch (\JustAuthMe\SDK\Exceptions\JamBadRequestException $e) {
-    } catch (\JustAuthMe\SDK\Exceptions\JamInternalServerErrorException $e) {
-    } catch (\JustAuthMe\SDK\Exceptions\JamNotFoundException $e) {
-    } catch (\JustAuthMe\SDK\Exceptions\JamUnauthorizedException $e) {
-    } catch (\JustAuthMe\SDK\Exceptions\JamUnknowErrorException $e) {
+    } catch (Exception $e) {
+        // Something's wrong on JustAuthMe side
+        Alert::error(L::jam_errors_unknown);
     }
+
+    header('location: ' . WEBROOT);
+    die;
 }

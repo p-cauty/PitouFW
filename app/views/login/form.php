@@ -17,6 +17,10 @@ use PitouFW\Model\JustAuthMeFactory;
                 <input type="password" class="form-control" name="pass" required id="pass" />
             </div>
             <div class="form-group">
+                <input type="checkbox" name="remember" id="remember" value="1" />
+                <label for="remember"><?= L::login_labels_remember ?></label>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-user-lock"></i>
                     <?= L::login_submit ?>

@@ -34,7 +34,7 @@ class Alert {
         $isError = $type === 'error';
         $isWarning = $type === 'warning';
         $message = $_SESSION['alert']['message'];
-        $html = '<div class="alert alert-' . $theme . ' mb-5">' . ($isError ? 'Erreur : ' : ($isWarning ? 'Attention : ' : '')) . $message . '</div>';
+        $html = '<div class="alert alert-' . $theme . ' mb-4">' . ($isError ? 'Erreur : ' : ($isWarning ? 'Attention : ' : '')) . $message . '</div>';
 
         unset($_SESSION['alert']);
         return $html;

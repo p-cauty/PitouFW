@@ -16,7 +16,8 @@ use PitouFW\Entity\User;
 class UserModel {
     const SESSION_COOKIE_NAME = 'PTFW_SESSID';
     const SESSION_CACHE_PREFIX = 'session_';
-    const SESSION_CACHE_TTL = 86400; // 1 day
+    const SESSION_CACHE_TTL_DEFAULT = 86400; // 1 day
+    const SESSION_CACHE_TTL_LONG = 86400 * 366; // 1 year
 
     private static ?User $user = null;
 
@@ -28,7 +29,7 @@ class UserModel {
         return sha1(uniqid());
     }
 
-    public static function login(User $user, int $ttl = self::SESSION_CACHE_TTL): bool {
+    public static function login(User $user, int $ttl = self::SESSION_CACHE_TTL_DEFAULT): bool {
         if (!User::exists('id', $user->getId())) {
             var_dump('user do not exists');
             return false;
