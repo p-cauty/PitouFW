@@ -11,7 +11,7 @@ use PitouFW\Core\Alert;
 		<link type="text/css" rel="stylesheet" href="<?= CSS . 'bootstrap.min.css' ?>" media="screen" />
         <link type="text/css" rel="stylesheet" href="<?= CSS . 'style.css' ?>" media="screen" />
 		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
-		<meta name="format-detection" content="telephone=no" />>
+		<meta name="format-detection" content="telephone=no" />
 	</head>
 
 	<body>
