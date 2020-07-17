@@ -12,7 +12,10 @@ class Redis extends \Redis {
     public function __construct() {
         parent::__construct();
         $this->connect(REDIS_HOST, REDIS_PORT);
-        $this->auth(REDIS_PASS);
+
+        if (REDIS_PASS !== '') {
+            $this->auth(REDIS_PASS);
+        }
     }
 
     public function set($key, $value, $ttl = 0): bool {

@@ -31,7 +31,6 @@ class UserModel {
 
     public static function login(User $user, int $ttl = self::SESSION_CACHE_TTL_DEFAULT): bool {
         if (!User::exists('id', $user->getId())) {
-            var_dump('user do not exists');
             return false;
         }
 
