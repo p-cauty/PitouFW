@@ -31,8 +31,8 @@ register:
 login:
   title: 'Login'
   submit: 'Sign me in!'
-    labels:
-      remember: 'Remember me'
+  labels:
+    remember: 'Remember me'
   success: 'You are now logged in! We are happy to see you again!'
   error: 'Incorrect e-mail address or password.'
 jam:
