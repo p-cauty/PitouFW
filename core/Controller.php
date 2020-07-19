@@ -46,7 +46,7 @@ abstract class Controller {
     }
 
     public static function renderApiSuccess(): void {
-        Data::get()->setData(array_merge(['status' => 'success'], Data::get()->getData()));
+        Data::get()->setData(['status' => 'success', 'data' => Data::get()->getData()]);
     }
 
     public static function sendNoCacheHeaders(): void {
