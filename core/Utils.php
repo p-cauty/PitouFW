@@ -99,9 +99,9 @@ class Utils {
             str_replace('.', '_', $ip);
     }
 
-    public static function generateToken($length = 64) {
+    public static function generateToken(int $length = 64): ?string {
         if ($length % 4 !== 0) {
-            throw new \Exception('$length must be a factor of 4');
+            return null;
         }
 
         $bytes_number = 0.75 * $length;
