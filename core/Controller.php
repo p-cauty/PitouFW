@@ -23,8 +23,8 @@ abstract class Controller {
         $file = VIEWS.$path.'.php';
         if (file_exists($file) ) {
             $appView = $file;
-            $data = Request::get()->getArg(0) !== 'api' ? Utils::secure(Data::get()->getData()) : Data::get()->getData();
-            extract($data);
+            $dataToExtract = Request::get()->getArg(0) !== 'api' ? Utils::secure(Data::get()->getData()) : Data::get()->getData();
+            extract($dataToExtract);
             if (!is_null($layout)) {
                 require_once $layout;
             }

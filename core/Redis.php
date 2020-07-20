@@ -18,7 +18,7 @@ class Redis extends \Redis {
         }
     }
 
-    public function set($key, $value, $ttl = 0): bool {
+    public function set($key, $value, $ttl = null): bool {
         if (!is_string($value)) {
             $value = json_encode($value);
         }
