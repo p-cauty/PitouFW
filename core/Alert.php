@@ -4,6 +4,8 @@
 namespace PitouFW\Core;
 
 
+use L;
+
 class Alert {
     private static function alert(string $type, string $message): void {
         $_SESSION['alert'] = [
@@ -34,7 +36,7 @@ class Alert {
         $isError = $type === 'error';
         $isWarning = $type === 'warning';
         $message = $_SESSION['alert']['message'];
-        $html = '<div class="alert alert-' . $theme . ' mb-4">' . ($isError ? 'Erreur : ' : ($isWarning ? 'Attention : ' : '')) . $message . '</div>';
+        $html = '<div class="alert alert-' . $theme . ' mb-4">' . ($isError ? L::error . ' ' : ($isWarning ? L::warning . ' ' : '')) . $message . '</div>';
 
         unset($_SESSION['alert']);
         return $html;

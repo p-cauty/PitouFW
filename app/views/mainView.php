@@ -12,6 +12,7 @@ use PitouFW\Core\Alert;
         <link type="text/css" rel="stylesheet" href="<?= CSS . 'style.css' ?>" media="screen" />
 		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
 		<meta name="format-detection" content="telephone=no" />
+        <link rel="icon" type="image/x-icon" href="<?= IMG ?>icon.png" />
 	</head>
 
 	<body>

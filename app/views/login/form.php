@@ -1,10 +1,11 @@
 <?php
 
 use PitouFW\Model\JustAuthMeFactory;
+use function PitouFW\Core\t;
 
 ?>
 <h1 class="h2 mb-3"><?= L::login_title ?></h1>
-<?= JustAuthMeFactory::getSdk()->generateDefaultButtonHtml($_SESSION['lang'] ?? 'en') ?>
+<?= JustAuthMeFactory::getSdk()->generateDefaultButtonHtml(t()->getAppliedLang() ?? 'en') ?>
 <div class="row">
     <div class="col-md-6">
         <form action="" method="post">
@@ -20,11 +21,12 @@ use PitouFW\Model\JustAuthMeFactory;
                 <input type="checkbox" name="remember" id="remember" value="1" />
                 <label for="remember"><?= L::login_labels_remember ?></label>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">
+            <div class="form-inline">
+                <button type="submit" class="btn btn-primary mr-3 mb-2">
                     <i class="fas fa-user-lock"></i>
                     <?= L::login_submit ?>
                 </button>
+                <a href="<?= WEBROOT ?>forgot-passwd"><?= L::login_forgot ?></a>
             </div>
         </form>
     </div>

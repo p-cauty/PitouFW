@@ -1,5 +1,7 @@
 problem: 'It seems like something''s wrong here...'
 back: 'Go back'
+error: 'Error:'
+warning: 'Warning:'
 errors:
   401: 'Authentication required'
   403: 'Forbidden access'
@@ -17,6 +19,12 @@ home:
   register: 'Sign up'
   login: 'Sign in'
   logout: 'Logout'
+  form:
+    placeholder: 'Enter your e-mail address'
+    submit: 'Stay tuned'
+    success: 'Your e-mail address has been successfully added to our mailing lists!'
+    warning: 'Your e-mail address is already registered in our mailing lists.'
+    error: 'Please provide a valid e-mail address.'
 register:
   title: 'Registration'
   submit: 'Sign me up!'
@@ -35,6 +43,7 @@ login:
     remember: 'Remember me'
   success: 'You are now logged in! We are happy to see you again!'
   error: 'Incorrect e-mail address or password.'
+  forgot: 'Forgot password?'
 jam:
   errors:
     no_email: 'An error occured during your registration. Please remove %s from your JustAuthMe app and try again.'
@@ -42,6 +51,15 @@ jam:
 logout:
   success: 'You are successfully logged out.'
   error: 'An unknown error appeared during sign out.'
+forgot_passwd:
+  title: 'Forgot password'
+  form:
+    label: 'Enter your e-mail address:'
+    submit: 'Reset my password'
+  success: 'If you have a %s account, reset password instructions just had been sent to you by e-mail.'
+reset_passwd:
+  email:
+    subject: 'Your password reset'
 unsubscribe:
   title: 'Newsletter unsubscription'
   text: 'Your e-mail address %s has successfully been removed from our mailing lists.'

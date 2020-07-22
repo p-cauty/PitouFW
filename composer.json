@@ -14,6 +14,7 @@
         "ext-redis": "*",
         "phpmailer/phpmailer": "^6.1",
         "philipp15b/php-i18n": "^4.0",
-        "justauthme/php-sdk": "^1.1.1"
+        "justauthme/php-sdk": "^1.1.1",
+        "ext-iconv": "*"
     }
 }

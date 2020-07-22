@@ -2,6 +2,7 @@
 
 use PitouFW\Core\Controller;
 use PitouFW\Core\DB;
+use PitouFW\Core\Mailer;
 use PitouFW\Core\Redis;
 
 if (!isset($argc)) {

@@ -74,7 +74,7 @@ abstract class Entity {
         return $res;
     }
 
-    private function create(): int {
+    private function create(bool $show_errors = false): int {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
         $ref = new ReflectionClass($classname);
@@ -104,6 +104,9 @@ abstract class Entity {
 
         $req = DB::get()->prepare("INSERT INTO $table_name ($columns) VALUES ($qms)");
         $req->execute($values);
+        if ($show_errors) {
+            var_dump($req->errorInfo());
+        }
 
         return DB::get()->lastInsertId();
     }
@@ -156,7 +159,7 @@ abstract class Entity {
         return $res['nb'];
     }
 
-    private function update() {
+    private function update(bool $show_errors = false) {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
         $id = $this->getId();
@@ -167,20 +170,27 @@ abstract class Entity {
         $qms = [];
         foreach ($props as $prop) {
             $getter = self::getGetterName($prop->getName());
-            $values[] = $this->$getter();
+            $val = $this->$getter();
+            if ($val === null) {
+                continue;
+            }
             $qms[] = $prop->getName()." = ?";
+            $values[] = $val;
         }
         $qms = implode(', ', $qms);
 
         $req = DB::get()->prepare("UPDATE $table_name SET $qms WHERE id = ?");
         $req->execute(array_merge($values, [$id]));
+        if ($show_errors) {
+            var_dump($req->errorInfo());
+        }
     }
 
-    public function save(): ?int {
+    public function save(bool $show_errors = false): ?int {
         if ($this->getId() === 0) {
-           return $this->create();
+            return $this->create($show_errors);
         } else {
-            $this->update();
+            $this->update($show_errors);
         }
 
         return null;

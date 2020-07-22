@@ -15,8 +15,21 @@ use PitouFW\Model\UserModel;
     <i class="fas fa-user-plus"></i>
     <?= L::home_register ?>
 </a>
-<a href="<?= WEBROOT ?>login" class="btn btn-primary mb-2">
+<a href="<?= WEBROOT ?>login" class="btn btn-info mb-2">
     <i class="fas fa-user-lock"></i>
     <?= L::home_login ?>
 </a>
+<div class="row">
+    <div class="col-md-6">
+        <form action="" method="post" class="mt-4 form-inline">
+            <div class="form-group">
+                <input class="form-control mr-2 mb-2" type="email" name="email" placeholder="<?= L::home_form_placeholder ?>" required />
+                <button type="submit" class="btn btn-primary mb-2">
+                    <i class="fas fa-envelope"></i>
+                    <?= L::home_form_submit ?>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 <?php endif ?>

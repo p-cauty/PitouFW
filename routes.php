@@ -12,6 +12,7 @@ const ROUTES = [
     'login' => 'login',
     'jam' => 'jam',
     'logout' => 'logout',
+    'forgot-passwd' => 'forgot_passwd',
     'unsubscribe' => 'unsubscribe',
     'api' => [
         'mailer' => 'mailer',

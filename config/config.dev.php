@@ -31,7 +31,7 @@ const EMAIL_RENDERING_KEY = 'xxxxx';
 
 const SOCIAL_FACEBOOK = 'https://facebook.com/pitoufw';
 const SOCIAL_TWITTER = 'https://twitter.com/pitoufw';
-const SOCIAL_INSTAGRAM = 'https://intagram.com/pitoufw';
+const SOCIAL_INSTAGRAM = 'https://instagram.com/pitoufw';
 
 const PASSWD_MINIMAL_LENGTH = 8;
 

@@ -1,5 +1,7 @@
 problem: 'Il semblerait qu''il y ai un problème par ici...'
 back: 'Retour'
+error: 'Erreur :'
+warning: 'Attention :'
 errors:
   401: 'Authentification requise'
   403: 'Accès interdit'
@@ -17,6 +19,12 @@ home:
   register: 'M''inscrire'
   login: 'Me connecter'
   logout: 'Me déconnecter'
+  form:
+    placeholder: 'Entrez votre adresse e-mail'
+    submit: 'Rester informé'
+    success: 'Votre adresse e-mail a bien été ajoutée à nos listes de diffusion !'
+    warning: 'Votre adresse e-mail est déjà inscrite à nos newsletters.'
+    error: 'Merci de renseigner une adresse e-mail valide.'
 register:
   title: 'Inscription'
   submit: 'M''inscrire !'
@@ -35,6 +43,7 @@ login:
     remember: 'Se souvenir de moi'
   success: 'Vous êtes maintenant connecté ! Nous sommes heureux de vous revoir !'
   error: 'Adresse e-mail ou mot de passe incorrect.'
+  forgot: 'Mot de passe oublié ?'
 jam:
   errors:
     no_email: 'Une erreur est survenue lors de votre inscription. Merci de supprimer %s de votre application JustAuthMe et de réessayer'
@@ -42,6 +51,15 @@ jam:
 logout:
   success: 'Vous êtes bien déconnecté.'
   error: 'Une erreur inconnue est survenue durant la déconnexion.'
+forgot_passwd:
+  title: 'Mot de passe oublié'
+  form:
+    label: 'Entrez votre adresse e-mail :'
+    submit: 'Réinitialiser mon mot de passe'
+  success: 'Si vous avez un compte %s, en e-mail vient de vous être envoyé avec les instructions pour réinitialiser votre mot de passe.'
+reset_passwd:
+  email:
+    subject: 'Réinitialisation de votre mot de passe'
 unsubscribe:
   title: 'Désinscription de la newsletter'
   text: 'Votre adresse E-Mail %s a bien été supprimée de nos listes de diffusions.'

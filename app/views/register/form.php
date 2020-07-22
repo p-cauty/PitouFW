@@ -1,10 +1,11 @@
 <?php
 
 use PitouFW\Model\JustAuthMeFactory;
+use function PitouFW\Core\t;
 
 ?>
 <h1 class="h2 mb-3"><?= L::register_title ?></h1>
-<?= JustAuthMeFactory::getSdk()->generateDefaultButtonHtml($_SESSION['lang'] ?? 'en') ?>
+<?= JustAuthMeFactory::getSdk()->generateDefaultButtonHtml(t()->getAppliedLang() ?? 'en') ?>
 <div class="row">
     <div class="col-md-6">
         <form action="" method="post">

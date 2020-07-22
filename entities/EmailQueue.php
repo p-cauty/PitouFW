@@ -121,17 +121,17 @@ class EmailQueue extends Entity {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreatedAt(): string {
+    public function getCreatedAt(): ?string {
         return $this->created_at;
     }
 
     /**
-     * @param string $created_at
+     * @param string|null $created_at
      * @return EmailQueue
      */
-    public function setCreatedAt(string $created_at): EmailQueue {
+    public function setCreatedAt(?string $created_at): EmailQueue {
         $this->created_at = $created_at;
         return $this;
     }

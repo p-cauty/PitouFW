@@ -6,7 +6,7 @@ namespace PitouFW\Entity;
 
 class NewsletterEmail extends \PitouFW\Core\Entity {
     private string $email = '';
-    private ?string $created_at = '';
+    private ?string $created_at = null;
 
     /**
      * @return string
@@ -32,17 +32,17 @@ class NewsletterEmail extends \PitouFW\Core\Entity {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreatedAt(): string {
+    public function getCreatedAt(): ?string {
         return $this->created_at;
     }
 
     /**
-     * @param string $created_at
+     * @param string|null $created_at
      * @return NewsletterEmail
      */
-    public function setCreatedAt(string $created_at): NewsletterEmail {
+    public function setCreatedAt(?string $created_at): NewsletterEmail {
         $this->created_at = $created_at;
         return $this;
     }

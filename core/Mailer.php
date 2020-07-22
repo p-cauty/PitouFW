@@ -1,5 +1,7 @@
 <?php
 
+namespace PitouFW\Core;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PitouFW\Core\DB;
 use PitouFW\Core\Logger;
@@ -99,7 +101,7 @@ class Mailer extends PHPMailer {
             ->setSubject($subject)
             ->setTemplate($template)
             ->setParams(json_encode($params))
-            ->setBcc(json_encode($bcc));
-        $email_queue->save();
+            ->setBcc(json_encode($bcc))
+            ->save();
     }
 }
