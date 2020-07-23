@@ -56,6 +56,3 @@ if (isset($_GET['lang'])) {
 Translator::init();
 
 require_once Router::get()->getPathToRequire();
-if (Request::get()->getArg(0) === 'api') {
-    Controller::renderView('json/json', null);
-}

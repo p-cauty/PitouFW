@@ -7,14 +7,20 @@ use PitouFW\Core\Mailer;
 use PitouFW\Core\Utils;
 use PitouFW\Entity\PasswdReset;
 use PitouFW\Entity\User;
+use PitouFW\Model\UserModel;
 use function PitouFW\Core\t;
+
+UserModel::rejectUsers();
 
 if (POST) {
     if (!empty($_POST['email'])) {
         if (User::exists('email', $_POST['email'])) {
             $user = User::readBy('email', $_POST['email']);
 
-            $token = Utils::generateToken();
+            do {
+                $token = Utils::generateToken();
+            } while (PasswdReset::exists('token', $token));
+
             $passwd_reset = new PasswdReset();
             $passwd_reset->setToken($token)
                 ->setUserId($user->getId())
@@ -23,7 +29,7 @@ if (POST) {
             $mailer = new Mailer();
             $mailer->queueMail(
                 $user->getEmail(),
-                L::reset_passwd_email_subject,
+                L::passwd_reset_email_subject,
                 'mail/' . t()->getAppliedLang() . '/passwd_reset',
                 ['token' => $token]
             );

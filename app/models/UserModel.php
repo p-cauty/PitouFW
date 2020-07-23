@@ -9,6 +9,7 @@
 namespace PitouFW\Model;
 
 
+use PitouFW\Core\DB;
 use PitouFW\Core\Redis;
 use PitouFW\Core\Utils;
 use PitouFW\Entity\User;
@@ -62,6 +63,20 @@ class UserModel {
         return false;
     }
 
+    public static function rejectGuests(): void {
+        if (!self::isLogged()) {
+            header('location: ' . WEBROOT . 'login');
+            die;
+        }
+    }
+
+    public static function rejectUsers(): void {
+        if (self::isLogged()) {
+            header('location: ' . WEBROOT);
+            die;
+        }
+    }
+
     public static function get(): ?User {
         if (self::isLogged()) {
             if (self::$user === null) {
@@ -107,5 +122,22 @@ class UserModel {
         }
 
         return true;
+    }
+
+    public static function isPasswdResetTokenValid(string $token ): bool {
+        $minus_24h = Utils::time() - 86400;
+        $datetime_to_compare_with = date('Y-m-d H:i:s', $minus_24h);
+
+        $req = DB::get()->prepare("
+            SELECT COUNT(*) AS cnt
+            FROM passwd_reset
+            WHERE token = ?
+            AND used_at IS NULL
+            AND requested_at > ?
+        ");
+        $req->execute([$token, $datetime_to_compare_with]);
+        $res = $req->fetch();
+
+        return $res['cnt'] > 0;
     }
 }

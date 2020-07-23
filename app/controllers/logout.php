@@ -3,10 +3,7 @@
 use PitouFW\Core\Alert;
 use PitouFW\Model\UserModel;
 
-if (!UserModel::isLogged()) {
-    header('location: ' . WEBROOT);
-    die;
-}
+UserModel::rejectGuests();
 
 $success = UserModel::logout();
 if ($success) {

@@ -6,10 +6,7 @@ use PitouFW\Core\Data;
 use PitouFW\Entity\User;
 use PitouFW\Model\UserModel;
 
-if (UserModel::isLogged()) {
-    header('location: ' . WEBROOT);
-    die;
-}
+UserModel::rejectUsers();
 
 if (POST) {
     if (!empty($_POST['email']) && !empty($_POST['pass1']) && !empty($_POST['pass2'])) {

@@ -13,6 +13,7 @@ const ROUTES = [
     'jam' => 'jam',
     'logout' => 'logout',
     'forgot-passwd' => 'forgot_passwd',
+    'passwd-reset' => 'passwd_reset',
     'unsubscribe' => 'unsubscribe',
     'api' => [
         'mailer' => 'mailer',

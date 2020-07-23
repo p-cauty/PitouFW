@@ -4,7 +4,7 @@
         <form action="" method="post">
             <div class="form-group">
                 <label for="email"><?= L::forgot_passwd_form_label ?></label>
-                <input type="email" name="email" id="email" class="form-control" />
+                <input type="email" name="email" id="email" required class="form-control" />
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">

@@ -47,6 +47,8 @@ abstract class Controller {
 
     public static function renderApiSuccess(): void {
         Data::get()->setData(['status' => 'success', 'data' => Data::get()->getData()]);
+        Controller::renderView('json/json', null);
+        die;
     }
 
     public static function sendNoCacheHeaders(): void {
