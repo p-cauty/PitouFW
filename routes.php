@@ -15,6 +15,7 @@ const ROUTES = [
     'forgot-passwd' => 'forgot_passwd',
     'passwd-reset' => 'passwd_reset',
     'unsubscribe' => 'unsubscribe',
+    'profile' => 'profile',
     'api' => [
         'mailer' => 'mailer',
         'version' => 'version'
