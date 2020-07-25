@@ -4,7 +4,9 @@
 namespace PitouFW\Entity;
 
 
-class NewsletterEmail extends \PitouFW\Core\Entity {
+use PitouFW\Core\Entity;
+
+class NewsletterEmail extends Entity {
     private string $email = '';
     private ?string $created_at = null;
 

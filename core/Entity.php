@@ -196,7 +196,7 @@ abstract class Entity {
         return null;
     }
 
-    public function delete() {
+    public function delete(): void {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
         $id = $this->getId();
@@ -204,10 +204,14 @@ abstract class Entity {
         $req->execute([$id]);
     }
 
-    public static function deleteById(int $id) {
+    public static function deleteBy(string $column, $value): void {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
-        $req = DB::get()->prepare("DELETE FROM $table_name WHERE id = ?");
-        $req->execute([$id]);
+        $req = DB::get()->prepare("DELETE FROM $table_name WHERE $column = ?");
+        $req->execute([$value]);
+    }
+
+    public static function deleteById(int $id): void {
+        self::deleteBy('id', $id);
     }
 }
