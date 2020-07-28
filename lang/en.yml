@@ -18,6 +18,7 @@ home:
   logged_as: 'Signed in as: %s'
   register: 'Sign up'
   login: 'Sign in'
+  profile: 'My profile'
   logout: 'Logout'
   form:
     placeholder: 'Enter your e-mail address'
@@ -67,3 +68,9 @@ passwd_reset:
 unsubscribe:
   title: 'Newsletter unsubscription'
   text: 'Your e-mail address %s has successfully been removed from our mailing lists.'
+profile:
+  title: 'My profile'
+  labels:
+    newpass: 'New password :'
+  success: 'Your informations have been successfully saved!'
+  submit: 'Save'

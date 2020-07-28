@@ -18,6 +18,7 @@ home:
   logged_as: 'Connecté en tant que : %s'
   register: 'M''inscrire'
   login: 'Me connecter'
+  profile: 'Mon profil'
   logout: 'Me déconnecter'
   form:
     placeholder: 'Entrez votre adresse e-mail'
@@ -67,3 +68,9 @@ passwd_reset:
 unsubscribe:
   title: 'Désinscription de la newsletter'
   text: 'Votre adresse E-Mail %s a bien été supprimée de nos listes de diffusions.'
+profile:
+  title: 'Mon profil'
+  labels:
+    newpass: 'Nouveau mot de passe :'
+  success: 'Vos informations ont été sauvegardées avec succès !'
+  submit: 'Sauvegarder'
