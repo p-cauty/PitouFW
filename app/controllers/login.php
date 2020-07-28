@@ -14,14 +14,18 @@ if (POST) {
             $user = User::readBy('email', $_POST['email']);
 
             if (UserModel::checkPassword($_POST['pass'], $user->getPasswd())) {
-                $ttl = !empty($_POST['remember']) && $_POST['remember'] === '1' ?
-                    UserModel::SESSION_CACHE_TTL_LONG :
-                    UserModel::SESSION_CACHE_TTL_DEFAULT;
-                UserModel::login($user, $ttl);
+                if ($user->isActive()) {
+                    $ttl = !empty($_POST['remember']) && $_POST['remember'] === '1' ?
+                        UserModel::SESSION_CACHE_TTL_LONG :
+                        UserModel::SESSION_CACHE_TTL_DEFAULT;
+                    UserModel::login($user, $ttl);
 
-                Alert::success(L::login_success);
-                header('location: ' . WEBROOT);
-                die;
+                    Alert::success(L::login_success);
+                    header('location: ' . WEBROOT);
+                    die;
+                } else {
+                    Alert::error(L::login_inactive);
+                }
             } else {
                 Alert::error(L::login_error);
             }

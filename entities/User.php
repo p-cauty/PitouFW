@@ -12,6 +12,7 @@ class User extends Entity {
     private string $jam_id = '';
     private int $admin = 0;
     private ?string $reg_timestamp = null;
+    private ?string $activated_at = null;
 
     /**
      * @return string
@@ -101,6 +102,29 @@ class User extends Entity {
      */
     public function setRegTimestamp(?string $reg_timestamp): User {
         $this->reg_timestamp = $reg_timestamp;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getActivatedAt(): ?string {
+        return $this->activated_at;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool {
+        return $this->getActivatedAt() !== null;
+    }
+
+    /**
+     * @param string|null $activated_at
+     * @return User
+     */
+    public function setActivatedAt(?string $activated_at): User {
+        $this->activated_at = $activated_at;
         return $this;
     }
 }

@@ -45,6 +45,7 @@ login:
   success: 'Vous êtes maintenant connecté ! Nous sommes heureux de vous revoir !'
   error: 'Adresse e-mail ou mot de passe incorrect.'
   forgot: 'Mot de passe oublié ?'
+  inactive: 'Merci d''activer votre compte en cliquant sur le lien reçu par e-mail avant de pouvoir vous connecter.'
 jam:
   errors:
     no_email: 'Une erreur est survenue lors de votre inscription. Merci de supprimer %s de votre application JustAuthMe et de réessayer'

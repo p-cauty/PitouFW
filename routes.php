@@ -16,6 +16,7 @@ const ROUTES = [
     'passwd-reset' => 'passwd_reset',
     'unsubscribe' => 'unsubscribe',
     'profile' => 'profile',
+    'confirm' => 'confirm',
     'api' => [
         'mailer' => 'mailer',
         'version' => 'version'
