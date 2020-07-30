@@ -37,6 +37,9 @@ register:
     email_exists: 'Cette adresse e-mail est déjà liée à un compte existant. Essayez de vous connecter.'
     invalid_passwd: 'Votre mot de passe doit faire au moins 8 caractères de long et être composé de minuscules, de majuscules et de chiffres.'
     identical: 'Les deux mots de passe doivent être identiques.'
+  email:
+    subject: 'Activiation de votre compte %s'
+  already_user: 'Déjà membre ? Connectez-vous !'
 login:
   title: 'Connexion'
   submit: 'Me connecter !'
@@ -46,6 +49,7 @@ login:
   error: 'Adresse e-mail ou mot de passe incorrect.'
   forgot: 'Mot de passe oublié ?'
   inactive: 'Merci d''activer votre compte en cliquant sur le lien reçu par e-mail avant de pouvoir vous connecter.'
+  no_account: 'Pas encore de compte ? Créez-en un !'
 jam:
   errors:
     no_email: 'Une erreur est survenue lors de votre inscription. Merci de supprimer %s de votre application JustAuthMe et de réessayer'
@@ -75,3 +79,6 @@ profile:
     newpass: 'Nouveau mot de passe :'
   success: 'Vos informations ont été sauvegardées avec succès !'
   submit: 'Sauvegarder'
+confirm:
+  success: 'Votre compte est maintenant activé ! Vous pouvez vous connecter !'
+  error: 'Lien invalide ou obsolète.'

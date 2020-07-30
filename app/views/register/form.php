@@ -22,10 +22,11 @@ use function PitouFW\Core\t;
                 <input type="password" class="form-control" name="pass2" required id="pass2" />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary mr-3 mb-2">
                     <i class="fas fa-user-plus"></i>
                     <?= L::register_submit ?>
                 </button>
+                <a href="<?= WEBROOT ?>login"><?= L::register_already_user ?></a>
             </div>
         </form>
     </div>

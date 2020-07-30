@@ -1,9 +1,11 @@
 <?php
 
-if (file_exists(__DIR__ . '/config.dist.php')) {
-    require_once __DIR__ . '/config.dist.php';
+require_once __DIR__ . '/app.php';
+
+if (file_exists(__DIR__ . '/host.dist.php')) {
+    require_once __DIR__ . '/host.dist.php';
 } else {
-    require_once __DIR__ . '/config.dev.php';
+    require_once __DIR__ . '/host.dev.php';
 }
 
 const PROD_ENV = ENV_NAME === 'prod';

@@ -10,15 +10,20 @@ namespace PitouFW\Model;
 
 
 use PitouFW\Core\DB;
+use PitouFW\Core\Mailer;
 use PitouFW\Core\Redis;
 use PitouFW\Core\Utils;
 use PitouFW\Entity\User;
+use function PitouFW\Core\t;
 
 class UserModel {
     const SESSION_COOKIE_NAME = 'PTFW_SESSID';
     const SESSION_CACHE_PREFIX = 'session_';
     const SESSION_CACHE_TTL_DEFAULT = 86400; // 1 day
     const SESSION_CACHE_TTL_LONG = 86400 * 366; // 1 year
+
+    const ACCOUNT_VALIDATION_CACHE_PREFIX = 'valid_';
+    const ACCOUNT_VALIDATION_CACHE_TTL = 86400; // 1 day
 
     private static ?User $user = null;
 
@@ -139,5 +144,20 @@ class UserModel {
         $res = $req->fetch();
 
         return $res['cnt'] > 0;
+    }
+
+    public static function startAccountValidation(User $user): void {
+        $token = Utils::generateToken();
+        $redis = new Redis();
+        $cache_key = self::ACCOUNT_VALIDATION_CACHE_PREFIX . $token;
+        $redis->set($cache_key, $user->getId(), self::ACCOUNT_VALIDATION_CACHE_TTL);
+
+        $mailer = new Mailer();
+        $mailer->queueMail(
+            $user->getEmail(),
+            \L::register_email_subject(NAME),
+            'mail/' . t()->getAppliedLang() . '/account_validation',
+            ['token' => $token],
+        );
     }
 }

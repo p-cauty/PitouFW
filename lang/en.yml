@@ -37,6 +37,9 @@ register:
     email_exists: 'This e-mail address is already associated with another account. Try to sign in.'
     invalid_passwd: 'Your password must be at least 8 chars long and must contains lowercases, uppercases ans digits.'
     identical: 'Both passwords must be identical.'
+  email:
+    subject: 'Your %s account validation'
+  already_user: 'Already have an account? Sign in!'
 login:
   title: 'Login'
   submit: 'Sign me in!'
@@ -46,6 +49,7 @@ login:
   error: 'Incorrect e-mail address or password.'
   forgot: 'Forgot password?'
   inactive: 'Please enable your account by clicking the link your received by e-mail before trying to sign in.'
+  no_account: 'No account yet? Create one!'
 jam:
   errors:
     no_email: 'An error occured during your registration. Please remove %s from your JustAuthMe app and try again.'
@@ -75,3 +79,6 @@ profile:
     newpass: 'New password :'
   success: 'Your informations have been successfully saved!'
   submit: 'Save'
+confirm:
+  success: 'Your account is now activated! You can sign in!'
+  error: 'This link is invalid or outdated.'

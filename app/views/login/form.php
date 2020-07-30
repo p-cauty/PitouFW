@@ -27,6 +27,7 @@ use function PitouFW\Core\t;
                     <?= L::login_submit ?>
                 </button>
                 <a href="<?= WEBROOT ?>forgot-passwd"><?= L::login_forgot ?></a>
+                <a href="<?= WEBROOT ?>register"><?= L::login_no_account ?></a>
             </div>
         </form>
     </div>
