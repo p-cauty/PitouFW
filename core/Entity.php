@@ -11,7 +11,7 @@ namespace PitouFW\Core;
 use ReflectionClass;
 
 abstract class Entity {
-    private int $id = 0;
+    protected int $id = 0;
 
     /**
      * @return int

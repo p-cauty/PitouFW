@@ -14,7 +14,7 @@ if (POST) {
             $user = User::readBy('email', $_POST['email']);
 
             if (UserModel::checkPassword($_POST['pass'], $user->getPasswd())) {
-                if ($user->isActive()) {
+                if (UserModel::isTrustable($user)) {
                     $ttl = !empty($_POST['remember']) && $_POST['remember'] === '1' ?
                         UserModel::SESSION_CACHE_TTL_LONG :
                         UserModel::SESSION_CACHE_TTL_DEFAULT;

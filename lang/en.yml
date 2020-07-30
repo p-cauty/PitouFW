@@ -38,7 +38,7 @@ register:
     invalid_passwd: 'Your password must be at least 8 chars long and must contains lowercases, uppercases ans digits.'
     identical: 'Both passwords must be identical.'
   email:
-    subject: 'Your %s account validation'
+    subject: 'Activate your %s account'
   already_user: 'Already have an account? Sign in!'
 login:
   title: 'Login'
@@ -79,6 +79,8 @@ profile:
     newpass: 'New password :'
   success: 'Your informations have been successfully saved!'
   submit: 'Save'
+  email:
+    subject: 'Confirm your e-mail address'
 confirm:
-  success: 'Your account is now activated! You can sign in!'
+  success: 'Your account is now activated!'
   error: 'This link is invalid or outdated.'

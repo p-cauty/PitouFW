@@ -129,7 +129,7 @@ class UserModel {
         return true;
     }
 
-    public static function isPasswdResetTokenValid(string $token ): bool {
+    public static function isPasswdResetTokenValid(string $token): bool {
         $minus_24h = Utils::time() - 86400;
         $datetime_to_compare_with = date('Y-m-d H:i:s', $minus_24h);
 
@@ -159,5 +159,23 @@ class UserModel {
             'mail/' . t()->getAppliedLang() . '/account_validation',
             ['token' => $token],
         );
+    }
+
+    public static function isAwaitingEmailConfirmation(User $user): bool {
+        $req = DB::get()->prepare("
+            SELECT confirmed_at
+            FROM email_update
+            WHERE user_id = ?
+            ORDER BY requested_at DESC
+            LIMIT 1
+        ");
+        $req->execute([$user->getId()]);
+        $rep = $req->fetch();
+
+        return $rep !== false && $rep['confirmed_at'] === null;
+    }
+
+    public static function isTrustable(User $user): bool {
+        return !TRUST_NEEDED || ($user->isActive() && !self::isAwaitingEmailConfirmation($user));
     }
 }

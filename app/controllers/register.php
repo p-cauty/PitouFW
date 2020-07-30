@@ -21,7 +21,9 @@ if (POST) {
                         $user->setId($uid);
 
                         UserModel::login($user);
-                        UserModel::startAccountValidation($user);
+                        if (TRUST_NEEDED) {
+                            UserModel::startAccountValidation($user);
+                        }
 
                         Alert::success(L::register_success(NAME));
                         header('location: ' . WEBROOT);

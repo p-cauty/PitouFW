@@ -16,7 +16,7 @@
                             <div>
                                 <h4 class=""
                                     style="margin-top: 0; margin-bottom: 0; font-weight: 500; color: inherit; vertical-align: baseline; font-size: 24px; line-height: 28.8px;"
-                                    align="left">Confirmation de votre compte <?= NAME ?></h4>
+                                    align="left">Activation de votre compte <?= NAME ?></h4>
                                 <table  border="0" cellpadding="0"
                                         cellspacing="0" style="width: 100%;">
                                     <tbody>
@@ -32,12 +32,12 @@
                                 <p class=""
                                    style="line-height: 24px; font-size: 14px; margin: 0;"
                                    align="left">
-                                    Vous venez de vous inscrire sur <?= NAME ?> et nous avons vesoin de confirmer votre
+                                    Vous venez de vous inscrire sur <?= NAME ?> et nous avons besoin de confirmer votre
                                     adresse e-mail. Veuillez cliquer sur le bouton ci-dessous afin d'activer votre compte.
                                     Si le bouton ne s'affiche pas ou fonctionne mal, copiez-collez ce lien dans votre
                                     navigateur : <strong><?= APP_URL ?>confirm/<?= $token ?></strong>
                                     <br /><br />
-                                    Si vous n'êtes pas à l'origine de cette demande, Merci de nous le signifier en
+                                    Si vous n'êtes pas à l'origine de cette demande, merci de nous le signifier en
                                     répondant à cet e-mail.
                                 </p>
                                 <table  border="0" cellpadding="0"

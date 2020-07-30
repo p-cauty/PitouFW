@@ -38,7 +38,7 @@ register:
     invalid_passwd: 'Votre mot de passe doit faire au moins 8 caractères de long et être composé de minuscules, de majuscules et de chiffres.'
     identical: 'Les deux mots de passe doivent être identiques.'
   email:
-    subject: 'Activiation de votre compte %s'
+    subject: 'Activation de votre compte %s'
   already_user: 'Déjà membre ? Connectez-vous !'
 login:
   title: 'Connexion'
@@ -79,6 +79,8 @@ profile:
     newpass: 'Nouveau mot de passe :'
   success: 'Vos informations ont été sauvegardées avec succès !'
   submit: 'Sauvegarder'
+  email:
+    subject: 'Confirmation de votre adresse e-mail'
 confirm:
-  success: 'Votre compte est maintenant activé ! Vous pouvez vous connecter !'
+  success: 'Votre compte est maintenant activé !'
   error: 'Lien invalide ou obsolète.'

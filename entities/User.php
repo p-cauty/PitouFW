@@ -4,7 +4,13 @@
 namespace PitouFW\Entity;
 
 
+use PitouFW\Core\DB;
 use PitouFW\Core\Entity;
+use PitouFW\Core\Mailer;
+use PitouFW\Core\Redis;
+use PitouFW\Core\Utils;
+use PitouFW\Model\UserModel;
+use function PitouFW\Core\t;
 
 class User extends Entity {
     private string $email = '';
