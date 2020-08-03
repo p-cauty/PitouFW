@@ -33,7 +33,7 @@
                                    style="line-height: 24px; font-size: 14px; margin: 0;"
                                    align="left">
                                     Vous venez de modifier votre adresse e-mail sur <?= NAME ?> et nous avons besoin de
-                                    confirmer votre cette dernière. Veuillez cliquer sur le bouton ci-dessous afin de
+                                    confirmer cette dernière. Veuillez cliquer sur le bouton ci-dessous afin de
                                     valider votre adresse e-mail. Si le bouton ne s'affiche pas ou fonctionne mal,
                                     copiez-collez ce lien dans votre navigateur :
                                     <strong><?= APP_URL ?>user/confirm/<?= $token ?></strong>
