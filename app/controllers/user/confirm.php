@@ -4,32 +4,35 @@ use PitouFW\Core\Controller;
 use PitouFW\Core\Data;
 use PitouFW\Core\Redis;
 use PitouFW\Core\Request;
+use PitouFW\Core\Utils;
 use PitouFW\Entity\EmailUpdate;
 use PitouFW\Entity\User;
 use PitouFW\Model\UserModel;
 
-$token = Request::get()->getArg(1);
+$token = Request::get()->getArg(2);
 
 $redis = new Redis();
 $cache_key = UserModel::ACCOUNT_VALIDATION_CACHE_PREFIX . $token;
 $cached = $redis->get($cache_key);
-
+// TODO : pouvoir redemander un email de confirmation
 $success = false;
 if ($cached !== false) {
     if (User::exists('id', $cached)) {
         $user = User::read($cached);
-        $user->setActivatedAt(date('Y-m-d H:i:s'))
+        $user->setActivatedAt(Utils::datetime())
             ->save();
         $redis->del($cache_key);
         $success = true;
     }
-} elseif (EmailUpdate::exists('confirm_token', $token)) {
-    $email_update = EmailUpdate::readBy('confirm_token', $token);
-    if ($email_update->getConfirmedAt() === null) {
-        $email_update->setConfirmedAt(date('Y-m-d H:i:s'))
+} elseif (UserModel::isAwaitingEmailConfirmation($user)) {
+    $email_update = UserModel::getLastEmailUpdate($user);
+    if ($email_update->getConfirmToken() === $token) {
+        $email_update->setConfirmedAt(Utils::datetime())
             ->save();
+        $success = true;
     }
 }
 
+Data::get()->add('TITLE', L::confirm_title);
 Data::get()->add('success', $success);
-Controller::renderView('confirm/confirm');
+Controller::renderView('user/confirm/confirm');

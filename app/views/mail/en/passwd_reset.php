@@ -35,7 +35,7 @@
                                     You have recently requested a password reset on <?= NAME ?>.
                                     Please click the button below to engage the new password creation procedure. If the
                                     button does not appears or does not work, copy-paste the following link in your
-                                    browser: <strong><?= APP_URL ?>passwd-reset/<?= $token ?></strong>
+                                    browser: <strong><?= APP_URL ?>user/passwd-reset/<?= $token ?></strong>
                                     <br /><br />
                                     If you do not asked for a password reset, just ignore this e-mail.
                                 </p>
@@ -73,7 +73,7 @@
                                     <tr>
                                         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;"
                                             align="center" bgcolor="<?= PRIMARY_COLOR ?>">
-                                            <a href="<?= APP_URL ?>passwd-reset/<?= $token ?>"
+                                            <a href="<?= APP_URL ?>user/passwd-reset/<?= $token ?>"
                                                style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4.8px; line-height: 30px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: <?= PRIMARY_COLOR ?>; color: #ffffff; padding: 8px 16px; border: 1px solid <?= PRIMARY_COLOR ?>;">Reset my password</a>
                                         </td>
                                     </tr>

@@ -13,6 +13,7 @@ use PitouFW\Core\DB;
 use PitouFW\Core\Mailer;
 use PitouFW\Core\Redis;
 use PitouFW\Core\Utils;
+use PitouFW\Entity\EmailUpdate;
 use PitouFW\Entity\User;
 use function PitouFW\Core\t;
 
@@ -177,5 +178,43 @@ class UserModel {
 
     public static function isTrustable(User $user): bool {
         return !TRUST_NEEDED || ($user->isActive() && !self::isAwaitingEmailConfirmation($user));
+    }
+
+    public static function getLastEmailUpdate(User $user): ?EmailUpdate {
+        $req = DB::get()->prepare("
+            SELECT id
+            FROM email_update
+            WHERE user_id = ?
+            ORDER BY requested_at DESC
+            LIMIT 1
+        ");
+        $req->execute([$user->getId()]);
+        $rep = $req->fetch();
+
+        return $rep !== false ? EmailUpdate::read($rep['id']) : null;
+    }
+
+    public static function startNewMailValidation(User $user): void {
+        do {
+            $token = Utils::generateToken();
+        } while (EmailUpdate::exists('confirm_token', $token));
+
+        $email_update = new EmailUpdate();
+        $email_update->setUserId($user->getId())
+            ->setConfirmToken($token)
+            ->setOldEmail($user->getEmail())
+            ->setNewEmail($_POST['email'])
+            ->save();
+
+        $mailer = new Mailer();
+        $mailer->queueMail(
+            $_POST['email'],
+            \L::profile_email_subject,
+            'mail/' . t()->getAppliedLang() . '/newmail',
+            ['token' => $token],
+        );
+
+        self::logout();
+        self::login($user);
     }
 }

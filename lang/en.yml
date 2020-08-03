@@ -77,10 +77,17 @@ profile:
   title: 'My profile'
   labels:
     newpass: 'New password :'
-  success: 'Your informations have been successfully saved!'
+  success:
+    default: 'Your informations have been successfully saved!'
+    with_email: 'Your informations have been successfully saved! You received an e-mail in order to confirm your new address.'
   submit: 'Save'
   email:
-    subject: 'Confirm your e-mail address'
+    subject: 'Validate your e-mail address'
 confirm:
+  title: 'Confirm your e-mail address'
   success: 'Your account is now activated!'
   error: 'This link is invalid or outdated.'
+resend:
+  title: 'Send me a new confirmation e-mail'
+  success: 'A new confirmation e-mail just has been sent to your inbox!'
+  error: 'Your account is already active and validated. You have nothind to do!'

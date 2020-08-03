@@ -35,7 +35,7 @@
                                     You just sign up to <?= NAME ?> and we need you to confirm your e-mail address.
                                     Please click the button below to activate your account. If the button does not work
                                     or is malfunctioning, copy-paste this link into your browser :
-                                    <strong><?= APP_URL ?>confirm/<?= $token ?></strong>
+                                    <strong><?= APP_URL ?>user/confirm/<?= $token ?></strong>
                                     <br /><br />
                                     If you do not requested this, please warn us by answering this e-mail.
                                 </p>
@@ -73,7 +73,7 @@
                                     <tr>
                                         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;"
                                             align="center" bgcolor="<?= PRIMARY_COLOR ?>">
-                                            <a href="<?= APP_URL ?>confirm/<?= $token ?>"
+                                            <a href="<?= APP_URL ?>user/confirm/<?= $token ?>"
                                                style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4.8px; line-height: 30px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: <?= PRIMARY_COLOR ?>; color: #ffffff; padding: 8px 16px; border: 1px solid <?= PRIMARY_COLOR ?>;">Activate my account</a>
                                         </td>
                                     </tr>

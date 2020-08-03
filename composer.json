@@ -1,11 +1,16 @@
 {
-    "name": "phpeter/pitoufw",
+    "name": "phpitou/pitoufw",
     "authors": [
         {
-            "name": "PHPeter",
-            "email": "phpeter@phpeter.fr"
+            "name": "Peter Cauty",
+            "email": "peter@cauty.fr",
+            "homepage": "https://peter.cauty.fr",
+            "role": "Developer"
         }
     ],
+    "version": "3.0.0",
+    "minimum-stability": "stable",
+    "license": "MIT",
     "require": {
         "php": "^7.4",
         "ext-json": "*",

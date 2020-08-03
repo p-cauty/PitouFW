@@ -40,4 +40,4 @@ if (POST) {
 }
 
 Data::get()->add('TITLE', L::forgot_passwd_title);
-Controller::renderView('passwd/forgot');
+Controller::renderView('user/passwd/forgot');

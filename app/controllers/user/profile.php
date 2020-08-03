@@ -18,32 +18,14 @@ if (POST) {
     if (!empty($_POST['email'])) {
         if (filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
             if ($user->getEmail() === $_POST['email'] || !User::exists('email', $_POST['email'])) {
+                Alert::success(L::profile_success_default);
+
                 if (TRUST_NEEDED && $user->getEmail() !== $_POST['email']) {
-                    do {
-                        $token = Utils::generateToken();
-                    } while (EmailUpdate::exists('confirm_token', $token));
-
-                    $email_update = new EmailUpdate();
-                    $email_update->setUserId($user->getId())
-                        ->setConfirmToken($token)
-                        ->setOldEmail($user->getEmail())
-                        ->setNewEmail($_POST['email'])
-                        ->save();
-
-                    $mailer = new Mailer();
-                    $mailer->queueMail(
-                        $_POST['email'],
-                        L::profile_email_subject,
-                        'mail/' . t()->getAppliedLang() . '/newmail',
-                        ['token' => $token],
-                    );
-
-                    UserModel::logout();
-                    UserModel::login($user);
+                    UserModel::startNewMailValidation($user);
+                    Alert::success(L::profile_success_with_email);
                 }
 
                 $user->setEmail($_POST['email']);
-                Alert::success(L::profile_success);
 
                 if (!empty($_POST['pass1'])) {
                     if (UserModel::validatePassword($_POST['pass1'])) {
@@ -71,4 +53,4 @@ if (POST) {
 
 Data::get()->add('TITLE', L::profile_title);
 Data::get()->add('user', $user);
-Controller::renderView('profile/form');
+Controller::renderView('user/profile/form');

@@ -35,7 +35,7 @@
                                     Vous venez de vous inscrire sur <?= NAME ?> et nous avons besoin de confirmer votre
                                     adresse e-mail. Veuillez cliquer sur le bouton ci-dessous afin d'activer votre compte.
                                     Si le bouton ne s'affiche pas ou fonctionne mal, copiez-collez ce lien dans votre
-                                    navigateur : <strong><?= APP_URL ?>confirm/<?= $token ?></strong>
+                                    navigateur : <strong><?= APP_URL ?>user/confirm/<?= $token ?></strong>
                                     <br /><br />
                                     Si vous n'êtes pas à l'origine de cette demande, merci de nous le signifier en
                                     répondant à cet e-mail.
@@ -74,7 +74,7 @@
                                     <tr>
                                         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;"
                                             align="center" bgcolor="<?= PRIMARY_COLOR ?>">
-                                            <a href="<?= APP_URL ?>confirm/<?= $token ?>"
+                                            <a href="<?= APP_URL ?>user/confirm/<?= $token ?>"
                                                style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4.8px; line-height: 30px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: <?= PRIMARY_COLOR ?>; color: #ffffff; padding: 8px 16px; border: 1px solid <?= PRIMARY_COLOR ?>;">Activer mon compte</a>
                                         </td>
                                     </tr>

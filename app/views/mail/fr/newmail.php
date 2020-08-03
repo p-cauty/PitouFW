@@ -16,7 +16,7 @@
                             <div>
                                 <h4 class=""
                                     style="margin-top: 0; margin-bottom: 0; font-weight: 500; color: inherit; vertical-align: baseline; font-size: 24px; line-height: 28.8px;"
-                                    align="left">Réinitialisation de votre mot de passe</h4>
+                                    align="left">Validation de votre adresse e-mail</h4>
                                 <table  border="0" cellpadding="0"
                                         cellspacing="0" style="width: 100%;">
                                     <tbody>
@@ -32,12 +32,14 @@
                                 <p class=""
                                    style="line-height: 24px; font-size: 14px; margin: 0;"
                                    align="left">
-                                    Vous avez récemment demandé la réinitialisation de votre mot de passe <?= NAME ?>.
-                                    Veuillez cliquer sur le bouton ci-dessous afin de débuter la procédure de création d'un nouveau mot
-                                    de passe. Si le bouton ne s'affiche pas ou fonctionne mal, copiez-collez ce lien
-                                    dans votre navigateur : <strong><?= APP_URL ?>user/passwd-reset/<?= $token ?></strong>
+                                    Vous venez de modifier votre adresse e-mail sur <?= NAME ?> et nous avons besoin de
+                                    confirmer votre cette dernière. Veuillez cliquer sur le bouton ci-dessous afin de
+                                    valider votre adresse e-mail. Si le bouton ne s'affiche pas ou fonctionne mal,
+                                    copiez-collez ce lien dans votre navigateur :
+                                    <strong><?= APP_URL ?>user/confirm/<?= $token ?></strong>
                                     <br /><br />
-                                    Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet e-mail.
+                                    Si vous n'êtes pas à l'origine de cette demande, merci de nous le signifier en
+                                    répondant à cet e-mail.
                                 </p>
                                 <table  border="0" cellpadding="0"
                                         cellspacing="0" style="width: 100%;">
@@ -73,8 +75,8 @@
                                     <tr>
                                         <td style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 16px; border-radius: 4px; margin: 0;"
                                             align="center" bgcolor="<?= PRIMARY_COLOR ?>">
-                                            <a href="<?= APP_URL ?>user/passwd-reset/<?= $token ?>"
-                                               style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4.8px; line-height: 30px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: <?= PRIMARY_COLOR ?>; color: #ffffff; padding: 8px 16px; border: 1px solid <?= PRIMARY_COLOR ?>;">Réitinialiser mon mot de passe</a>
+                                            <a href="<?= APP_URL ?>user/confirm/<?= $token ?>"
+                                               style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 4.8px; line-height: 30px; display: inline-block; font-weight: normal; white-space: nowrap; background-color: <?= PRIMARY_COLOR ?>; color: #ffffff; padding: 8px 16px; border: 1px solid <?= PRIMARY_COLOR ?>;">Valider mon e-mail</a>
                                         </td>
                                     </tr>
                                     </tbody>

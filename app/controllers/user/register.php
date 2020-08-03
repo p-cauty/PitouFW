@@ -46,4 +46,4 @@ if (POST) {
 }
 
 Data::get()->add('TITLE', L::register_title);
-Controller::renderView('register/form');
+Controller::renderView('user/register/form');

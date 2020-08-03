@@ -22,7 +22,7 @@
     </a>
 </div>
 <div  style="color: #636c72;font-size: 11px;" align="center">
-    <a href="<?= APP_URL ?>unsubscribe?email=<?= $unsubscribe_email ?>&key=<?= $unsubscribe_key ?>">Se
+    <a href="<?= APP_URL ?>user/unsubscribe?email=<?= $unsubscribe_email ?>&key=<?= $unsubscribe_key ?>">Se
         désinscrire</a>
 </div>
 <table  border="0" cellpadding="0" cellspacing="0"

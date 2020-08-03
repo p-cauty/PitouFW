@@ -26,7 +26,7 @@ use function PitouFW\Core\t;
                     <i class="fas fa-user-plus"></i>
                     <?= L::register_submit ?>
                 </button>
-                <a href="<?= WEBROOT ?>login"><?= L::register_already_user ?></a>
+                <a href="<?= WEBROOT ?>user/login"><?= L::register_already_user ?></a>
             </div>
         </form>
     </div>

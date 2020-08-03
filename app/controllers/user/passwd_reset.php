@@ -9,7 +9,7 @@ use PitouFW\Model\UserModel;
 
 UserModel::rejectUsers();
 
-$token = Request::get()->getArg(1);
+$token = Request::get()->getArg(2);
 if (!UserModel::isPasswdResetTokenValid($token)) {
     Controller::http404NotFound();
 }
@@ -23,7 +23,7 @@ if (POST) {
             if ($_POST['pass1'] === $_POST['pass2']) {
                 $user->setPasswd(UserModel::hashPassword($_POST['pass1']))
                     ->save();
-                $passwd_reset->setUsedAt(date('Y-m-d H:i:s'))
+                $passwd_reset->setUsedAt(Utils::datetime())
                     ->save();
                 Alert::success(L::passwd_reset_success);
                 header('location: ' . WEBROOT . 'login');
@@ -40,4 +40,4 @@ if (POST) {
 }
 
 Data::get()->add('TITLE', L::passwd_reset_title);
-Controller::renderView('passwd/reset');
+Controller::renderView('user/passwd/reset');

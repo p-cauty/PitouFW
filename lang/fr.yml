@@ -77,10 +77,17 @@ profile:
   title: 'Mon profil'
   labels:
     newpass: 'Nouveau mot de passe :'
-  success: 'Vos informations ont été sauvegardées avec succès !'
+  success:
+    default: 'Vos informations ont été sauvegardées avec succès !'
+    with_email: 'Vos informations ont été sauvegardées avec succès ! Vous avez reçu un e-mail afin de confirmer votre nouvelle adresse.'
   submit: 'Sauvegarder'
   email:
-    subject: 'Confirmation de votre adresse e-mail'
+    subject: 'Validation de votre adresse e-mail'
 confirm:
+  title: 'Confirmation de votre adresse e-mail'
   success: 'Votre compte est maintenant activé !'
   error: 'Lien invalide ou obsolète.'
+resend:
+  title: 'Renvoyez-moi un nouvel e-mail de confirmation'
+  success: 'Un nouvel e-mail de confirmation viens de vous être envoyé !'
+  error: 'Votre compte est déjà actif et validé. Vous n''avez plus rien à faire !'

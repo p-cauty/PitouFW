@@ -19,4 +19,4 @@ if (NewsletterEmail::exists('email', $_GET['email'])) {
 
 Data::get()->add('TITLE', L::unsubscribe_title);
 Data::get()->add('email', $_GET['email']);
-Controller::renderView('unsubscribe/unsubscribe');
+Controller::renderView('user/unsubscribe/unsubscribe');

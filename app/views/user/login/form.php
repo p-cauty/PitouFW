@@ -26,8 +26,8 @@ use function PitouFW\Core\t;
                     <i class="fas fa-user-lock"></i>
                     <?= L::login_submit ?>
                 </button>
-                <a href="<?= WEBROOT ?>forgot-passwd"><?= L::login_forgot ?></a>
-                <a href="<?= WEBROOT ?>register"><?= L::login_no_account ?></a>
+                <a href="<?= WEBROOT ?>user/forgot-passwd"><?= L::login_forgot ?></a>
+                <a href="<?= WEBROOT ?>user/register"><?= L::login_no_account ?></a>
             </div>
         </form>
     </div>

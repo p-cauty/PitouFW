@@ -8,15 +8,19 @@
 
 const ROUTES = [
     'home' => 'home',
-    'register' => 'register',
-    'login' => 'login',
-    'jam' => 'jam',
-    'logout' => 'logout',
-    'forgot-passwd' => 'forgot_passwd',
-    'passwd-reset' => 'passwd_reset',
-    'unsubscribe' => 'unsubscribe',
-    'profile' => 'profile',
-    'confirm' => 'confirm',
+    'cron' => 'cron',
+    'user' => [
+        'register' => 'register',
+        'login' => 'login',
+        'jam' => 'jam',
+        'logout' => 'logout',
+        'forgot-passwd' => 'forgot_passwd',
+        'passwd-reset' => 'passwd_reset',
+        'unsubscribe' => 'unsubscribe',
+        'profile' => 'profile',
+        'confirm' => 'confirm',
+        'resend' => 'resend'
+    ],
     'api' => [
         'mailer' => 'mailer',
         'version' => 'version'

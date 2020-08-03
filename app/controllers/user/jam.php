@@ -2,6 +2,7 @@
 
 use JustAuthMe\SDK\JamSdk;
 use PitouFW\Core\Alert;
+use PitouFW\Core\Utils;
 use PitouFW\Entity\User;
 use PitouFW\Model\JustAuthMeFactory;
 use PitouFW\Model\UserModel;
@@ -23,13 +24,23 @@ if (isset($_GET['access_token'])) {
                     // Account linking
                     $user = User::readBy('email', $response->email);
                     $user->setJamId($response->jam_id);
+                    if (!$user->isActive()) {
+                        $user->setActivatedAt(Utils::datetime());
+                    }
                     $user->save();
+
+                    if (UserModel::isAwaitingEmailConfirmation($user)) {
+                        $email_update = UserModel::getLastEmailUpdate($user);
+                        $email_update->setConfirmedAt(Utils::datetime())
+                            ->save();
+                    }
                 } else {
                     // Registration
                     $user = new User();
                     $user->setEmail($response->email)
-                        ->setJamId($response->jam_id);
-                    $user->save();
+                        ->setJamId($response->jam_id)
+                        ->setActivatedAt(Utils::datetime())
+                        ->save();
                 }
 
                 Alert::success(L::login_success);

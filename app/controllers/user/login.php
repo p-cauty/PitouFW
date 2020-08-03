@@ -38,4 +38,4 @@ if (POST) {
 }
 
 Data::get()->add('TITLE', L::login_title);
-Controller::renderView('login/form');
+Controller::renderView('user/login/form');

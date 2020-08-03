@@ -1,19 +1,19 @@
 <?php
 
-require_once __DIR__ . '/app.php';
-
 if (file_exists(__DIR__ . '/host.dist.php')) {
     require_once __DIR__ . '/host.dist.php';
 } else {
     require_once __DIR__ . '/host.dev.php';
 }
 
+require_once __DIR__ . '/app.php';
+
 const PROD_ENV = ENV_NAME === 'prod';
 
 define('POST', $_SERVER['REQUEST_METHOD'] == 'POST');
 define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 
-const JAM_CALLBACK_DEFAULT = APP_URL . 'jam';
+const JAM_CALLBACK_DEFAULT = APP_URL . 'user/jam';
 const ENTITIES = ROOT . 'entities/';
 const CORE = ROOT . 'core/';
 const APP = ROOT . 'app/';
