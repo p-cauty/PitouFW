@@ -47,7 +47,7 @@
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <img width="250" alt="JustAuthMe"
+                                                <img width="250" alt="<?= NAME ?>"
                                                      src="<?= EMAIL_LOGO_CDN ?>"
                                                      style="height: auto; line-height: 100%; outline: none; text-decoration: none; border: 0 none;">
                                                 <table  border="0" cellpadding="0" cellspacing="0"

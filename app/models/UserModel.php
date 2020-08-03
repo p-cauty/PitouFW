@@ -71,7 +71,7 @@ class UserModel {
 
     public static function rejectGuests(): void {
         if (!self::isLogged()) {
-            header('location: ' . WEBROOT . 'login');
+            header('location: ' . WEBROOT . 'user/login');
             die;
         }
     }
@@ -132,7 +132,7 @@ class UserModel {
 
     public static function isPasswdResetTokenValid(string $token): bool {
         $minus_24h = Utils::time() - 86400;
-        $datetime_to_compare_with = date('Y-m-d H:i:s', $minus_24h);
+        $datetime_to_compare_with = Utils::datetime($minus_24h);
 
         $req = DB::get()->prepare("
             SELECT COUNT(*) AS cnt

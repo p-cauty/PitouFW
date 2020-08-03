@@ -24,7 +24,7 @@ if (POST) {
                     header('location: ' . WEBROOT);
                     die;
                 } else {
-                    Alert::error(L::login_inactive);
+                    Alert::error(L::login_inactive(WEBROOT . 'user/resend/' . $user->getId()));
                 }
             } else {
                 Alert::error(L::login_error);

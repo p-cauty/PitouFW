@@ -7,8 +7,7 @@ use ReflectionProperty;
 
 class Utils {
 	public static function time(): int {
-		$jet_lag = 0;
-		return time() + (3600 * $jet_lag); 
+		return time() + (3600 * JET_LAG);
 	}
 
 	public static function fromSnakeCaseToCamelCase(string $string): string {

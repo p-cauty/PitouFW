@@ -4,6 +4,7 @@ use PitouFW\Core\Alert;
 use PitouFW\Core\Controller;
 use PitouFW\Core\Data;
 use PitouFW\Core\Request;
+use PitouFW\Core\Utils;
 use PitouFW\Entity\PasswdReset;
 use PitouFW\Model\UserModel;
 
@@ -26,7 +27,7 @@ if (POST) {
                 $passwd_reset->setUsedAt(Utils::datetime())
                     ->save();
                 Alert::success(L::passwd_reset_success);
-                header('location: ' . WEBROOT . 'login');
+                header('location: ' . WEBROOT . 'user/login');
                 die;
             } else {
                 Alert::error(L::register_errors_identical);

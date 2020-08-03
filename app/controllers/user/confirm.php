@@ -24,12 +24,16 @@ if ($cached !== false) {
         $redis->del($cache_key);
         $success = true;
     }
-} elseif (UserModel::isAwaitingEmailConfirmation($user)) {
-    $email_update = UserModel::getLastEmailUpdate($user);
-    if ($email_update->getConfirmToken() === $token) {
-        $email_update->setConfirmedAt(Utils::datetime())
-            ->save();
-        $success = true;
+} elseif (EmailUpdate::exists('confirm_token', $token)) {
+    $email_update = EmailUpdate::readBy('confirm_token', $token);
+    $user = $email_update->getUser();
+    if (UserModel::isAwaitingEmailConfirmation($user)) {
+        $real_email_update = UserModel::getLastEmailUpdate($user);
+        if ($email_update->getConfirmToken() === $real_email_update->getConfirmToken()) {
+            $email_update->setConfirmedAt(Utils::datetime())
+                ->save();
+            $success = true;
+        }
     }
 }
 

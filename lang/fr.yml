@@ -2,6 +2,8 @@ problem: 'Il semblerait qu''il y ai un problème par ici...'
 back: 'Retour'
 error: 'Erreur :'
 warning: 'Attention :'
+yes: 'Oui'
+no: 'Non'
 errors:
   401: 'Authentification requise'
   403: 'Accès interdit'
@@ -16,6 +18,7 @@ home:
   title: 'Accueil'
   welcome: 'Bienvenue sur %s !'
   logged_as: 'Connecté en tant que : %s'
+  trusted: 'Utilisateur de confiance : %s'
   register: 'M''inscrire'
   login: 'Me connecter'
   profile: 'Mon profil'
@@ -48,7 +51,7 @@ login:
   success: 'Vous êtes maintenant connecté ! Nous sommes heureux de vous revoir !'
   error: 'Adresse e-mail ou mot de passe incorrect.'
   forgot: 'Mot de passe oublié ?'
-  inactive: 'Merci d''activer votre compte en cliquant sur le lien reçu par e-mail avant de pouvoir vous connecter.'
+  inactive: 'Merci d''activer votre compte en cliquant sur le lien reçu par e-mail avant de pouvoir vous connecter. <a href="%s">Renvoyez-moi un e-mail.</a>'
   no_account: 'Pas encore de compte ? Créez-en un !'
 jam:
   errors:

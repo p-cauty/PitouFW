@@ -2,6 +2,8 @@ problem: 'It seems like something''s wrong here...'
 back: 'Go back'
 error: 'Error:'
 warning: 'Warning:'
+yes: 'Yes'
+no: 'No'
 errors:
   401: 'Authentication required'
   403: 'Forbidden access'
@@ -16,6 +18,7 @@ home:
   title: 'Home'
   welcome: 'Welcome to %s!'
   logged_as: 'Signed in as: %s'
+  trusted: 'Trusted user: %s'
   register: 'Sign up'
   login: 'Sign in'
   profile: 'My profile'
@@ -48,7 +51,7 @@ login:
   success: 'You are now logged in! We are happy to see you again!'
   error: 'Incorrect e-mail address or password.'
   forgot: 'Forgot password?'
-  inactive: 'Please enable your account by clicking the link your received by e-mail before trying to sign in.'
+  inactive: 'Please enable your account by clicking the link your received by e-mail before trying to sign in. <a href="%s">Send me another e-mail.</a>'
   no_account: 'No account yet? Create one!'
 jam:
   errors:

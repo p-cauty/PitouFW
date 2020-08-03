@@ -2,19 +2,16 @@
 
 namespace PitouFW\Core;
 
+use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use PitouFW\Core\DB;
-use PitouFW\Core\Logger;
 use PitouFW\Entity\EmailQueue;
 use PitouFW\Model\EmailModel;
 
 class Mailer extends PHPMailer {
     const SEND_AS_DEFAULT = EMAIL_SEND_AS_DEFAULT;
-    const CACHE_PREFIX = 'email_';
 
     public function __construct() {
         parent::__construct(true);
-
 
         $this->IsSMTP();
         $this->CharSet = parent::CHARSET_UTF8;
@@ -79,11 +76,12 @@ class Mailer extends PHPMailer {
             $text = wordwrap($text);
             $this->AltBody = $text;
 
-            if ($this->send() === false) {
+            $is_sent = $this->send();
+            if ($is_sent) {
+                $sent_at = Utils::datetime();
+            } else {
                 $error = $this->ErrorInfo;
                 Logger::logError('PHPMailer error: ' . $this->ErrorInfo);
-            } else {
-                $sent_at = date('Y-m-d H:i:s');
             }
         } catch (Exception $e) {
             $error = $e->getMessage();

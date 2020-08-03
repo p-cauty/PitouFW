@@ -1,12 +1,14 @@
 <?php
 /**
- * Rename this file "host.dist.php"
+ * Copy this file to "host.dist.php"
  */
 
 const APP_URL = 'http://localhost/PitouFW/public/';
-
 const PROD_HOST = 'localhost';
+const JET_LAG = 0;
+
 const LOGGING = true;
+
 const INTERNAL_API_KEY = 'xxxxx';
 const UNSUBSCRIBE_SALT = 'xxxxx';
 
@@ -24,6 +26,8 @@ const SMTP_PORT = 587;
 const SMTP_USER = 'phpmailer@domain.com';
 const SMTP_PASS = '';
 
+const EMAIL_SEND_AS_DEFAULT = NAME . ' <hello@' . PROD_HOST . '>';
+const EMAIL_CONTACT = 'contact@' . PROD_HOST;
 const EMAIL_RENDERING_KEY = 'xxxxx';
 
 const JAM_APP_ID = 'xxxxx';

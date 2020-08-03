@@ -39,8 +39,9 @@ if (isset($_GET['access_token'])) {
                     $user = new User();
                     $user->setEmail($response->email)
                         ->setJamId($response->jam_id)
-                        ->setActivatedAt(Utils::datetime())
-                        ->save();
+                        ->setActivatedAt(Utils::datetime());
+                    $uid = $user->save();
+                    $user->setId($uid);
                 }
 
                 Alert::success(L::login_success);
