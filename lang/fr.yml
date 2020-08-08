@@ -8,6 +8,7 @@ errors:
   401: 'Authentification requise'
   403: 'Accès interdit'
   404: 'Page non trouvée'
+  429: 'Vous avez effectué trop de requêtes, merci de patienter quelques minutes.'
   500: 'Erreur interne du serveur'
   form:
     empty: 'Tous les champs doivent être remplis.'
@@ -66,6 +67,7 @@ forgot_passwd:
     label: 'Entrez votre adresse e-mail :'
     submit: 'Réinitialiser mon mot de passe'
   success: 'Si vous avez un compte %s, en e-mail vient de vous être envoyé avec les instructions pour réinitialiser votre mot de passe.'
+  error: 'Merci d''attendre au moins 5 minutes avant de faire une nouvelle demande et de bien vérifier votre courrier indésirable.'
 passwd_reset:
   title: 'Réinitialisation de votre mot de passe'
   label: 'Votre nouveau mot de passe :'
@@ -93,4 +95,5 @@ confirm:
 resend:
   title: 'Renvoyez-moi un nouvel e-mail de confirmation'
   success: 'Un nouvel e-mail de confirmation viens de vous être envoyé !'
-  error: 'Votre compte est déjà actif et validé. Vous n''avez plus rien à faire !'
+  verified: 'Votre compte est déjà actif et validé. Vous n''avez plus rien à faire !'
+  spam: 'Merci d''attendre au moins 5 minutes avant de faire une nouvelle demande et de bien vérifier votre courrier indésirable.'

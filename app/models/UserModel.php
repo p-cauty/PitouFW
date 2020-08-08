@@ -26,6 +26,26 @@ class UserModel {
     const ACCOUNT_VALIDATION_CACHE_PREFIX = 'valid_';
     const ACCOUNT_VALIDATION_CACHE_TTL = 86400; // 1 day
 
+    const FORGOT_PASSWD_EMAIL_COOLDOWN_PREFIX = 'forgot_passwd_email_';
+    const FORGOT_PASSWD_EMAIL_COOLDOWN_TTL = 300; // 5 min
+
+    const FORGOT_PASSWD_IP_COOLDOWN_PREFIX = 'forgot_passwd_ip_';
+    const FORGOT_PASSWD_IP_COOLDOWN_ATTEMPTS = 5;
+    const FORGOT_PASSWD_IP_COOLDOWN_TTL = 60; // 1 min
+    const FORGOT_PASSWD_IP_COOLDOWN_BAN = 600; // 10 min
+
+    const RESEND_EMAIL_UID_COOLDOWN_PREFIX = 'resend_uid_';
+    const RESEND_EMAIL_UID_COOLDOWN_TTL = 300; // 5 min;
+
+    const RESEND_EMAIL_IP_COOLDOWN_PREFIX = 'resend_ip_';
+    const RESEND_EMAIL_IP_COOLDOWN_ATTEMPTS = 5;
+    const RESEND_EMAIL_IP_COOLDOWN_TTL = 60; // 1 min;
+    const RESEND_EMAIL_IP_COOLDOWN_BAN = 600; // 10 min;
+
+    const UPDATE_EMAIL_COOLDOWN_PREFIX = 'update_';
+    const UPDATE_EMAIL_COOLDOWN_ATTEMPTS = 2;
+    const UPDATE_EMAIL_COOLDOWN_TTL = 86400; // 1 day
+
     private static ?User $user = null;
 
     public static function hashInfo(string $info): string {

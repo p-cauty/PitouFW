@@ -66,7 +66,7 @@ class Utils {
         return $string;
     }
 
-    public static function slugify($string, $delimiter = '-') {
+    public static function slugify(string $string, string $delimiter = '-') {
         $oldLocale = setlocale(LC_ALL, '0');
         setlocale(LC_ALL, 'en_US.UTF-8');
         $clean = strtr(utf8_decode($string), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
@@ -109,6 +109,10 @@ class Utils {
         return $is_ipv6 ?
             str_replace(':', '_', $ip) :
             str_replace('.', '_', $ip);
+    }
+
+    public static function parseIpForAntispam(string $ip): string {
+        return self::slugifyIp(self::truncateIPV6($ip, 4));
     }
 
     public static function generateToken(int $length = 64): ?string {

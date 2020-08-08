@@ -8,6 +8,7 @@ errors:
   401: 'Authentication required'
   403: 'Forbidden access'
   404: 'Page not found'
+  429: 'You have made too many requests, please wait a few minutes.'
   500: 'Internal server error'
   form:
     empty: 'All fields must be filled.'
@@ -66,6 +67,7 @@ forgot_passwd:
     label: 'Enter your e-mail address:'
     submit: 'Reset my password'
   success: 'If you have a %s account, reset password instructions just had been sent to you by e-mail.'
+  error: 'Please wait at least 5 minutes before making a new request and check your junk mail.'
 passwd_reset:
   title: 'Reset your password'
   label: 'Your new password:'
@@ -93,4 +95,5 @@ confirm:
 resend:
   title: 'Send me a new confirmation e-mail'
   success: 'A new confirmation e-mail just has been sent to your inbox!'
-  error: 'Your account is already active and validated. You have nothind to do!'
+  verified: 'Your account is already active and validated. You have nothind to do!'
+  spam: 'Please wait at least 5 minutes before making a new request and check your junk mail.'
