@@ -8,8 +8,8 @@ use PitouFW\Core\Translator;
 session_start();
 
 define('ROOT', str_replace('public/index.php', '', $_SERVER['SCRIPT_FILENAME']));
-require_once ROOT . 'config/config.php';
 require_once ROOT . 'vendor/autoload.php';
+require_once ROOT . 'config/config.php';
 
 $bool = PROD_ENV ? 0 : 1;
 $econst = PROD_ENV ? 0 : E_ALL;

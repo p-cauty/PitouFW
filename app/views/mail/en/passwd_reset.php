@@ -90,4 +90,4 @@
     </tr>
     </tbody>
 </table>
-<?php require VIEWS . 'mail/_btm.php'; ?>
+<?php require VIEWS . 'mail/en/_btm.php'; ?>

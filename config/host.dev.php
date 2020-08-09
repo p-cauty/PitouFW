@@ -23,7 +23,7 @@ const REDIS_PASS = 'secret';
 
 const SMTP_HOST = 'mail.domain.com';
 const SMTP_PORT = 587;
-const SMTP_SECURE = true;
+const SMTP_SECURE = '';
 const SMTP_USER = 'phpmailer@domain.com';
 const SMTP_PASS = '';
 

@@ -91,4 +91,4 @@
     </tr>
     </tbody>
 </table>
-<?php require VIEWS . 'mail/_btm.php'; ?>
+<?php require VIEWS . 'mail/fr/_btm.php'; ?>

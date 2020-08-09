@@ -17,9 +17,7 @@ class Mailer extends PHPMailer {
         $this->CharSet = parent::CHARSET_UTF8;
         $this->SMTPDebug  = 0;
         $this->SMTPAuth   = true;
-        if (SMTP_SECURE) {
-            $this->SMTPSecure = 'tls';
-        }
+        $this->SMTPSecure = SMTP_SECURE;
         $this->Host       = SMTP_HOST;
         $this->Port       = SMTP_PORT;
         $this->Username   = SMTP_USER;
