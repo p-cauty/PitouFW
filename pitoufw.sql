@@ -50,7 +50,7 @@ CREATE TABLE `email_update` (
     `new_email` varchar(255) NOT NULL,
     `requested_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `confirmed_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE `passwd_reset` (
     `token` varchar(255) NOT NULL,
     `requested_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `used_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,7 @@ CREATE TABLE `user` (
     `admin` tinyint(1) NOT NULL,
     `reg_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `activated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Index pour les tables déchargées
