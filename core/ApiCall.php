@@ -9,7 +9,7 @@ use stdClass;
 class ApiCall {
     private string $method = 'GET';
     private ?string $url = null;
-    private ?array $params = null;
+    private ?array $post_params = null;
     private ?array $custom_header = null;
     private bool $trust_any_ssl = false;
     private bool $json_content = false;
@@ -47,12 +47,12 @@ class ApiCall {
                     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
             }
 
-            if ($this->params !== null) {
-                $postdata = $this->json_content ? json_encode($this->params) : http_build_query($this->params);
+            if ($this->post_params !== null) {
+                $postdata = $this->json_content ? json_encode($this->post_params) : http_build_query($this->post_params);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
             }
 
-            if ($this->params !== null) {
+            if ($this->post_params !== null) {
                 curl_setopt($ch,
                     CURLOPT_HTTPHEADER,
                     $this->json_content ?
@@ -85,8 +85,8 @@ class ApiCall {
                 'ignore_errors' => true
             ]];
             
-            if ($this->params !== null) {
-                $postdata = $this->json_content ? json_encode($this->params) : http_build_query($this->params);
+            if ($this->post_params !== null) {
+                $postdata = $this->json_content ? json_encode($this->post_params) : http_build_query($this->post_params);
                 $opts['http']['content'] = $postdata;
             }
             
@@ -142,16 +142,16 @@ class ApiCall {
     /**
      * @return array|null
      */
-    public function getParams(): ?array {
-        return $this->params;
+    public function getPostParams(): ?array {
+        return $this->post_params;
     }
 
     /**
-     * @param array|null $params
+     * @param array|null $post_params
      * @return ApiCall
      */
-    public function setParams(?array $params): ApiCall {
-        $this->params = $params;
+    public function setPostParams(?array $post_params): ApiCall {
+        $this->post_params = $post_params;
         return $this;
     }
 
@@ -215,7 +215,14 @@ class ApiCall {
     /**
      * @return stdClass|null
      */
-    public function responseJson(): ?stdClass {
+    public function responseObj(): ?stdClass {
         return json_decode($this->response_body);
+    }
+
+    /**
+     * @return stdClass|null
+     */
+    public function responseArray(): ?stdClass {
+        return json_decode($this->response_body, true);
     }
 }
