@@ -187,10 +187,11 @@ class UserModel {
             SELECT confirmed_at
             FROM email_update
             WHERE user_id = ?
+            AND new_email = ?
             ORDER BY requested_at DESC
             LIMIT 1
         ");
-        $req->execute([$user->getId()]);
+        $req->execute([$user->getId(), $user->getEmail()]);
         $rep = $req->fetch();
 
         return $rep !== false && $rep['confirmed_at'] === null;
@@ -205,10 +206,11 @@ class UserModel {
             SELECT id
             FROM email_update
             WHERE user_id = ?
+            AND new_email = ?
             ORDER BY requested_at DESC
             LIMIT 1
         ");
-        $req->execute([$user->getId()]);
+        $req->execute([$user->getId(), $user->getEmail()]);
         $rep = $req->fetch();
 
         return $rep !== false ? EmailUpdate::read($rep['id']) : null;

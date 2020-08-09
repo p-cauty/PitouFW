@@ -85,6 +85,7 @@ profile:
   success:
     default: 'Your informations have been successfully saved!'
     with_email: 'Your informations have been successfully saved! You received an e-mail in order to confirm your new address.'
+  warning: 'You cannot update your e-mail address more than twice every 24h.'
   submit: 'Save'
   email:
     subject: 'Validate your e-mail address'

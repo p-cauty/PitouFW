@@ -85,6 +85,7 @@ profile:
   success:
     default: 'Vos informations ont été sauvegardées avec succès !'
     with_email: 'Vos informations ont été sauvegardées avec succès ! Vous avez reçu un e-mail afin de confirmer votre nouvelle adresse.'
+  warning: 'Vous ne pouvez pas modifier votre adresse e-mail plus de 2 fois toutes les 24h.'
   submit: 'Sauvegarder'
   email:
     subject: 'Validation de votre adresse e-mail'
