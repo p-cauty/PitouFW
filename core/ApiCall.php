@@ -15,7 +15,21 @@ class ApiCall {
     private bool $json_content = false;
     private ?array $response_header = null;
     private ?string $response_body = null;
+    private ?string $error_info = null;
+    private bool $is_internal = false;
 
+    /**
+     * ApiCall constructor.
+     * @param bool $is_internal
+     */
+    public function __construct(bool $is_internal = false) {
+        $this->is_internal = $is_internal;
+    }
+
+    /**
+     * @param array $header
+     * @return array
+     */
     private function parseResponseHeader(array $header): array {
         $headers = ['Status' => $header[0]];
         unset($header[0]);
@@ -32,7 +46,7 @@ class ApiCall {
      * @return ApiCall
      */
     public function exec(): ApiCall {
-        if (function_exists('curl_version')) {
+        if (!function_exists('curl_version')) {
             $ch = curl_init($this->url);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -52,13 +66,18 @@ class ApiCall {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
             }
 
-            if ($this->post_params !== null) {
-                curl_setopt($ch,
-                    CURLOPT_HTTPHEADER,
-                    $this->json_content ?
-                        array_merge($this->custom_header, ['Content-Type: application/json']) :
-                        $this->custom_header
-                );
+
+            $header = $this->custom_header ?? [];
+            if ($this->json_content) {
+                $header = array_merge($header, ['Content-Type: application/json']);
+            }
+
+            if ($this->is_internal) {
+                $header = array_merge($header, ['X-Access-Token: ' . INTERNAL_API_KEY]);
+            }
+
+            if (!empty($header)) {
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
             }
 
             if ($this->trust_any_ssl) {
@@ -78,29 +97,36 @@ class ApiCall {
 
                 $this->response_header = $this->parseResponseHeader($header);
                 $this->response_body = $body;
+            } else {
+                $errno = curl_errno($ch);
+                $this->error_info = curl_strerror($errno);
             }
+
+            curl_close($ch);
         } else {
             $opts = ['http' => [
                 'method' => $this->method,
                 'ignore_errors' => true
             ]];
-            
+
             if ($this->post_params !== null) {
                 $postdata = $this->json_content ? json_encode($this->post_params) : http_build_query($this->post_params);
                 $opts['http']['content'] = $postdata;
             }
-            
+
             if ($this->custom_header !== null) {
                 $opts['http']['header'] = ($this->json_content ? 'Content-Type: application/json' . "\n" : '') .
                     implode("\n", $this->custom_header);
             }
-            
+
             $context = stream_context_create($opts);
-            $result = file_get_contents($this->url, false, $context);
+            $result = @file_get_contents($this->url, false, $context);
 
             if ($result !== false) {
                 $this->response_header = $this->parseResponseHeader($http_response_header);
                 $this->response_body = $result;
+            } else {
+                $this->error_info = error_get_last()['message'];
             }
         }
 
@@ -135,6 +161,10 @@ class ApiCall {
      * @return ApiCall
      */
     public function setUrl(?string $url): ApiCall {
+        if ($this->is_internal) {
+            $url = APP_URL . 'api/' . $url;
+        }
+
         $this->url = $url;
         return $this;
     }
@@ -201,6 +231,9 @@ class ApiCall {
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function responseHeader(): array {
         return $this->response_header;
     }
@@ -220,9 +253,16 @@ class ApiCall {
     }
 
     /**
-     * @return stdClass|null
+     * @return array|null
      */
-    public function responseArray(): ?stdClass {
+    public function responseArray(): ?array {
         return json_decode($this->response_body, true);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function errorInfo(): ?string {
+        return $this->error_info;
     }
 }
