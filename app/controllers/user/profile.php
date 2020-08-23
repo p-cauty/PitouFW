@@ -25,14 +25,17 @@ if (POST) {
                 $ttl = $ttl > 0 ? $ttl : UserModel::UPDATE_EMAIL_COOLDOWN_TTL;
 
                 if (!$must_wait) {
-                    if (TRUST_NEEDED && $user->getEmail() !== $_POST['email']) {
+                    if ($user->getEmail() !== $_POST['email']) {
+                        if (TRUST_NEEDED) {
                             UserModel::startNewMailValidation($user);
                             Alert::success(L::profile_success_with_email);
+                        }
+
+                        $update_attempts++;
+                        $redis->set($cache_key, $update_attempts, $ttl);
                     }
 
                     $user->setEmail($_POST['email']);
-                    $update_attempts++;
-                    $redis->set($cache_key, $update_attempts, $ttl);
                 } else {
                     Alert::warning(L::profile_warning);
                 }
