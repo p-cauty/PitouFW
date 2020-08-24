@@ -6,7 +6,7 @@ use PitouFW\Model\UserModel;
 <h1><?= L::home_welcome(NAME)  ?></h1>
 <?php if (UserModel::isLogged()): ?>
 <p><?= L::home_logged_as(UserModel::get()->getEmail()) ?></p>
-<p><?= L::home_trusted(UserModel::isTrustable(UserModel::get()) ? L::yes : L::no) ?></p>
+<p><?= L::home_trusted(UserModel::get()->isTrustable() ? L::yes : L::no) ?></p>
 <a href="<?= WEBROOT ?>user/profile" class="btn btn-success">
     <i class="fas fa-user-cog"></i>
     <?= L::home_profile ?>

@@ -133,4 +133,91 @@ class User extends Entity {
         $this->activated_at = $activated_at;
         return $this;
     }
+
+    public function login(int $ttl = UserModel::SESSION_CACHE_TTL_DEFAULT): bool {
+        if (!self::exists('id', $this->getId())) {
+            return false;
+        }
+
+        $session_token = UserModel::generateSessionToken();
+        $redis = new Redis();
+        $cache_key = UserModel::SESSION_CACHE_PREFIX . $session_token;
+        $cookie_set = setcookie(UserModel::SESSION_COOKIE_NAME, $session_token, Utils::time() + $ttl, WEBROOT, PROD_HOST);
+        $redis_set = $redis->set($cache_key, $this->getId(), $ttl);
+
+        return $cookie_set && $redis_set;
+    }
+
+    public function startAccountValidation(): void {
+        $token = Utils::generateToken();
+        $redis = new Redis();
+        $cache_key = UserModel::ACCOUNT_VALIDATION_CACHE_PREFIX . $token;
+        $redis->set($cache_key, $this->getId(), UserModel::ACCOUNT_VALIDATION_CACHE_TTL);
+
+        $mailer = new Mailer();
+        $mailer->queueMail(
+            $this->getEmail(),
+            \L::register_email_subject(NAME),
+            'mail/' . t()->getAppliedLang() . '/account_validation',
+            ['token' => $token],
+        );
+    }
+
+    public function isAwaitingEmailConfirmation(): bool {
+        $req = DB::get()->prepare("
+            SELECT confirmed_at
+            FROM email_update
+            WHERE user_id = ?
+            AND new_email = ?
+            ORDER BY requested_at DESC
+            LIMIT 1
+        ");
+        $req->execute([$this->getId(), $this->getEmail()]);
+        $rep = $req->fetch();
+
+        return $rep !== false && $rep['confirmed_at'] === null;
+    }
+
+    public function isTrustable(): bool {
+        return !TRUST_NEEDED || ($this->isActive() && !$this->isAwaitingEmailConfirmation());
+    }
+
+    public function getLastEmailUpdate(): ?EmailUpdate {
+        $req = DB::get()->prepare("
+            SELECT id
+            FROM email_update
+            WHERE user_id = ?
+            AND new_email = ?
+            ORDER BY requested_at DESC
+            LIMIT 1
+        ");
+        $req->execute([$this->getId(), $this->getEmail()]);
+        $rep = $req->fetch();
+
+        return $rep !== false ? EmailUpdate::read($rep['id']) : null;
+    }
+
+    public function startNewMailValidation(): void {
+        do {
+            $token = Utils::generateToken();
+        } while (EmailUpdate::exists('confirm_token', $token));
+
+        $email_update = new EmailUpdate();
+        $email_update->setUserId($this->getId())
+            ->setConfirmToken($token)
+            ->setOldEmail($this->getEmail())
+            ->setNewEmail($_POST['email'])
+            ->save();
+
+        $mailer = new Mailer();
+        $mailer->queueMail(
+            $_POST['email'],
+            \L::profile_email_subject,
+            'mail/' . t()->getAppliedLang() . '/newmail',
+            ['token' => $token],
+        );
+
+        UserModel::logout();
+        $this->login();
+    }
 }

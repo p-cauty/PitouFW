@@ -27,7 +27,7 @@ if (POST) {
                 if (!$must_wait) {
                     if ($user->getEmail() !== $_POST['email']) {
                         if (TRUST_NEEDED) {
-                            UserModel::startNewMailValidation($user);
+                            $user->startNewMailValidation();
                             Alert::success(L::profile_success_with_email);
                         }
 

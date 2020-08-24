@@ -36,11 +36,11 @@ $must_wait = $redis->get($uid_cache_key) !== false;
 
 if (!$must_wait) {
     if (!$user->isActive()) {
-        UserModel::startAccountValidation($user);
+        $this->startAccountValidation();
         $success = true;
         $redis->set($uid_cache_key, 1, UserModel::RESEND_EMAIL_UID_COOLDOWN_TTL);
-    } elseif (UserModel::isAwaitingEmailConfirmation($user)) {
-        UserModel::startNewMailValidation($user);
+    } elseif ($this->isAwaitingEmailConfirmation()) {
+        $user->startNewMailValidation();
         $success = true;
         $redis->set($uid_cache_key, 1, UserModel::RESEND_EMAIL_UID_COOLDOWN_TTL);
     }

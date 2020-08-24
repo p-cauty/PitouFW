@@ -171,9 +171,6 @@ abstract class Entity {
         foreach ($props as $prop) {
             $getter = self::getGetterName($prop->getName());
             $val = $this->$getter();
-            if ($val === null) {
-                continue;
-            }
             $qms[] = $prop->getName()." = ?";
             $values[] = $val;
         }

@@ -57,7 +57,7 @@ login:
 jam:
   errors:
     no_email: 'Une erreur est survenue lors de votre inscription. Merci de supprimer %s de votre application JustAuthMe et de réessayer'
-    unknown: 'Une erreur inconnue est survenue lors de la connexion.'
+    unknown: 'Une erreur est survenue lors de la connexion : %s'
 logout:
   success: 'Vous êtes bien déconnecté.'
   error: 'Une erreur inconnue est survenue durant la déconnexion.'

@@ -20,9 +20,9 @@ if (POST) {
                         $uid = $user->save();
                         $user->setId($uid);
 
-                        UserModel::login($user);
+                        $user->login();
                         if (TRUST_NEEDED) {
-                            UserModel::startAccountValidation($user);
+                            $user->startAccountValidation();
                         }
 
                         Alert::success(L::register_success(NAME));

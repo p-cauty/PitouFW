@@ -56,20 +56,6 @@ class UserModel {
         return sha1(uniqid());
     }
 
-    public static function login(User $user, int $ttl = self::SESSION_CACHE_TTL_DEFAULT): bool {
-        if (!User::exists('id', $user->getId())) {
-            return false;
-        }
-
-        $session_token = self::generateSessionToken();
-        $redis = new Redis();
-        $cache_key = self::SESSION_CACHE_PREFIX . $session_token;
-        $cookie_set = setcookie(self::SESSION_COOKIE_NAME, $session_token, Utils::time() + $ttl, WEBROOT, PROD_HOST);
-        $redis_set = $redis->set($cache_key, $user->getId(), $ttl);
-
-        return $cookie_set && $redis_set;
-    }
-
     private static function getCachedValue() {
         $redis = new Redis();
         $cache_key = self::SESSION_CACHE_PREFIX . Utils::secure($_COOKIE[self::SESSION_COOKIE_NAME] ?? '');
@@ -165,78 +151,5 @@ class UserModel {
         $res = $req->fetch();
 
         return $res['cnt'] > 0;
-    }
-
-    public static function startAccountValidation(User $user): void {
-        $token = Utils::generateToken();
-        $redis = new Redis();
-        $cache_key = self::ACCOUNT_VALIDATION_CACHE_PREFIX . $token;
-        $redis->set($cache_key, $user->getId(), self::ACCOUNT_VALIDATION_CACHE_TTL);
-
-        $mailer = new Mailer();
-        $mailer->queueMail(
-            $user->getEmail(),
-            \L::register_email_subject(NAME),
-            'mail/' . t()->getAppliedLang() . '/account_validation',
-            ['token' => $token],
-        );
-    }
-
-    public static function isAwaitingEmailConfirmation(User $user): bool {
-        $req = DB::get()->prepare("
-            SELECT confirmed_at
-            FROM email_update
-            WHERE user_id = ?
-            AND new_email = ?
-            ORDER BY requested_at DESC
-            LIMIT 1
-        ");
-        $req->execute([$user->getId(), $user->getEmail()]);
-        $rep = $req->fetch();
-
-        return $rep !== false && $rep['confirmed_at'] === null;
-    }
-
-    public static function isTrustable(User $user): bool {
-        return !TRUST_NEEDED || ($user->isActive() && !self::isAwaitingEmailConfirmation($user));
-    }
-
-    public static function getLastEmailUpdate(User $user): ?EmailUpdate {
-        $req = DB::get()->prepare("
-            SELECT id
-            FROM email_update
-            WHERE user_id = ?
-            AND new_email = ?
-            ORDER BY requested_at DESC
-            LIMIT 1
-        ");
-        $req->execute([$user->getId(), $user->getEmail()]);
-        $rep = $req->fetch();
-
-        return $rep !== false ? EmailUpdate::read($rep['id']) : null;
-    }
-
-    public static function startNewMailValidation(User $user): void {
-        do {
-            $token = Utils::generateToken();
-        } while (EmailUpdate::exists('confirm_token', $token));
-
-        $email_update = new EmailUpdate();
-        $email_update->setUserId($user->getId())
-            ->setConfirmToken($token)
-            ->setOldEmail($user->getEmail())
-            ->setNewEmail($_POST['email'])
-            ->save();
-
-        $mailer = new Mailer();
-        $mailer->queueMail(
-            $_POST['email'],
-            \L::profile_email_subject,
-            'mail/' . t()->getAppliedLang() . '/newmail',
-            ['token' => $token],
-        );
-
-        self::logout();
-        self::login($user);
     }
 }

@@ -27,8 +27,8 @@ if ($cached !== false) {
 } elseif (EmailUpdate::exists('confirm_token', $token)) {
     $email_update = EmailUpdate::readBy('confirm_token', $token);
     $user = $email_update->getUser();
-    if (UserModel::isAwaitingEmailConfirmation($user)) {
-        $real_email_update = UserModel::getLastEmailUpdate($user);
+    if ($user->isAwaitingEmailConfirmation()) {
+        $real_email_update = $user->getLastEmailUpdate();
         if ($email_update->getConfirmToken() === $real_email_update->getConfirmToken()) {
             $email_update->setConfirmedAt(Utils::datetime())
                 ->save();
