@@ -134,6 +134,10 @@ class User extends Entity {
         return $this;
     }
 
+    /**
+     * @param int $ttl
+     * @return bool
+     */
     public function login(int $ttl = UserModel::SESSION_CACHE_TTL_DEFAULT): bool {
         if (!self::exists('id', $this->getId())) {
             return false;
@@ -148,6 +152,9 @@ class User extends Entity {
         return $cookie_set && $redis_set;
     }
 
+    /**
+     *
+     */
     public function startAccountValidation(): void {
         $token = Utils::generateToken();
         $redis = new Redis();
@@ -163,6 +170,9 @@ class User extends Entity {
         );
     }
 
+    /**
+     * @return bool
+     */
     public function isAwaitingEmailConfirmation(): bool {
         $req = DB::get()->prepare("
             SELECT confirmed_at
@@ -178,6 +188,9 @@ class User extends Entity {
         return $rep !== false && $rep['confirmed_at'] === null;
     }
 
+    /**
+     * @return bool
+     */
     public function isTrustable(): bool {
         return !TRUST_NEEDED || ($this->isActive() && !$this->isAwaitingEmailConfirmation());
     }
@@ -197,6 +210,9 @@ class User extends Entity {
         return $rep !== false ? EmailUpdate::read($rep['id']) : null;
     }
 
+    /**
+     *
+     */
     public function startNewMailValidation(): void {
         do {
             $token = Utils::generateToken();

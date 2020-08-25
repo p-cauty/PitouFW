@@ -37,13 +37,12 @@ $must_wait = $redis->get($uid_cache_key) !== false;
 if (!$must_wait) {
     if (!$user->isActive()) {
         $this->startAccountValidation();
-        $success = true;
-        $redis->set($uid_cache_key, 1, UserModel::RESEND_EMAIL_UID_COOLDOWN_TTL);
     } elseif ($this->isAwaitingEmailConfirmation()) {
         $user->startNewMailValidation();
-        $success = true;
-        $redis->set($uid_cache_key, 1, UserModel::RESEND_EMAIL_UID_COOLDOWN_TTL);
     }
+
+    $success = true;
+    $redis->set($uid_cache_key, 1, UserModel::RESEND_EMAIL_UID_COOLDOWN_TTL);
 } else {
     $spam = true;
 }

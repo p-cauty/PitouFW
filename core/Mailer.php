@@ -66,7 +66,10 @@ class Mailer extends PHPMailer {
             }
 
             $this->Subject = $email['subject'];
-            $body = file_get_contents(APP_URL . 'api/mailer/' . $email['id'] . '?render_key=' . EmailModel::hashId($email['id']));
+            $apiCall = new ApiCall(true);
+            $apiCall->setUrl('mailer/' . $email['id'] . '?render_key=' . EmailModel::hashId($email['id']))
+                ->exec();
+            $body = $apiCall->responseText();
             $this->Body = $body;
 
             $text = html_entity_decode($body);
