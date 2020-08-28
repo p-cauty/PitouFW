@@ -111,7 +111,7 @@ abstract class Entity {
         return DB::get()->lastInsertId();
     }
 
-    public static function exists(string $column, string $value): bool {
+    public static function exists(string $column, $value): bool {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT COUNT(*) AS nb FROM $table_name WHERE $column = ?");
@@ -139,7 +139,7 @@ abstract class Entity {
      * @param string $value
      * @return static
      */
-    public static function readBy(string $column, string $value): Entity {
+    public static function readBy(string $column, $value): Entity {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
         $req = DB::get()->prepare("SELECT * FROM $table_name WHERE $column = ?");
