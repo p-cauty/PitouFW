@@ -35,7 +35,7 @@ if (isset($_GET['access_token'])) {
                 }
                 $user->save();
 
-                if ($this->isAwaitingEmailConfirmation()) {
+                if ($user->isAwaitingEmailConfirmation()) {
                     $email_update = $this->getLastEmailUpdate();
                     $email_update->setConfirmedAt(Utils::datetime())
                         ->save();
