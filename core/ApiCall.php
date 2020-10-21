@@ -46,7 +46,7 @@ class ApiCall {
      * @return ApiCall
      */
     public function exec(): ApiCall {
-        if (!function_exists('curl_version')) {
+        if (function_exists('curl_version')) {
             $ch = curl_init($this->url);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -236,6 +236,13 @@ class ApiCall {
      */
     public function responseHeader(): array {
         return $this->response_header;
+    }
+
+    /**
+     * @return int
+     */
+    public function responseCode(): int {
+        return (int) substr($this->responseHeader()['Status'], 9, 3);
     }
 
     /**
