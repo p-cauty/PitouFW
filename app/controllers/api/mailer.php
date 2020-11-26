@@ -2,11 +2,13 @@
 
 use PitouFW\Core\Controller;
 use PitouFW\Core\Data;
+use PitouFW\Core\Mailer;
 use PitouFW\Core\Request;
 use PitouFW\Core\Utils;
 use PitouFW\Entity\EmailQueue;
 use PitouFW\Model\EmailModel;
 use PitouFW\Model\UserModel;
+use function PitouFW\Core\t;
 
 if (isset($_GET['render_key']) && $_GET['render_key'] === EmailModel::hashId(Request::get()->getArg(2))) {
     $email = EmailQueue::read(Request::get()->getArg(2));
@@ -60,7 +62,15 @@ $params = [
     'body' => $_POST['body']
 ];
 
-switch (Request::get()->getArg(2)) {
+$lang = t()->getFallbackLang();
+$wanted_lang = Request::get()->getArg(2);
+if (file_exists(VIEWS . 'mail/' . $wanted_lang)) {
+    $lang = $wanted_lang;
+}
+
+$wanted_template = Request::get()->getArg(3);
+$template = $wanted_template !== '' ? $wanted_template : $wanted_lang;
+switch ($template) {
     case 'default':
         if (isset($_POST['call_to_action'])) {
             if (
@@ -74,7 +84,7 @@ switch (Request::get()->getArg(2)) {
             $params['call_to_action'] = Utils::secure($_POST['call_to_action']);
         }
 
-        $template = 'mail/default';
+        $template = 'mail/' . $lang . '/default';
         break;
 
     default:

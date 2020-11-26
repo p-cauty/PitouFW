@@ -8,6 +8,7 @@ use PitouFW\Core\Entity;
 
 class NewsletterEmail extends Entity {
     private string $email = '';
+    private string $lang = '';
     private ?string $created_at = null;
 
     /**
@@ -30,6 +31,22 @@ class NewsletterEmail extends Entity {
      */
     public function setEmail(string $email): NewsletterEmail {
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLang(): string {
+        return $this->lang;
+    }
+
+    /**
+     * @param string $lang
+     * @return NewsletterEmail
+     */
+    public function setLang(string $lang): NewsletterEmail {
+        $this->lang = $lang;
         return $this;
     }
 

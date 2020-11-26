@@ -4,6 +4,7 @@ use PitouFW\Core\Alert;
 use PitouFW\Core\Controller;
 use PitouFW\Core\Data;
 use PitouFW\Entity\NewsletterEmail;
+use function PitouFW\Core\t;
 
 if (POST) {
     if (!empty($_POST['email'])) {
@@ -11,6 +12,7 @@ if (POST) {
             if (!NewsletterEmail::exists('email', $_POST['email'])) {
                 $newsletter_email = new NewsletterEmail();
                 $newsletter_email->setEmail($_POST['email'])
+                    ->setLang(t()->getAppliedLang())
                     ->save();
                 Alert::success(L::home_form_success);
             } else {

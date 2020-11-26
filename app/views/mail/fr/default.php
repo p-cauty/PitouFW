@@ -59,7 +59,7 @@
                                     </tbody>
                                 </table>
                                 <?php if (isset($call_to_action)): ?>
-                                    <table 
+                                    <table
                                            align="center" border="0" cellpadding="0"
                                            cellspacing="0"
                                            style="font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: separate !important; border-radius: 4px; margin: 0 auto;">
@@ -85,4 +85,4 @@
     </tr>
     </tbody>
 </table>
-<?php require VIEWS . 'mail/_btm.php'; ?>
+<?php require VIEWS . 'mail/fr/_btm.php'; ?>
