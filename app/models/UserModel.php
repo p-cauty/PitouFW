@@ -12,6 +12,7 @@ namespace PitouFW\Model;
 use PitouFW\Core\DB;
 use PitouFW\Core\Mailer;
 use PitouFW\Core\Redis;
+use PitouFW\Core\Router;
 use PitouFW\Core\Utils;
 use PitouFW\Entity\EmailUpdate;
 use PitouFW\Entity\User;
@@ -77,15 +78,13 @@ class UserModel {
 
     public static function rejectGuests(): void {
         if (!self::isLogged()) {
-            header('location: ' . WEBROOT . 'user/login');
-            die;
+            Router::redirect('user/login');
         }
     }
 
     public static function rejectUsers(): void {
         if (self::isLogged()) {
-            header('location: ' . WEBROOT);
-            die;
+            Router::redirect();
         }
     }
 

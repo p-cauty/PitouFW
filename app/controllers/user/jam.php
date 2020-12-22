@@ -2,6 +2,7 @@
 
 use JustAuthMe\SDK\JamSdk;
 use PitouFW\Core\Alert;
+use PitouFW\Core\Router;
 use PitouFW\Core\Utils;
 use PitouFW\Entity\User;
 use PitouFW\Model\JustAuthMeFactory;
@@ -14,8 +15,7 @@ if (isset($_GET['access_token'])) {
         $response = $jamSdk->getUserInfos($_GET['access_token']);
     } catch (Exception $e) {
         Alert::error(L::jam_errors_unknown($e->getMessage()));
-        header('location: ' . WEBROOT);
-        die;
+        Router::redirect();
     }
 
     if (User::exists('jam_id', $response->jam_id)) {
@@ -58,6 +58,5 @@ if (isset($_GET['access_token'])) {
         }
     }
 
-    header('location: ' . WEBROOT);
-    die;
+    Router::redirect();
 }

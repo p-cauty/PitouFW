@@ -1,6 +1,7 @@
 <?php
 
 use PitouFW\Core\Alert;
+use PitouFW\Core\Router;
 use PitouFW\Model\UserModel;
 
 UserModel::rejectGuests();
@@ -12,5 +13,4 @@ if ($success) {
     Alert::error(L::logout_error);
 }
 
-header('location: ' . WEBROOT);
-die;
+Router::redirect();

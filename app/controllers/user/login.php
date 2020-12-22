@@ -3,6 +3,7 @@
 use PitouFW\Core\Alert;
 use PitouFW\Core\Controller;
 use PitouFW\Core\Data;
+use PitouFW\Core\Router;
 use PitouFW\Entity\User;
 use PitouFW\Model\UserModel;
 
@@ -21,8 +22,7 @@ if (POST) {
                     $user->login($ttl);
 
                     Alert::success(L::login_success);
-                    header('location: ' . WEBROOT);
-                    die;
+                    Router::redirect();
                 } else {
                     Alert::error(L::login_inactive(WEBROOT . 'user/resend/' . $user->getId()));
                 }

@@ -3,6 +3,7 @@
 use PitouFW\Core\Alert;
 use PitouFW\Core\Controller;
 use PitouFW\Core\Data;
+use PitouFW\Core\Router;
 use PitouFW\Entity\User;
 use PitouFW\Model\UserModel;
 
@@ -26,8 +27,7 @@ if (POST) {
                         }
 
                         Alert::success(L::register_success(NAME));
-                        header('location: ' . WEBROOT);
-                        die;
+                        Router::redirect();
                     } else {
                         Alert::error(L::register_errors_identical);
                     }
