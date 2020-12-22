@@ -26,6 +26,7 @@ class Router {
         }
 
         $current_path = Request::get()->getArg($depth);
+        $current_path = $current_path !== '' ? $current_path : 'home';
         if ($current_path !== '' && array_key_exists($current_path, $sub_controllers)) {
             if (is_array($sub_controllers[$current_path])) {
                 return $this->getControllerName($depth + 1, $path . $current_path . '/', $sub_controllers[$current_path]);
@@ -48,5 +49,10 @@ class Router {
 
     public function getPathToRequire(): string {
         return CONTROLLERS.$this->controller.'.php';
+    }
+
+    public static function redirect(string $relative_path = ''): void {
+        header('location: ' . WEBROOT . $relative_path);
+        die;
     }
 }
