@@ -49,10 +49,6 @@ if (Request::get()->getArg(0) == 'api' && empty($_POST)) {
     }
 }
 
-if (isset($_GET['lang'])) {
-    $_SESSION['lang'] = $_GET['lang'];
-}
-
 Translator::init();
 
 require_once Router::get()->getPathToRequire();

@@ -52,7 +52,7 @@ class Router {
     }
 
     public static function redirect(string $relative_path = ''): void {
-        header('location: ' . WEBROOT . $relative_path);
+        header('location: ' . webroot() . $relative_path);
         die;
     }
 }

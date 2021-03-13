@@ -19,7 +19,13 @@ class Translator {
         self::$instance = new \i18n();
         self::$instance->setCachePath(ROOT . 'cache/');
         self::$instance->setFilePath(ROOT . 'lang/{LANGUAGE}.yml');
-        self::$instance->setFallbackLang('en');
+
+        if (Request::get()->getLang() !== null) {
+            self::$instance->setForcedLang(Request::get()->getLang());
+        } else {
+            self::$instance->setFallbackLang(DEFAULT_LANGUAGE);
+        }
+
         self::$instance->setMergeFallback(true);
 
         try {

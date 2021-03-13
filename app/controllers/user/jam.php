@@ -1,6 +1,5 @@
 <?php
 
-use JustAuthMe\SDK\JamSdk;
 use PitouFW\Core\Alert;
 use PitouFW\Core\Router;
 use PitouFW\Core\Utils;

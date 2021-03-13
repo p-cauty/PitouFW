@@ -2,6 +2,7 @@
 
 use PitouFW\Model\JustAuthMeFactory;
 use function PitouFW\Core\t;
+use function PitouFW\Core\webroot;
 
 ?>
 <h1 class="h2 mb-3"><?= L::login_title ?></h1>
@@ -26,8 +27,8 @@ use function PitouFW\Core\t;
                     <i class="fas fa-user-lock"></i>
                     <?= L::login_submit ?>
                 </button>
-                <a href="<?= WEBROOT ?>user/forgot-passwd"><?= L::login_forgot ?></a>
-                <a href="<?= WEBROOT ?>user/register"><?= L::login_no_account ?></a>
+                <a href="<?= webroot() ?>user/forgot-passwd"><?= L::login_forgot ?></a>
+                <a href="<?= webroot() ?>user/register"><?= L::login_no_account ?></a>
             </div>
         </form>
     </div>

@@ -2,6 +2,7 @@
 
 use PitouFW\Model\JustAuthMeFactory;
 use function PitouFW\Core\t;
+use function PitouFW\Core\webroot;
 
 ?>
 <h1 class="h2 mb-3"><?= L::register_title ?></h1>
@@ -26,7 +27,7 @@ use function PitouFW\Core\t;
                     <i class="fas fa-user-plus"></i>
                     <?= L::register_submit ?>
                 </button>
-                <a href="<?= WEBROOT ?>user/login"><?= L::register_already_user ?></a>
+                <a href="<?= webroot() ?>user/login"><?= L::register_already_user ?></a>
             </div>
         </form>
     </div>

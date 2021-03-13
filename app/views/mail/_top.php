@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; border: 0;">
-<table valign="top" 
+<table valign="top"
        style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: collapse; margin: 0; padding: 0; border: 0;"
        bgcolor="#f8f9fa">
     <tbody>
@@ -48,7 +48,7 @@
                                                     </tbody>
                                                 </table>
                                                 <img width="250" alt="<?= NAME ?>"
-                                                     src="<?= EMAIL_LOGO_CDN ?>"
+                                                     src="<?= LOGO_STATIC_URL ?>"
                                                      style="height: auto; line-height: 100%; outline: none; text-decoration: none; border: 0 none;">
                                                 <table  border="0" cellpadding="0" cellspacing="0"
                                                        style="width: 100%;">

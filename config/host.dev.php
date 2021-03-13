@@ -6,8 +6,10 @@
 const APP_URL = 'http://localhost/PitouFW/public/';
 const PROD_HOST = 'localhost';
 const JET_LAG = 0;
-
 const LOGGING = true;
+
+const ACCEPTED_LANGUAGES = ['fr', 'en'];
+const DEFAULT_LANGUAGE = 'en';
 
 const INTERNAL_API_KEY = 'xxxxx';
 const UNSUBSCRIBE_SALT = 'xxxxx';
