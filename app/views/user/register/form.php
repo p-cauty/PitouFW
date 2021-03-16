@@ -6,7 +6,7 @@ use function PitouFW\Core\webroot;
 
 ?>
 <h1 class="h2 mb-3"><?= L::register_title ?></h1>
-<?= JustAuthMeFactory::getSdk()->generateDefaultButtonHtml(t()->getAppliedLang() ?? 'en') ?>
+<div class="jam-button" data-app-id="<?= JAM_APP_ID ?>" data-callback="<?= JAM_CALLBACK_DEFAULT ?>"></div>
 <div class="row">
     <div class="col-md-6">
         <form action="" method="post">
@@ -32,3 +32,4 @@ use function PitouFW\Core\webroot;
         </form>
     </div>
 </div>
+<script type="text/javascript" src="https://static.justauth.me/medias/jam-button-v2.js"></script>
