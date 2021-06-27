@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfb0eec322877c42b10ee962296d2417",
+    "content-hash": "80a77ab771f998ca652b06c671733163",
     "packages": [
         {
             "name": "justauthme/php-sdk",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/JustAuthMe/PHP-SDK.git",
-                "reference": "439415d651c37076cdf89d7d067e600f17a89a2f"
+                "url": "https://github.com/JustAuthMe/php-sdk.git",
+                "reference": "344c7a688bc8a566eab2677772e5591e438ee3bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/439415d651c37076cdf89d7d067e600f17a89a2f",
-                "reference": "439415d651c37076cdf89d7d067e600f17a89a2f",
+                "url": "https://api.github.com/repos/JustAuthMe/php-sdk/zipball/344c7a688bc8a566eab2677772e5591e438ee3bb",
+                "reference": "344c7a688bc8a566eab2677772e5591e438ee3bb",
                 "shasum": ""
             },
             "require": {
@@ -43,10 +43,10 @@
             ],
             "description": "Official PHP SDK for the JustAuthMe platform",
             "support": {
-                "issues": "https://github.com/JustAuthMe/PHP-SDK/issues",
-                "source": "https://github.com/JustAuthMe/PHP-SDK/tree/master"
+                "issues": "https://github.com/JustAuthMe/php-sdk/issues",
+                "source": "https://github.com/JustAuthMe/php-sdk/tree/1.1.2"
             },
-            "time": "2020-07-16T13:26:41+00:00"
+            "time": "2021-02-21T19:46:03+00:00"
         },
         {
             "name": "mustangostang/spyc",
@@ -228,7 +228,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-iconv": "*",
         "ext-curl": "*",
         "ext-json": "*",
@@ -237,5 +237,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
