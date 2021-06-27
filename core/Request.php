@@ -41,6 +41,10 @@ class Request {
     public function getLang(): ?string {
         return $this->lang;
 	}
+
+    public function getRoute(): string {
+        return '/' . implode('/', $this->args);
+    }
 }
 
 function webroot(): string {
