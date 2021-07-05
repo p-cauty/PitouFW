@@ -57,6 +57,11 @@ abstract class Entity {
         return $res;
     }
 
+    /**
+     * @param string $cond
+     * @param array $values
+     * @return static[]
+     */
     public static function fetchAll(string $cond = '', array $values = []): array {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
@@ -74,6 +79,11 @@ abstract class Entity {
         return $res;
     }
 
+    /**
+     * @param bool $show_errors
+     * @return int
+     * @throws \ReflectionException
+     */
     private function create(bool $show_errors = false): int {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
@@ -111,6 +121,11 @@ abstract class Entity {
         return DB::get()->lastInsertId();
     }
 
+    /**
+     * @param string $column
+     * @param $value
+     * @return bool
+     */
     public static function exists(string $column, $value): bool {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
@@ -149,6 +164,11 @@ abstract class Entity {
         return self::getFilledObject($res);
     }
 
+    /**
+     * @param string $cond
+     * @param array $values
+     * @return int
+     */
     public static function count(string $cond = '', array $values = []): int {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
@@ -159,6 +179,10 @@ abstract class Entity {
         return $res['nb'];
     }
 
+    /**
+     * @param bool $show_errors
+     * @throws \ReflectionException
+     */
     private function update(bool $show_errors = false) {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
@@ -183,6 +207,11 @@ abstract class Entity {
         }
     }
 
+    /**
+     * @param bool $show_errors
+     * @return int|null
+     * @throws \ReflectionException
+     */
     public function save(bool $show_errors = false): ?int {
         if ($this->getId() === 0) {
             return $this->create($show_errors);
@@ -201,6 +230,10 @@ abstract class Entity {
         $req->execute([$id]);
     }
 
+    /**
+     * @param string $column
+     * @param $value
+     */
     public static function deleteBy(string $column, $value): void {
         $classname = get_called_class();
         $table_name = $classname::getTableName();
@@ -208,6 +241,9 @@ abstract class Entity {
         $req->execute([$value]);
     }
 
+    /**
+     * @param int $id
+     */
     public static function deleteById(int $id): void {
         self::deleteBy('id', $id);
     }
