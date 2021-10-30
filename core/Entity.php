@@ -29,19 +29,30 @@ abstract class Entity {
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public static abstract function getTableName(): string;
 
+    /**
+     * @param string $column
+     * @return string
+     */
     private static function getSetterName(string $column): string {
         return 'set'.Utils::fromSnakeCaseToCamelCase($column);
     }
 
+    /**
+     * @param string $column
+     * @return string
+     */
     private static function getGetterName(string $column): string {
         return 'get'.Utils::fromSnakeCaseToCamelCase($column);
     }
 
     /**
      * @param array $rep
-     * @return static
+     * @return Entity
      */
     private static function getFilledObject(array $rep): Entity {
         $classname = get_called_class();

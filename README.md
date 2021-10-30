@@ -1,3 +1,3 @@
 # PitouFW
 
-My personnal PHP7 Framework, not perfect but efficient.
+My personnal PHP8 Framework, not perfect but efficient.

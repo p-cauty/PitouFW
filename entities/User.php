@@ -146,7 +146,7 @@ class User extends Entity {
         $session_token = UserModel::generateSessionToken();
         $redis = new Redis();
         $cache_key = UserModel::SESSION_CACHE_PREFIX . $session_token;
-        $cookie_set = setcookie(UserModel::SESSION_COOKIE_NAME, $session_token, Utils::time() + $ttl, WEBROOT, PROD_HOST);
+        $cookie_set = setcookie(UserModel::SESSION_COOKIE_NAME, $session_token, time() + $ttl, WEBROOT, PROD_HOST);
         $redis_set = $redis->set($cache_key, $this->getId(), $ttl);
 
         return $cookie_set && $redis_set;

@@ -5,7 +5,7 @@
 
 const APP_URL = 'http://localhost/PitouFW/public/';
 const PROD_HOST = 'localhost';
-const JET_LAG = 0;
+const TIMEZONE = 'UTC';
 const LOGGING = true;
 
 const ACCEPTED_LANGUAGES = ['fr', 'en'];

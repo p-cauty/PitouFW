@@ -8,18 +8,26 @@
 
 namespace PitouFW\Core;
 
+use JetBrains\PhpStorm\NoReturn;
+
 require_once ROOT . 'routes.php';
 
 class Router {
     private static ?Router $instance = null;
     public static array $controllers = ROUTES;
 
-    private $controller;
+    private string $controller;
 
     private function __construct() {
        $this->controller = $this->getControllerName(0, '', self::$controllers);
     }
 
+    /**
+     * @param int $depth
+     * @param string $path
+     * @param array|null $sub_controllers
+     * @return string
+     */
     private function getControllerName(int $depth = 0, string $path = '', ?array $sub_controllers = null): string {
         if ($sub_controllers === null || $depth >= 20) {
             return false;
@@ -39,6 +47,9 @@ class Router {
         die;
     }
 
+    /**
+     * @return Router
+     */
     public static function get(): Router {
         if (self::$instance == null) {
             self::$instance = new self();
@@ -47,10 +58,17 @@ class Router {
         return self::$instance;
     }
 
+    /**
+     * @return string
+     */
     public function getPathToRequire(): string {
         return CONTROLLERS.$this->controller.'.php';
     }
 
+    /**
+     * @param string $relative_path
+     */
+    #[NoReturn]
     public static function redirect(string $relative_path = ''): void {
         header('location: ' . webroot() . $relative_path);
         die;

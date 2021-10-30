@@ -14,6 +14,12 @@ class Crypt {
     const RSA_PADDING = OPENSSL_PKCS1_PADDING;
     const RSA_SIGNATURE_ALGO = OPENSSL_ALGO_SHA512;
 
+    /**
+     * @param string $data
+     * @param string $password
+     * @param string $method
+     * @return string|null
+     */
     public static function encrypt(string $data, string $password, string $method = 'aes-192-cbc'): ?string {
         $wasItSecure = false;
         $len = openssl_cipher_iv_length($method);
@@ -26,6 +32,12 @@ class Crypt {
         }
     }
 
+    /**
+     * @param string $data
+     * @param string $password
+     * @param string $method
+     * @return string|null
+     */
     public static function decrypt(string $data, string $password, string $method = 'aes-192-cbc'): ?string {
         $len = openssl_cipher_iv_length($method);
         $iv = substr($data, 0, $len);
@@ -33,22 +45,35 @@ class Crypt {
         return openssl_decrypt($cipher, $method, $password, OPENSSL_RAW_DATA, $iv) ?? null;
     }
 
+    /**
+     * @param string $data
+     * @param string $privkey
+     * @param string $passphrase
+     * @return string|null
+     */
     public static function sign(string $data, string $privkey, string $passphrase = ''): ?string {
         $privkeyid = openssl_pkey_get_private($privkey, $passphrase);
         $isSignatureOk = openssl_sign($data, $signature, $privkeyid, self::RSA_SIGNATURE_ALGO);
-        openssl_free_key($privkeyid);
 
         return $isSignatureOk ? $signature : null;
     }
 
+    /**
+     * @param string $data
+     * @param string $signature
+     * @param string $pubkey
+     * @return int
+     */
     public static function verify(string $data, string $signature, string $pubkey): int {
         $pubkeyid = openssl_pkey_get_public($pubkey);
-        $res = openssl_verify($data, $signature, $pubkeyid, self::RSA_SIGNATURE_ALGO);
-        openssl_free_key($pubkeyid);
-
-        return $res;
+        return openssl_verify($data, $signature, $pubkeyid, self::RSA_SIGNATURE_ALGO);
     }
 
+    /**
+     * @param string $data
+     * @param string $pubkey
+     * @return string|null
+     */
     public static function async_encrypt(string $data, string $pubkey): ?string {
         $encrypted = '';
         $plain = str_split($data, self::ENCRYPT_RSA_BLOCK_SIZE);
@@ -68,6 +93,12 @@ class Crypt {
         return base64_encode($encrypted);
     }
 
+    /**
+     * @param string $data
+     * @param string $privkey
+     * @param string $passphrase
+     * @return string|null
+     */
     public static function async_decrypt(string $data, string $privkey, string $passphrase = ''): ?string {
         $clear = '';
         $encrypted = str_split(base64_decode($data), self::DECRYPT_RSA_BLOCK_SIZE);

@@ -11,6 +11,13 @@
     "version": "3.0.0",
     "minimum-stability": "stable",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PitouFW\\Model\\": "app/models",
+            "PitouFW\\Core\\": "core",
+            "PitouFW\\Entity\\": "entities"
+        }
+    },
     "require": {
         "php": "^8.0",
         "phpmailer/phpmailer": "^6.5",

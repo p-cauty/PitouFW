@@ -18,14 +18,25 @@ class Redis extends \Redis {
         }
     }
 
-    public function set($key, $value, $ttl = null): bool {
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @param null $timeout
+     * @return bool
+     */
+    public function set($key, $value, $timeout = null): bool {
         if (!is_string($value)) {
             $value = json_encode($value);
         }
 
-        return parent::set($key, $value, $ttl);
+        return parent::set($key, $value, $timeout);
     }
 
+    /**
+     * @param string $key
+     * @param bool $assoc
+     * @return false|mixed|string
+     */
     public function get($key, bool $assoc = false) {
         $value = parent::get($key);
         $try_json = json_decode($value, $assoc);

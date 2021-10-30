@@ -3,6 +3,7 @@
 namespace PitouFW\Core;
 
 use Exception;
+use JetBrains\PhpStorm\ArrayShape;
 use PHPMailer\PHPMailer\PHPMailer;
 use PitouFW\Entity\EmailQueue;
 use PitouFW\Model\EmailModel;
@@ -25,6 +26,11 @@ class Mailer extends PHPMailer {
 
     }
 
+    /**
+     * @param string $contact
+     * @return array
+     */
+    #[ArrayShape(['email' => "string", 'name' => "string"])]
     private static function getContactDetailsFromString(string $contact): array {
         if (filter_var(trim($contact), FILTER_VALIDATE_EMAIL)) {
             return [
@@ -44,6 +50,9 @@ class Mailer extends PHPMailer {
         ];
     }
 
+    /**
+     * @param array $email
+     */
     public function sendMail(array $email): void {
         $sender = $email['sender'] !== '' ? $email['sender'] : self::SEND_AS_DEFAULT;
         $bcc = json_decode($email['bcc']);
@@ -96,7 +105,16 @@ class Mailer extends PHPMailer {
         $req->execute([$sent_at, $error, $email['id']]);
     }
 
-    public function queueMail(string $to, string $subject, string $template = 'mail/default', array $params = [], array $bcc = [], string $from = self::SEND_AS_DEFAULT): void {
+    /**
+     * @param string $to
+     * @param string $subject
+     * @param string $template
+     * @param array $params
+     * @param array $bcc
+     * @param string $from
+     * @throws \ReflectionException
+     */
+    public function queueMail(string $to, string $subject, string $template = 'mail/' . DEFAULT_LANGUAGE . '/default', array $params = [], array $bcc = [], string $from = self::SEND_AS_DEFAULT): void {
         $email_queue = new EmailQueue();
         $email_queue->setSender($from)
             ->setRecipient($to)

@@ -15,20 +15,20 @@ if ($argc !== 2) {
 }
 
 $start_time = time();
-$end_time = $start_time + 60;
+$end_time = $start_time + 55;
 
 $redis = new Redis();
 
 while ($end_time > time()) {
     DB::get()->beginTransaction();
-    $req = DB::get()->query("SELECT * FROM email_queue WHERE sent_at IS NULL AND error IS NULL ORDER BY id LIMIT 1 FOR UPDATE");
-    $email = $req->fetch();
-    if ($email !== false) {
+    $req = DB::get()->query("SELECT * FROM email_queue WHERE sent_at IS NULL AND error IS NULL ORDER BY id FOR UPDATE");
+    while ($email = $req->fetch()) {
         $mailer = new Mailer();
         $mailer->sendMail($email);
         echo 'Mail #' . $email['id'] . ' sent!' . "\n";
     }
     DB::get()->commit();
+    sleep(5);
 }
 
 echo 'Done in ' . (time() - $start_time) . ' seconds.' . "\n";

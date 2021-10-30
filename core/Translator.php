@@ -7,6 +7,9 @@ namespace PitouFW\Core;
 class Translator {
     public static ?\i18n $instance = null;
 
+    /**
+     * @return \i18n
+     */
     public static function get(): \i18n {
         if (self::$instance === null) {
             self::init();
@@ -15,6 +18,9 @@ class Translator {
         return self::$instance;
     }
 
+    /**
+     * @return bool
+     */
     public static function init(): bool {
         self::$instance = new \i18n();
         self::$instance->setCachePath(ROOT . 'cache/');
@@ -40,6 +46,9 @@ class Translator {
     }
 }
 
+/**
+ * @return \i18n
+ */
 function t(): \i18n {
     return Translator::get();
 }

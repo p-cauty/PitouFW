@@ -13,6 +13,11 @@ class Logger {
     const LOG_FILE_WARNING = ROOT . 'log/warning.log';
     const LOG_FILE_ERROR = ROOT . 'log/error.log';
 
+    /**
+     * @param string $message
+     * @param string $filename
+     * @param array|null $backtrace
+     */
     private static function log(string $message, string $filename = self::LOG_FILE_INFO, ?array $backtrace = null): void {
         if (LOGGING) {
             if (in_array($filename, [
@@ -33,14 +38,23 @@ class Logger {
         }
     }
 
+    /**
+     * @param string $message
+     */
     public static function logInfo(string $message): void {
         self::log($message, self::LOG_FILE_INFO, debug_backtrace());
     }
 
+    /**
+     * @param string $message
+     */
     public static function logWarning(string $message): void {
         self::log($message, self::LOG_FILE_WARNING, debug_backtrace());
     }
 
+    /**
+     * @param string $message
+     */
     public static function logError(string $message): void {
         self::log($message, self::LOG_FILE_ERROR, debug_backtrace());
     }

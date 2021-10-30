@@ -10,13 +10,10 @@ namespace PitouFW\Model;
 
 
 use PitouFW\Core\DB;
-use PitouFW\Core\Mailer;
 use PitouFW\Core\Redis;
 use PitouFW\Core\Router;
 use PitouFW\Core\Utils;
-use PitouFW\Entity\EmailUpdate;
 use PitouFW\Entity\User;
-use function PitouFW\Core\t;
 
 class UserModel {
     const SESSION_COOKIE_NAME = 'PTFW_SESSID';
@@ -136,7 +133,7 @@ class UserModel {
     }
 
     public static function isPasswdResetTokenValid(string $token): bool {
-        $minus_24h = Utils::time() - 86400;
+        $minus_24h = time() - 86400;
         $datetime_to_compare_with = Utils::datetime($minus_24h);
 
         $req = DB::get()->prepare("

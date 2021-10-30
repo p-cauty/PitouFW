@@ -22,7 +22,10 @@ class Request {
         }
 	}
 
-	public static function get(): Request {
+    /**
+     * @return Request
+     */
+    public static function get(): Request {
 		if (self::$instance == null) {
 			self::$instance = new self();
 		}
@@ -30,7 +33,11 @@ class Request {
 		return self::$instance;
 	}
 
-	public function getArg(int $i): string {
+    /**
+     * @param int $i
+     * @return string
+     */
+    public function getArg(int $i): string {
 		if (count($this->args) > $i) {
 			return $this->args[$i];
 		}
@@ -38,14 +45,24 @@ class Request {
 		return '';
 	}
 
+    /**
+     * @return string[]
+     */
     public function getArgs(): array {
         return $this->args;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLang(): ?string {
         return $this->lang;
 	}
 
+    /**
+     * @param bool $with_lang
+     * @return string
+     */
     public function getRoute(bool $with_lang = false): string {
         if ($with_lang) {
             return '/' . $_GET['arg'];
@@ -56,6 +73,9 @@ class Request {
     }
 }
 
+/**
+ * @return string
+ */
 function webroot(): string {
     $lang_route = Request::get()->getLang() !== null ? Request::get()->getLang() . '/' : '';
     return WEBROOT . $lang_route;

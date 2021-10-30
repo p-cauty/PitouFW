@@ -12,8 +12,11 @@ abstract class DB {
         $db_name = DB_NAME,
         $db_user = DB_USER,
         $db_pass = DB_PASS;
-	
-	public static function get(): PDO {
+
+    /**
+     * @return PDO
+     */
+    public static function get(): PDO {
 		if (self::$instance == null) {
 			try	{
 				self::$instance = new PDO('mysql:host='.self::$db_host.';dbname='.self::$db_name, self::$db_user, self::$db_pass);
