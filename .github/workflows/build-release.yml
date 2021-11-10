@@ -31,6 +31,7 @@ jobs:
         with:
           command: install --working-dir=html.new
           php_version: 8.0
+          php_extensions: curl redis
           progress: yes
           dev: no
       - name: Build artifact
