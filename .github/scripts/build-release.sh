@@ -1,4 +1,4 @@
-rm -rf html.new/.github html.new/.git html.new/.gitignore html.new/README.md html.new/html
-echo "$TAG" > html.new/version.txt
+rm -rf pitoufw/.github pitoufw/.git pitoufw/.gitignore pitoufw/README.md pitoufw/html
+echo "$TAG" > pitoufw/version.txt
 touch release.tar.gz
-tar --exclude=release.tar.gz -zcvf release.tar.gz html.new
+tar --exclude=release.tar.gz -zcvf release.tar.gz pitoufw

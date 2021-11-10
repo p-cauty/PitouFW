@@ -22,14 +22,14 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: refs/tags/${{ steps.getrelease.outputs.release }}
-          path: html.new
+          path: pitoufw
       - name: Update permissions
-        run: chmod a+x html.new/.github/scripts/build-release.sh
+        run: chmod a+x pitoufw/.github/scripts/build-release.sh
         shell: bash
       - name: Run composer install
         uses: php-actions/composer@v6
         with:
-          command: install --working-dir=html.new
+          command: install --working-dir=pitoufw
           php_version: 8.0
           php_extensions: curl redis
           progress: yes
@@ -37,7 +37,7 @@ jobs:
       - name: Build artifact
         env:
           TAG: ${{ steps.getrelease.outputs.release }}
-        run: html.new/.github/scripts/build-release.sh
+        run: pitoufw/.github/scripts/build-release.sh
         shell: bash
       - name: Attach artifact to release
         uses: svenstaro/upload-release-action@2.2.1
