@@ -1,4 +1,4 @@
-name: Build release
+name: Build framework artifact
 
 on:
   release:
@@ -24,20 +24,12 @@ jobs:
           ref: refs/tags/${{ steps.getrelease.outputs.release }}
           path: pitoufw
       - name: Update permissions
-        run: chmod a+x pitoufw/.github/scripts/build-release.sh
+        run: chmod a+x pitoufw/.github/scripts/build-fw.sh
         shell: bash
-      - name: Run composer install
-        uses: php-actions/composer@v6
-        with:
-          command: install --working-dir=pitoufw
-          php_version: 8.0
-          php_extensions: curl redis
-          progress: yes
-          dev: no
       - name: Build artifact
         env:
           TAG: ${{ steps.getrelease.outputs.release }}
-        run: pitoufw/.github/scripts/build-release.sh
+        run: pitoufw/.github/scripts/build-fw.sh
         shell: bash
       - name: Attach artifact to release
         uses: svenstaro/upload-release-action@2.2.1
