@@ -4,6 +4,7 @@ use PitouFW\Core\Controller;
 use PitouFW\Core\DB;
 use PitouFW\Core\Mailer;
 use PitouFW\Core\Redis;
+use PitouFW\Core\Utils;
 
 if (!isset($argc)) {
     Controller::http403Forbidden();
@@ -25,10 +26,8 @@ while ($end_time > time()) {
     while ($email = $req->fetch()) {
         $mailer = new Mailer();
         $mailer->sendMail($email);
-        echo 'Mail #' . $email['id'] . ' sent!' . "\n";
+        echo '[' . Utils::datetime() . '] Mail #' . $email['id'] . ' sent!' . "\n";
     }
     DB::get()->commit();
     sleep(5);
 }
-
-echo 'Done in ' . (time() - $start_time) . ' seconds.' . "\n";
