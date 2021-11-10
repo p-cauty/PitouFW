@@ -1,4 +1,4 @@
-name: Build production artifact
+name: Build release
 
 on:
   release:
@@ -24,7 +24,7 @@ jobs:
           ref: refs/tags/${{ steps.getrelease.outputs.release }}
           path: html.new
       - name: Update permissions
-        run: chmod a+x html.new/.github/scripts/build-prod.sh
+        run: chmod a+x html.new/.github/scripts/build-release.sh
         shell: bash
       - name: Run composer install
         uses: php-actions/composer@v6
@@ -36,7 +36,7 @@ jobs:
       - name: Build artifact
         env:
           TAG: ${{ steps.getrelease.outputs.release }}
-        run: html.new/.github/scripts/build-prod.sh
+        run: html.new/.github/scripts/build-release.sh
         shell: bash
       - name: Attach artifact to release
         uses: svenstaro/upload-release-action@2.2.1
@@ -44,6 +44,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release.tar.gz
           tag: ${{ steps.getrelease.outputs.release }}
-          asset_name: prod-$tag.tar.gz
+          asset_name: pitoufw-$tag.tar.gz
           overwrite: true
 
