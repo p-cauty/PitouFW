@@ -6,9 +6,7 @@ RUN apt-get update \
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install curl gd imap mbstring pdo_mysql xml zip
 
-RUN pecl install --onlyreqdeps --force redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
+RUN apt-get install -y redis-tools
 
 RUN a2enmod rewrite
 

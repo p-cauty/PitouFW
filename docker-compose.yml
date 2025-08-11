@@ -29,7 +29,7 @@ services:
     - mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ev_extranet
+      MYSQL_DATABASE: pitoufw
       MYSQL_USER: docker
       MYSQL_PASSWORD: secret
 
