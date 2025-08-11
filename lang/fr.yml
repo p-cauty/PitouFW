@@ -54,10 +54,6 @@ login:
   forgot: 'Mot de passe oublié ?'
   inactive: 'Merci d''activer votre compte en cliquant sur le lien reçu par e-mail avant de pouvoir vous connecter. <a href="%s">Renvoyez-moi un e-mail.</a>'
   no_account: 'Pas encore de compte ? Créez-en un !'
-jam:
-  errors:
-    no_email: 'Une erreur est survenue lors de votre inscription. Merci de supprimer %s de votre application JustAuthMe et de réessayer'
-    unknown: 'Une erreur est survenue lors de la connexion : %s'
 logout:
   success: 'Vous êtes bien déconnecté.'
   error: 'Une erreur inconnue est survenue durant la déconnexion.'

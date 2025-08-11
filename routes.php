@@ -12,7 +12,6 @@ const ROUTES = [
     'user' => [
         'register' => 'register',
         'login' => 'login',
-        'jam' => 'jam',
         'logout' => 'logout',
         'forgot-passwd' => 'forgot_passwd',
         'passwd-reset' => 'passwd_reset',

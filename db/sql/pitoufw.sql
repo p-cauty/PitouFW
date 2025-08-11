@@ -89,7 +89,6 @@ CREATE TABLE `user` (
     `id` int NOT NULL,
     `email` varchar(255) NOT NULL,
     `passwd` varchar(255) NOT NULL,
-    `jam_id` varchar(255) NOT NULL,
     `admin` tinyint(1) NOT NULL,
     `reg_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `activated_at` timestamp NULL DEFAULT NULL

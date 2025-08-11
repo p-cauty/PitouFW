@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="author" content="Peter Cauty" />
+        <meta name="robots" content="none" />
+        <title>Maintenance en cours</title>
+        <link rel="stylesheet" href="/assets/css/font-awesome_v5.15.1.min.css" />
+        <link href="/assets/css/styles.css?v=4" rel="stylesheet" />
+        <link href="/assets/css/custom.css" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="/assets/img/icon.png?v=4" />
+        <script src="/assets/js/feather.min.js"></script>
+
+        <meta http-equiv="refresh" content="30;URL=/" />
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+    </head>
+    <body class="bg-gradient-primary-to-secondary">
+        <main>
+            <div class="container-xl px-4">
+                <div class="text-center mt-5 mb-5 mb-xl-10">
+                    <a href="/maintenance.html">
+                        <img src="/assets/img/logo-white.png?v=4" style="max-width:50%;max-height:10rem" />
+                    </a>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
+                    <h1 class="text-center text-white mb-5">⚠️ Maintenance ⚠️</h1>
+                    <p class="text-gray-200 text-center mb-5">
+                        Cette page se rechargera automatiquement lorsque les opérations de maintenance seront terminées.
+                        Merci pour votre patience.
+                    </p>
+                    <img src="/assets/img/illustrations/maintenance.svg" class="img-fluid" />
+                </div>
+            </div>
+        </main>
+        <footer class="footer-admin mt-auto footer-dark">
+            <div class="container-xl px-4">
+                <div class="row">
+                    <div class="col-md-6 small">Copyright &copy; GESTION E.V 2021-<span id="current-year"></span></div>
+                </div>
+            </div>
+        </footer>
+        <script src="/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/assets/js/scripts.js"></script>
+        <script>
+            const currentYear = document.getElementById('current-year');
+            currentYear.textContent = '' + (new Date().getFullYear());
+        </script>
+    </body>
+</html>

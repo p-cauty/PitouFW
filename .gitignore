@@ -1,7 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 *.iws
-/out/
 .idea_modules/
 atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
@@ -9,14 +8,19 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 .project
-.cache/
-.settings/
-.buildpath
+/.cache/
+/cache/*
+/.settings/
+/.buildpath
 vendor/
 *.dist.php
-qr.php
-entity_gen.php
-demo/
-log/*.log
 .DS_Store
-cache/*.php
+/public/.htpasswd
+/storage/*
+*private.key
+app/controllers/func.php
+/hooks/*.json
+/app/controllers/api/connect2.php
+/app/controllers/cli/odds.php
+/version.txt
+.env

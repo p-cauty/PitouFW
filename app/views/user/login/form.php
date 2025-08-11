@@ -1,12 +1,9 @@
 <?php
 
-use PitouFW\Model\JustAuthMeFactory;
-use function PitouFW\Core\t;
 use function PitouFW\Core\webroot;
 
 ?>
 <h1 class="h2 mb-3"><?= L::login_title ?></h1>
-<div class="jam-button" data-app-id="<?= JAM_APP_ID ?>" data-callback="<?= JAM_CALLBACK_DEFAULT ?>"></div>
 <div class="row">
     <div class="col-md-6">
         <form action="" method="post">
@@ -33,4 +30,3 @@ use function PitouFW\Core\webroot;
         </form>
     </div>
 </div>
-<script type="text/javascript" src="https://static.justauth.me/medias/jam-button-v2.js"></script>

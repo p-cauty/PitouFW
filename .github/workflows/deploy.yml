@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          path: ${{ github.event.repository.name }}
+      - name: Update permissions
+        run: chmod a+x ${{ github.event.repository.name }}/.github/scripts/deploy.sh
+        shell: bash
+      - name: Deploy artifact
+        env:
+          DEPLOY_SERVER: ${{ vars.PROD_DEPLOY_SERVER }}
+          SSH_USER: ${{ vars.PROD_SSH_USER }}
+          ROOT_PATH: ${{ vars.PROD_ROOT_PATH }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          REPO_PATH: ${{ github.repository }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          TAG: ${{ github.ref_name }}
+          SSH_PRIVATE: ${{ secrets.PROD_SSH_PRIVATE }}
+        run: ${{ github.event.repository.name }}/.github/scripts/deploy.sh
+        shell: bash

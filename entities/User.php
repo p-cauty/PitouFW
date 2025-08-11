@@ -15,7 +15,6 @@ use function PitouFW\Core\t;
 class User extends Entity {
     private string $email = '';
     private string $passwd = '';
-    private string $jam_id = '';
     private int $admin = 0;
     private ?string $reg_timestamp = null;
     private ?string $activated_at = null;
@@ -56,22 +55,6 @@ class User extends Entity {
      */
     public function setPasswd(string $passwd): User {
         $this->passwd = $passwd;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getJamId(): string {
-        return $this->jam_id;
-    }
-
-    /**
-     * @param string $jam_id
-     * @return User
-     */
-    public function setJamId(string $jam_id): User {
-        $this->jam_id = $jam_id;
         return $this;
     }
 

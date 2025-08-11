@@ -23,7 +23,7 @@ class Translator {
      */
     public static function init(): bool {
         self::$instance = new \i18n();
-        self::$instance->setCachePath(ROOT . 'cache/');
+        self::$instance->setCachePath(ROOT . 'cache');
         self::$instance->setFilePath(ROOT . 'lang/{LANGUAGE}.yml');
 
         if (Request::get()->getLang() !== null) {

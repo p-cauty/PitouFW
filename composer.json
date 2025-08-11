@@ -19,15 +19,19 @@
         }
     },
     "require": {
-        "php": "^8.0",
-        "phpmailer/phpmailer": "^6.5",
-        "philipp15b/php-i18n": "^4.0",
-        "justauthme/php-sdk": "^1.1",
-        "ext-iconv": "*",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-pdo": "*",
-        "ext-openssl": "*",
-        "ext-redis": "*"
+      "php": "^8.3",
+      "ext-iconv": "*",
+      "ext-curl": "*",
+      "ext-json": "*",
+      "ext-pdo": "*",
+      "ext-openssl": "*",
+      "ext-redis": "*",
+      "ext-zip": "^1.19",
+      "ext-imap": "*",
+      "ext-readline": "*",
+      "phpmailer/phpmailer": "^6.5",
+      "philipp15b/php-i18n": "^4.0",
+      "robmorgan/phinx": "^0.16.2",
+      "phpseclib/phpseclib": "^3.0"
     }
 }

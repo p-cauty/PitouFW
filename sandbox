@@ -1,0 +1,32 @@
+#! /usr/bin/php
+<?php
+
+use PitouFW\Core\Session;
+
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config/config.php';
+
+Session::start();
+
+readline_completion_function(function () { return readline_info()["line_buffer"]; });
+
+while (true) {
+	echo PHP_EOL;
+	//$cmd = trim(fgets(STDIN));
+	$cmd = trim(readline(""));
+
+	if ($cmd === 'exit') {
+		echo 'bye!' . PHP_EOL;
+		die;
+	} elseif ($cmd === "") {
+		$cmd = readline_info()["line_buffer"];
+	}
+
+	try {	
+		eval("var_dump($cmd);");
+	} catch (\Throwable $e) {
+		echo 'Error: ' . $e->getMessage();
+	}
+
+	readline_add_history($cmd);
+}

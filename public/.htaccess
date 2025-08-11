@@ -1,7 +1,35 @@
 Options -indexes
 
+Order allow,deny
+Allow from all
+
+ErrorDocument 503 /maintenance.html
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    #RewriteRule .* - [E=EXT_MAINTENANCE:1]
+
+    RewriteCond %{THE_REQUEST} /maintenance\.html [NC]
+    RewriteRule ^ - [F,L]
+
+    RewriteCond %{REQUEST_URI} ^/maintenance\.html$ [NC]
+    RewriteRule .* - [E=EXT_ALREADY:1]
+
+    RewriteCond %{REQUEST_URI} \.(jpe?g|png|gif|ico|css|js|otf|ttf|svg)$ [NC]
+    RewriteRule .* - [E=EXT_ASSET:1]
+
+    # Start admins list
+    # localhost
+    RewriteCond %{REMOTE_ADDR} ^127\.0\.0\.1$
+    RewriteRule .* - [E=EXT_ADMIN:1]
+    # End admins list
+
+    RewriteCond %{ENV:EXT_MAINTENANCE} 1
+    RewriteCond %{ENV:EXT_ALREADY} !1
+    RewriteCond %{ENV:EXT_ASSET} !1
+    RewriteCond %{ENV:EXT_ADMIN} !1
+    RewriteRule .* - [R=503,L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

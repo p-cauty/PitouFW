@@ -1,0 +1,15 @@
+------------------------------------------
+[30/10/2021 13:50:42][CLI]
+[in /mnt/c/Users/Peter/Prog/web/pitoufw/core/Mailer.php line 101]
+PHPMailer exception: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
+
+------------------------------------------
+[30/10/2021 13:51:34][CLI]
+[in /mnt/c/Users/Peter/Prog/web/pitoufw/core/Mailer.php line 101]
+PHPMailer exception: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
+
+------------------------------------------
+[30/10/2021 13:51:39][CLI]
+[in /mnt/c/Users/Peter/Prog/web/pitoufw/core/Mailer.php line 101]
+PHPMailer exception: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
+

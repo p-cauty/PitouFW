@@ -1,22 +1,25 @@
 <?php
 
+use PitouFW\Core\Alert;
 use PitouFW\Core\Controller;
-use PitouFW\Core\Mailer;
 use PitouFW\Core\Request;
 use PitouFW\Core\Router;
+use PitouFW\Core\Session;
 use PitouFW\Core\Translator;
+use PitouFW\Model\ConfigModel;
+use PitouFW\Model\UserModel;
+use PitouFW\Model\UserSettingModel;
 
-session_start();
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/config.php';
 
-define('ROOT', str_replace('public/index.php', '', $_SERVER['SCRIPT_FILENAME']));
-require_once ROOT . 'vendor/autoload.php';
-require_once ROOT . 'config/config.php';
+Session::start();
 
-$int = PROD_ENV ? 0 : 1;
-ini_set('display_errors', $int);
-ini_set('display_startup_errors', $int);
-error_reporting(PROD_ENV ? E_ALL^E_DEPRECATED : E_ALL);
-date_default_timezone_set(TIMEZONE);
+$bool = PRODUCTION_ENV ? 0 : 1;
+ini_set('display_errors', $bool);
+ini_set('display_startup_errors', $bool);
+error_reporting(E_ALL ^ E_DEPRECATED);
+date_default_timezone_set('Europe/Paris');
 
 if (Request::get()->getArg(0) == 'api' && empty($_POST)) {
     if ($json_data = json_decode(file_get_contents('php://input'), true)) {
@@ -26,4 +29,15 @@ if (Request::get()->getArg(0) == 'api' && empty($_POST)) {
 
 Translator::init();
 
-require_once Router::get()->getPathToRequire();
+if (UserModel::isLogged() && !UserModel::get()->isActive()) {
+    UserModel::logout();
+    Alert::error('Votre compte a été désactivé.');
+    Router::redirect('account/login');
+}
+
+$path_to_require = Router::get()->getPathToRequire();
+if (file_exists($path_to_require)) {
+    require_once $path_to_require;
+} else {
+    Controller::http500InternalServerError();
+}

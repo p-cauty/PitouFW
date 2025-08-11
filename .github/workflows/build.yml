@@ -1,0 +1,50 @@
+name: Build
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest release
+        id: getrelease
+        uses: rez0n/actions-github-release@v2.0
+        env:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: ${{ github.repository }}
+          type: "nodraft"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          ref: refs/tags/${{ steps.getrelease.outputs.release }}
+          path: ${{ github.event.repository.name }}.new
+      - name: Update permissions
+        run: chmod a+x ${{ github.event.repository.name }}.new/.github/scripts/build.sh
+        shell: bash
+      - name: Run composer install
+        uses: php-actions/composer@v6
+        with:
+          command: install --prefer-dist --no-dev --working-dir=${{ github.event.repository.name }}.new
+          php_version: 8.3
+          php_extensions: curl redis gd mbstring zip xml imap iconv json pdo openssl
+          progress: yes
+          dev: no
+      - name: Build artifact
+        env:
+          REPO: ${{ github.event.repository.name }}
+          TAG: ${{ steps.getrelease.outputs.release }}
+        run: ${{ github.event.repository.name }}.new/.github/scripts/build.sh
+        shell: bash
+      - name: Attach artifact to release
+        uses: svenstaro/upload-release-action@2.2.1
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: release.tar.gz
+          tag: ${{ steps.getrelease.outputs.release }}
+          asset_name: ${{ github.event.repository.name }}-$tag.tar.gz
+          overwrite: true

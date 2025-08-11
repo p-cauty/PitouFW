@@ -8,9 +8,9 @@ use function PitouFW\Core\t;
 <!doctype html>
 <html lang="<?= t()->getAppliedLang() ?>">
 	<head>
-		<title><?= $TITLE ?? TITLE ?></title>
+		<title><?= $TITLE ?? 'PitouFW - Le framework de ceux qui n\'en veulent pas' ?></title>
         <meta name="author" content="<?= AUTHOR ?>" />
-        <meta name="description" content="<?= $DESC ?? DESC ?>" />
+        <meta name="description" content="<?= $DESC ?? 'Lorem ipsum dolor sit amet' ?>" />
 		<meta charset="utf-8" />
         <?php if (Request::get()->getArg(0) === 'home'): ?>
         <link rel="canonical" href="<?= APP_URL . t()->getAppliedLang() ?>" />
@@ -22,8 +22,8 @@ use function PitouFW\Core\t;
         endforeach; ?>
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="<?= $TITLE ?? TITLE ?>" />
-        <meta property="og:description" content="<?= $DESC ?? DESC ?>" />
+        <meta property="og:title" content="<?= $TITLE ?? 'PitouFW - Le framework de ceux qui n\'en veulent pas' ?>" />
+        <meta property="og:description" content="<?= $DESC ?? 'Lorem ipsum dolor sit amet' ?>" />
         <meta property="og:url" content="<?= APP_URL ?>" />
         <meta property="og:image" content="<?= APP_URL ?>assets/img/banner.png" />
         <meta property="og:site_name" content="<?= NAME ?>" />
